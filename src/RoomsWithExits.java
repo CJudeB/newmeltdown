@@ -29,7 +29,7 @@ public class RoomsWithExits {
             this.wall = wall;
 
         }
-        String[] walls = {"north", "south", "east", "west"};
+        String[] walls = {null, "north", "south", "east", "west"};
 
         String[] locations = {null, "1", "2", "3", "4", "5", "6",
                 "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
@@ -39,15 +39,14 @@ public class RoomsWithExits {
             String[] locations = {null, "1", "2", "3", "4", "5", "6",
                     "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
                     "17", "18", "19", "20", "21", "22", "23", "24", "25"};
-            String[] walls = {"north", "south", "east", "west"};
-            String s = locations[this.location] + " of " + walls[this.wall];
+            String[] walls = {null, "north", "south", "east", "west"};
+            String s = "\nLocation on a 5 x 5 grid and direction at location where\nnorth = 1,\nsouth = 2,\neast = 3,\nwest = 4: \n\n" + locations[this.location] + " facing " + walls[this.wall];
             return s;
-
         }
         }
 
     public static void main(String[] args) {
-        Room room = new Room(9, 3);
+        Room room = new Room(25, 4);
         System.out.println(room);
     }
 
