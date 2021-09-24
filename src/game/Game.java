@@ -56,7 +56,7 @@ public class Game {
         } else if ("w".equals(getDirect)) {
             moveW();
         }else{
-            System.out.println("Invalid Input");
+            System.out.println(getDirect);
         }
 
     }
