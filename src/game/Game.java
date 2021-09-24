@@ -133,11 +133,10 @@ public class Game {
         public static void main (String[] args) {
 
             Game theGame = new Game();
+            Scanner s = new Scanner(System.in);
             System.out.println(theGame.getPlayer().getTile().getDescribe());
-            //theGame.ChooseDirection("e");
             System.out.println("Which direction will you travel?");
-           Scanner s = new Scanner(System.in);
-       //  int newMove = s.nextLine();
+            theGame.ChooseDirection(s.nextLine());
         }
     }
 
