@@ -5,20 +5,20 @@ import java.util.ArrayList;
 public class Player {
 
     private String name ;
-    private int position;
+    private int xPosition, yPosition;
 
     public Player(String name){
         this.name = name;
-        this.position = 3;
+        this.xPosition =2;
 
     }
 
     public int getPosition() {
-        return position;
+        return xPosition;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public void setPosition(int xPosition) {
+        this.xPosition = xPosition;
     }
 }
 

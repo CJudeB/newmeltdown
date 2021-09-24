@@ -4,9 +4,9 @@ import java.util.ArrayList;
 public class Tile {
 
 
-    private  static String tDescription, tIteractable, tPuzzle;
-    private static ArrayList <String> tItems = new ArrayList<>();
-    private static boolean tN, tE, tS,tW;
+    private String tDescription, tIteractable, tPuzzle;
+    private ArrayList <String> tItems = new ArrayList<>();
+    private boolean tN, tE, tS,tW;
 
     public Tile(String tDescription, String tInteratable, String tPuzzle, Boolean tN, Boolean tE, Boolean tS, Boolean tW ) {
 
@@ -20,7 +20,7 @@ public class Tile {
 
     }
 
-    public static Boolean gettN()
+    public Boolean gettN()
     {
         return tN;
     }
@@ -41,7 +41,7 @@ public class Tile {
     }
 
 
-    public static String gettDescription() {
+    public String gettDescription() {
         return tDescription;
     }
 }
