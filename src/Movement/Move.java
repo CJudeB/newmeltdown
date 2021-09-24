@@ -3,6 +3,7 @@ package Movement;
 import java.util.ArrayList;
 import Movement.Selection;
 import java.util.Scanner;
+import Movement.Tile;
 public class Move {
 
 
@@ -43,9 +44,12 @@ public class Move {
             Selection s = new Selection();
             Scanner input = new Scanner(System.in);
 
-            newMove.moveTo(newMove.getPlayer(), s.directionSelection(input.nextLine()));
+            System.out.println(newMove.tileRef.get(newMove.player.getPosition()).gettDescription());
 
-            System.out.println();
+            String temp = input.nextLine();
+            newMove.moveTo(newMove.getPlayer(), s.directionSelection(temp));
+
+            //System.out.println(newMove.tileRef.get(newMove.player.getPosition()).gettDescription());
         }
 
     }
