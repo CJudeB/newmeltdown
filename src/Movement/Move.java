@@ -1,0 +1,56 @@
+package Movement;
+
+import java.util.ArrayList;
+import Movement.Selection;
+import java.util.Scanner;
+public class Move {
+
+
+    private ArrayList <Tile> tileRef;
+    private Player player;
+
+    public Move(){
+        this.tileRef = new ArrayList<Tile>();
+        tileRef.add(null);
+        tileRef.add(new Tile("East of Start(4C)","table", "lockedDoor", false, true, false,true));
+        tileRef.add(new Tile("Start(4E)","table", "lockedDoor", false, true, false,true));
+        tileRef.add(new Tile("West of Start(4E)","table", "lockedDoor", false, false, true,true));
+        tileRef.add(null);
+        tileRef.add(null);
+        tileRef.add(null);
+        tileRef.add(null);
+        tileRef.add(new Tile("South of 4E(5E)","table", "lockedDoor", true, false, false,true));
+
+        player = new Player("Tester");
+
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void moveTo(Player player, int newTile){
+
+                player.setPosition(player.getPosition() + newTile);
+
+        }
+
+
+
+
+        public static void main(String[] args) {
+            Move newMove = new Move();
+            Selection s = new Selection();
+            Scanner input = new Scanner(System.in);
+
+            newMove.moveTo(newMove.getPlayer(), s.directionSelection(input.nextLine()));
+
+            System.out.println();
+        }
+
+    }
+
+
+
+
+
