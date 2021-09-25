@@ -1,7 +1,5 @@
 package objects;
-import objects.Player;
 
-import jdk.jfr.ValueDescriptor;
 
 public class Definer {
     private String name;
@@ -23,7 +21,6 @@ public class Definer {
     public String getDescribe() {
         return describe;
     }
-
 
     public void setDescribe(String vDescribe) {
         this.describe = vDescribe;

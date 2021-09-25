@@ -1,12 +1,13 @@
 package position;
 
 
-public enum Direction {
+public enum Direct {
 
     NORTH,
     SOUTH,
     EAST,
     WEST;
 
-    public static final int NOEXIT = -1;
+    public static final int NOX = -1;
+
 }
