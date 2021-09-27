@@ -9,10 +9,10 @@ public class Tile {
     private ArrayList <String> tItems = new ArrayList<>();
     private boolean tN, tE, tS,tW;
 
-    public Tile(String tDescription, String tInteratable, String tPuzzle, Boolean tN, Boolean tE, Boolean tS, Boolean tW ) {
+    public Tile(String tDescription, String tInteractable, String tPuzzle, Boolean tN, Boolean tE, Boolean tS, Boolean tW ) {
 
         this.tDescription = tDescription;
-        this.tIteractable = tInteratable;
+        this.tIteractable = tInteractable;
         this.tPuzzle = tPuzzle;
         this.tN = tN;
         this.tE = tE;
