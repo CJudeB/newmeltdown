@@ -61,7 +61,7 @@ public class Game {
 
     }
 
-    //Call positon updaters with parameters
+    //Call position updaters with parameters
     private void moveN() {
         upDate(moveTo(player, Direction.NORTH));
     }

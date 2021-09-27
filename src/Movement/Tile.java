@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class Tile {
 
+    public Tile(){}
 
     private String tDescription, tIteractable, tPuzzle;
     private ArrayList <String> tItems = new ArrayList<>();

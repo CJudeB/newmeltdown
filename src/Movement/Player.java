@@ -7,9 +7,11 @@ public class Player {
     private String name ;
     private int xPosition, yPosition;
 
+    public Player(){}
+
     public Player(String name){
         this.name = name;
-        this.xPosition =2;
+        this.xPosition = 1;
 
     }
 
