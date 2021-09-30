@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import java.util.Scanner;
 
-public class Move {
+public class Game {
 
 
     private ArrayList <Tile> tileRef;
@@ -12,11 +12,33 @@ public class Move {
 
 
 
-    public Move(){
+    public Game(){
         this.tileRef = new ArrayList<Tile>();
+        //row 1
+        this.tileRef.add(null);
+        this.tileRef.add(null);
+        this.tileRef.add(null);
+        this.tileRef.add(null);
+        this.tileRef.add(null);
+        //row 2
+        this.tileRef.add(null);
+        this.tileRef.add(null);
+        this.tileRef.add(null);
+        this.tileRef.add(null);
+        this.tileRef.add(null);
+        //row 3
+        this.tileRef.add(null);
+        this.tileRef.add(null);
+        this.tileRef.add(null);
+        this.tileRef.add(null);
+        this.tileRef.add(null);
+        //row 4
+        this.tileRef.add(null);
+        this.tileRef.add(null);
         this.tileRef.add(new Tile("West of Start(4C)","table", "lockedDoor", false, true, false,true));
-        this.tileRef.add(new Tile("Start(4E)","table", "lockedDoor", false, true, false,true));
-        this.tileRef.add(new Tile("East of Start(4D)","table", "lockedDoor", false, false, true,true));
+        this.tileRef.add(new Tile("Start(4D)","table", "lockedDoor", false, true, false,true));
+        this.tileRef.add(new Tile("East of Start(4E)","table", "lockedDoor", false, false, true,true));
+        //row 5
         this.tileRef.add(null);
         this.tileRef.add(null);
         this.tileRef.add(null);
@@ -29,7 +51,10 @@ public class Move {
 
         public void moveTile(String dir, int newTile) {
 
-            if (dir.equals("n") && this.tileRef.get(this.player.getPosition()).gettN()) {
+        //Needs statments for exiting the game at 3a
+        //Also needs statments for traveling in the cart 3a-1a,1a-1c
+
+        if (dir.equals("n") && this.tileRef.get(this.player.getPosition()).gettN()) {
                 this.player.setPosition(this.player.getPosition() + newTile);
             } else if (dir.equals("s") && this.tileRef.get(this.player.getPosition()).gettS()) {
                 this.player.setPosition(this.player.getPosition() + newTile);
@@ -45,24 +70,20 @@ public class Move {
         }
 
 
-
-
-
-
         public static void main(String[] args) {
-            Move newMove = new Move();
+            Game newGame = new Game();
             Selection s = new Selection();
-            Validation v =new Validation();
+            Validation v = new Validation();
             Scanner input = new Scanner(System.in);
             String temp;
 
-            System.out.println(newMove.tileRef.get(newMove.player.getPosition()).gettDescription());
+            System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
             while(true) {
                 System.out.println("Enter a direction");
                 temp = input.nextLine();
-                newMove.moveTile(v.validateInput(temp), s.directionSelection(temp));
+                newGame.moveTile(v.validateInput(temp), s.directionSelection(temp));
 
-                System.out.println(newMove.tileRef.get(newMove.player.getPosition()).gettDescription());
+                System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
             }
         }
 
