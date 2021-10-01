@@ -1,10 +1,11 @@
 package Movement;
 
+import java.util.ArrayList;
+
 public class Validation {
 
-    private String [] cardinals = {"n","e","s","w"};
-    private String [] inventory = new String [5];
-    private String [] tileItems = new String [5];
+    private String[] cardinals = {"n", "e", "s", "w"};
+    private String[] tileItems = new String[5];
     private String badInput = "badInput";
 
     public String validateInput(String input) {
@@ -19,21 +20,33 @@ public class Validation {
         } else if (input.toLowerCase().equals("w") || input.toLowerCase().equals("west")) {
             return cardinals[3];
         }
+        return badInput;
+    }
 
-        for (String a : inventory) {
-            if (input.toLowerCase().equals(a)) {
-                return a;
-            }
-        }
-
-        for (String b : tileItems) {
-            if (input.toLowerCase().equals(b)) {
-                return b;
+    public String validateInput(String input, ArrayList<String> tInven) {
+        String item = input.toLowerCase();
+        for (String a : tInven) {
+            if (item.equals(a)) {
+                return item;
             }
         }
         return badInput;
     }
+
+    public String validateInput(String input, String pInven[]) {
+        String item = input.toLowerCase();
+        for (String i : pInven) {
+            if (item.equals(i)) {
+                return item;
+            }
+
+        }
+        return badInput;
+    }
 }
+
+
+
 
 
 

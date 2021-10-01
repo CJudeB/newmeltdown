@@ -15,42 +15,44 @@ public class Game {
     public Game(){
         this.tileRef = new ArrayList<Tile>();
         //row 1
-        this.tileRef.add(null);
-        this.tileRef.add(null);
-        this.tileRef.add(null);
-        this.tileRef.add(null);
-        this.tileRef.add(null);
+        this.tileRef.add(new Tile("1A","", "", false, true, true,false));
+        this.tileRef.add(new Tile("1B","", "", false, true, false,true));
+        this.tileRef.add(new Tile("1C","", "", false, false, true,true));
+        this.tileRef.add(new Tile("1D(Unreachable)","", "", false, false, false,false));
+        this.tileRef.add(new Tile("1E(Unreachable)","", "", false, false, false,false));
         //row 2
-        this.tileRef.add(null);
-        this.tileRef.add(null);
-        this.tileRef.add(null);
-        this.tileRef.add(null);
-        this.tileRef.add(null);
+        this.tileRef.add(new Tile("2A","", "", true, false, true,false));
+        this.tileRef.add(new Tile("2B(Unreachable)","", "", false, false, false,false));
+        this.tileRef.add(new Tile("2C","", "", true, false, false,false));
+        this.tileRef.add(new Tile("2D","", "", true, false, false,false));
+        this.tileRef.add(new Tile("2E(Unreachable)","", "", false, false, false,false));
         //row 3
-        this.tileRef.add(null);
-        this.tileRef.add(null);
-        this.tileRef.add(null);
-        this.tileRef.add(null);
-        this.tileRef.add(null);
+        this.tileRef.add(new Tile("3A(Exit via West)","", "", true, false, true,false));
+        this.tileRef.add(new Tile("3B(Unreachable)","", "", false, false, false,false));
+        this.tileRef.add(new Tile("3C(Unreachable)","", "", false, false, false,false));
+        this.tileRef.add(new Tile("3D(Unreachable)","", "", false, false, false,false));
+        this.tileRef.add(new Tile("3E(Unreachable)","", "", false, false, false,false));
         //row 4
-        this.tileRef.add(null);
-        this.tileRef.add(null);
-        this.tileRef.add(new Tile("West of Start(4C)","table", "lockedDoor", false, true, false,true));
-        this.tileRef.add(new Tile("Start(4D)","table", "lockedDoor", false, true, false,true));
-        this.tileRef.add(new Tile("East of Start(4E)","table", "lockedDoor", false, false, true,true));
+        this.tileRef.add(new Tile("4A","", "", true, true, true,false));
+        this.tileRef.add(new Tile("4B","", "", false, true, false,true));
+        this.tileRef.add(new Tile("4C(West of Start)","", "", false, true, false,true));
+        this.tileRef.add(new Tile("4D(Start)","Cart", "", false, true, false,true));
+        this.tileRef.add(new Tile("4E(East of Start)","", "", false, false, true,true));
         //row 5
-        this.tileRef.add(null);
-        this.tileRef.add(null);
-        this.tileRef.add(null);
-        this.tileRef.add(null);
-        this.tileRef.add(new Tile("South of 4E(5E)","table", "lockedDoor", true, false, false,true));
+        this.tileRef.add(new Tile("5A","", "", true, true, false,false));
+        this.tileRef.add(new Tile("5B","", "", false, true, false,true));
+        this.tileRef.add(new Tile("5C","", "", false, true, false,true));
+        this.tileRef.add(new Tile("5D","", "", false, true, false,true));
+        this.tileRef.add(new Tile("5E","", "", true, false, false,true));
 
         player = new Player("Tester");
+
 
     }
 
         public void moveTile(String dir, int newTile) {
 
+        //Notes
         //Needs statments for exiting the game at 3a
         //Also needs statments for traveling in the cart 3a-1a,1a-1c
 
@@ -69,21 +71,75 @@ public class Game {
             }
         }
 
+    //Method to drop items from player inventory and add to the tile inventory
+    public String[] dropItem(String item, String pInven[]) {
+        //If validate returns badInput print
+        if(item.equals("badInput")) {
+            System.out.println("You aren't holding a item like that");
+            return pInven;
+        }
+        for (int i = 0; i < pInven.length; i++) {
+            if (pInven[i].equals(item)) {
+                pInven[i] = null;
+                System.out.println("You dropped the " + item);
+                this.tileRef.get(this.player.getPosition()).settItems(item);
+                return pInven;
+            }
+        }
+        return pInven;
+    }
+
+    //Method to pickup items from tile inventory and add to the player inventory
+    public String[] pickItem(String item, String pInven[]) {
+        if(item.equals("badInput")){
+            System.out.println("There doesn't seem to be an item like that here");
+            return pInven;
+        }
+        for (int i = 0; i < pInven.length; i++) {
+            if (pInven[i] == null) {
+                pInven[i] = item;
+                this.tileRef.get(this.player.getPosition()).removeItem(item);
+                System.out.println("You picked up the " + item);
+                return pInven;
+            } else if(i == pInven.length - 1){
+                System.out.println("You can't carry anything else");
+                return pInven;
+            }
+        }
+        return pInven;
+    }
+
 
         public static void main(String[] args) {
             Game newGame = new Game();
             Selection s = new Selection();
             Validation v = new Validation();
+            Items i = new Items();
             Scanner input = new Scanner(System.in);
             String temp;
-
+            System.out.println(newGame.tileRef);
             System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
             while(true) {
-                System.out.println("Enter a direction");
+              /* System.out.println("Enter a direction");
+                temp = input.nextLine();
+                newGame.moveTile(v.validateInput(temp), s.directionSelection(v.validateInput(temp)));
+                System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription()); */
+
+                newGame.tileRef.get(newGame.player.getPosition()).settItems("Cart Key");
+                System.out.println("Enter an item to pick up");
+                temp = input.nextLine();
+                newGame.player.setInventory(newGame.pickItem(v.validateInput(temp, newGame.tileRef.get(newGame.player.getPosition()).gettItems()), newGame.player.getInventory()));
+                System.out.println("Enter a direction to move");
                 temp = input.nextLine();
                 newGame.moveTile(v.validateInput(temp), s.directionSelection(temp));
-
+                newGame.player.setPosition(19);
                 System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
+                System.out.println("What would you like to drop");
+                temp = input.nextLine();
+                newGame.player.setInventory(newGame.dropItem(v.validateInput(temp, newGame.player.getInventory()), newGame.player.getInventory()));
+                newGame.tileRef.get(newGame.player.getPosition()).printItems();
+
+
             }
         }
 

@@ -7,19 +7,19 @@ public class Selection {
         int output;
         switch (input) {
 
-            case "North", "north", "n", "N": {
+            case "n": {
                 output = -5;
                 return output;
             }
-            case "East", "east", "e", "E": {
+            case "e": {
                 output = 1;
                 return output;
             }
-            case "South", "south", "s", "S": {
+            case "s": {
                 output = 5;
                 return output;
             }
-            case "West", "west", "w", "W": {
+            case "w": {
                 output = -1;
                 return output;
 

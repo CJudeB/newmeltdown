@@ -41,8 +41,34 @@ public class Tile {
         return tW;
     }
 
-
     public String gettDescription() {
         return tDescription;
+    }
+
+    public String gettItems(int index) {
+        return tItems.get(index);
+    }
+
+    public void settItems(String item) {
+        this.tItems.add(item);
+    }
+
+    public ArrayList<String> gettItems() {
+        return tItems;
+    }
+
+    public void removeItem(String item){
+
+        for (int i = 0 ; i < tItems.size(); i++){
+                if(item.equals(this.tItems.get(i))){
+                    this.tItems.remove(i);
+            }
+        }
+    }
+
+    public void printItems(){
+        for (String i:tItems) {
+            System.out.println(i);
+        }
     }
 }
