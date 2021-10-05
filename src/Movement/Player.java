@@ -2,6 +2,7 @@ package Movement;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Player {
@@ -9,7 +10,7 @@ public class Player {
 
     private String name;
     private int Position, health = 100;
-    private boolean inCart = false, isAlive = true;
+    private boolean inCart = false, hasProtectiveClothing = false, isAlive = true;
     private String[] inventory = new String[5];
 
     public Player(String name) {
@@ -39,6 +40,14 @@ public class Player {
 
     public void setInCart(boolean inCart) {
         this.inCart = inCart;
+    }
+
+    public boolean isHasProtectiveClothing() {
+        return hasProtectiveClothing;
+    }
+
+    public void setHasProtectiveClothing(boolean hasProtectiveClothing) {
+        this.hasProtectiveClothing = hasProtectiveClothing;
     }
 
     public boolean isAlive() {

@@ -11,33 +11,38 @@ public class Validation {
     public String validateInput(String input) {
 
 
-        if (input.toLowerCase().equals("n") || input.toLowerCase().equals("north")) {
+        if (input.equalsIgnoreCase("n") || input.equalsIgnoreCase("north")) {
             return cardinals[0];
-        } else if (input.toLowerCase().equals("e") || input.toLowerCase().equals("east")) {
+        } else if (input.equalsIgnoreCase("e") || input.equalsIgnoreCase("east")) {
             return cardinals[1];
-        } else if (input.toLowerCase().equals("s") || input.toLowerCase().equals("south")) {
+        } else if (input.equalsIgnoreCase("s") || input.equalsIgnoreCase("south")) {
             return cardinals[2];
-        } else if (input.toLowerCase().equals("w") || input.toLowerCase().equals("west")) {
+        } else if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("west")) {
             return cardinals[3];
         }
         return badInput;
     }
 
     public String validateInput(String input, ArrayList<String> tInven) {
-        String item = input.toLowerCase();
         for (String a : tInven) {
-            if (item.equals(a)) {
-                return item;
+            if (input.equalsIgnoreCase(a)) {
+                return input;
             }
         }
         return badInput;
     }
 
+    public String validateInput(String input, String tInteractable){
+        if(input.equalsIgnoreCase(tInteractable)){
+            return input;
+        }else
+            return badInput;
+    }
+
     public String validateInput(String input, String pInven[]) {
-        String item = input.toLowerCase();
         for (String i : pInven) {
-            if (item.equals(i)) {
-                return item;
+            if (input.equalsIgnoreCase(i)) {
+                return input;
             }
 
         }

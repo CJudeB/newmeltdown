@@ -47,6 +47,10 @@ public class Tile {
         return tDescription;
     }
 
+    public String gettIteractable() {
+        return tIteractable;
+    }
+
     public int getDamVal() {
         return damVal;
 
