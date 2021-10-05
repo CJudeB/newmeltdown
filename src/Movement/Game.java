@@ -3,19 +3,15 @@ package Movement;
 //import MultiArray.CalculateDamage;
 
 import java.util.ArrayList;
-import Movement.Items.*;
 import java.util.Scanner;
+import static Movement.Items.*;
 
-import static Movement.Items.useCart;
-import static Movement.Items.useProtectiveClothing;
-import static Movement.Items.useWrench;
 public class Game {
 
 
     private ArrayList<Tile> tileRef;
     private Player player;
-    private boolean pipelineFixed = false;
-
+    private boolean pipelineFixed = false, quit = false, exitFacility = false;
     public Game() {
         this.tileRef = new ArrayList<Tile>();
         //row 1
@@ -138,7 +134,7 @@ public String[] pickItem(String item, String pInven[]) {
                 player.setInventory(dropItem(v.validateInput(parts[1], player.getInventory()), player.getInventory()));
                 break;
             }
-            case "Pickup", "pickup":{
+            case "Pick-up", "pick-up":{
                 player.setInventory(pickItem(v.validateInput(parts[1], tileRef.get(player.getPosition()).gettItems()), player.getInventory()));
                 break;
             }
@@ -148,8 +144,8 @@ public String[] pickItem(String item, String pInven[]) {
                         player.setInCart(useCart(parts[1], tileRef.get(player.getPosition()).gettIteractable(),player));
                         break;
                     }
-                    case "Protective Clothing", "protective clothing":{
-                        player.setHasProtectiveClothing(useProtectiveClothing(parts[1], player));
+                    case "Hazmat", "hazmat":{
+                        player.setHasProtectiveClothing(useHazmat(parts[1], player));
                         break;
                     }
                     case "wrench", "Wrench":{
@@ -171,39 +167,15 @@ public String[] pickItem(String item, String pInven[]) {
         String temp;
 
         //Main game loop after intro
+
+
         do{
+
             System.out.print(">");
             temp = input.nextLine();
             newGame.inputHandler(temp);
-
-        }while(!newGame.pipelineFixed);
-
-        // Test code
-      /*  System.out.println(newGame.tileRef);
-        System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
-        newGame.tileRef.get(newGame.player.getPosition()).settItems("cart key");
-        newGame.tileRef.get(newGame.player.getPosition()).printItems();
-        while (true) {
-       /*       System.out.println("Enter a direction");
-                temp = input.nextLine();
-                newGame.moveTile(v.validateInput(temp), s.directionSelection(v.validateInput(temp)));
-                System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
-
-
-            System.out.println("Enter an item to pick up");
-            temp = input.nextLine();
-            newGame.player.setInventory(newGame.pickItem(v.validateInput(temp, newGame.tileRef.get(newGame.player.getPosition()).gettItems()), newGame.player.getInventory()));
-            System.out.println("Enter a direction to move");
-            temp = input.nextLine();
-            newGame.moveTile(v.validateInput(temp), s.directionSelection(temp));
-            System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
-            System.out.println("What would you like to drop");
-            temp = input.nextLine();
-            newGame.player.setInventory(newGame.dropItem(v.validateInput(temp, newGame.player.getInventory()), newGame.player.getInventory()));
-            newGame.tileRef.get(newGame.player.getPosition()).printItems();
-
-
-        } */
+            
+        }while(!newGame.pipelineFixed && newGame.player.isAlive() && !newGame.quit && !newGame.exitFacility);
 
     }
 

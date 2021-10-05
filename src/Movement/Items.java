@@ -41,14 +41,14 @@ public class Items {
     public static boolean useCart(String item, String tInteractable, Player player) {
         Validation v = new Validation();
         if (item.equalsIgnoreCase(tInteractable)){
-            if (v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && v.validateInput("cart key", player.getInventory()).equalsIgnoreCase("cart key")) {
+            if (v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
 
                 System.out.println("You re-fuel the cart and start it with the key");
                 return true;
-            } else if (v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && !v.validateInput("cart key", player.getInventory()).equalsIgnoreCase("cart key")) {
+            } else if (v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && !v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
                 System.out.println("It seems you're missing the key");
                 return false;
-            } else if (!v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && !v.validateInput("cart key", player.getInventory()).equalsIgnoreCase("cart key")) {
+            } else if (!v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && !v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
                 System.out.println("It seems to be out of fuel");
                 return false;
             }
@@ -69,9 +69,9 @@ public class Items {
         return false;
     }
 
-    public static boolean useProtectiveClothing (String item, Player player){
+    public static boolean useHazmat (String item, Player player){
         Validation v = new Validation();
-        if(v.validateInput(item, player.getInventory()).equalsIgnoreCase("protective clothing")){
+        if(v.validateInput(item, player.getInventory()).equalsIgnoreCase("hazmat")){
 
             System.out.println("You change into the lead lined clothing");
             return true;
