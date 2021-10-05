@@ -2,7 +2,7 @@ package objects;
 
 public class Validation {
 
-    private String [] cardinals = {"n","e","s","w"};
+    private String [] cardinals = {"n","s","e","w"};
     private String [] inventory = new String [5];
     private String [] tileItems = new String [5];
     private String badInput = "badInput";
@@ -12,9 +12,9 @@ public class Validation {
 
         if (input.toLowerCase().equals("n") || input.toLowerCase().equals("north")) {
             return cardinals[0];
-        } else if (input.toLowerCase().equals("e") || input.toLowerCase().equals("east")) {
-            return cardinals[1];
         } else if (input.toLowerCase().equals("s") || input.toLowerCase().equals("south")) {
+            return cardinals[1];
+        } else if (input.toLowerCase().equals("e") || input.toLowerCase().equals("east")) {
             return cardinals[2];
         } else if (input.toLowerCase().equals("w") || input.toLowerCase().equals("west")) {
             return cardinals[3];

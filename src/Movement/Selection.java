@@ -6,27 +6,27 @@ public class Selection {
     public int directionSelection(String input) {
         int output;
         switch (input) {
-
-            case "n": {
+            case "n" -> {
                 output = -5;
                 return output;
             }
-            case "e": {
+            case "e" -> {
                 output = 1;
                 return output;
             }
-            case "s": {
+            case "s" -> {
                 output = 5;
                 return output;
             }
-            case "w": {
+            case "w" -> {
                 output = -1;
                 return output;
 
             }
-            default:
+            default -> {
                 output = 0;
                 return output;
+            }
         }
     }
 }

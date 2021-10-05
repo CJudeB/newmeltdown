@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 public class Player {
 
+
     private String name;
     private int Position, health = 100;
     private boolean inCart = false, isAlive = true;
@@ -20,7 +21,7 @@ public class Player {
         return Position;
     }
 
-    public void setPosition(int xPosition) {
+    public void setPosition(int Position) {
         this.Position = Position;
     }
 
