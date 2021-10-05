@@ -1,6 +1,6 @@
 package Movement;
 
-import MultiArray.CalculateDamage;
+//import MultiArray.CalculateDamage;
 
 import java.util.ArrayList;
 
@@ -121,20 +121,21 @@ public String[] pickItem(String item, String pInven[]) {
         String temp;
         System.out.println(newGame.tileRef);
         System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
+        newGame.tileRef.get(newGame.player.getPosition()).settItems("cart key");
+        newGame.tileRef.get(newGame.player.getPosition()).printItems();
         while (true) {
        /*       System.out.println("Enter a direction");
                 temp = input.nextLine();
                 newGame.moveTile(v.validateInput(temp), s.directionSelection(v.validateInput(temp)));
                 System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());*/
 
-            newGame.tileRef.get(newGame.player.getPosition()).settItems("Cart Key");
+
             System.out.println("Enter an item to pick up");
             temp = input.nextLine();
             newGame.player.setInventory(newGame.pickItem(v.validateInput(temp, newGame.tileRef.get(newGame.player.getPosition()).gettItems()), newGame.player.getInventory()));
             System.out.println("Enter a direction to move");
             temp = input.nextLine();
             newGame.moveTile(v.validateInput(temp), s.directionSelection(temp));
-            newGame.player.setPosition(18);
             System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
             System.out.println("What would you like to drop");
             temp = input.nextLine();
