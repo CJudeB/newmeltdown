@@ -47,7 +47,6 @@ public class Game {
 
         //Add items to tile 4E
         this.tileRef.get(18).settItems("wrench");
-        player = new Player("Tester");
         //Add items to tile 5A
         this.tileRef.get(19).settItems("fuel");
         //Add items to tile 5C
@@ -55,6 +54,8 @@ public class Game {
         this.tileRef.get(22).settItems("cart key");
         this.tileRef.get(22).settItems("protective clothing");
 
+        //Create player
+        player = new Player("Tester");
     }
 
     public void setPipelineFixed(boolean pipelineFixed) {
@@ -126,7 +127,7 @@ public String[] pickItem(String item, String pInven[]) {
         String[] parts = temp.split(" ");
         switch(parts[0]){
             case "Move", "move":{
-                moveTile(v.validateInput(parts[1]), s.directionSelection(parts[1]));
+                moveTile(v.validateInput(parts[1]), s.directionSelection(v.validateInput(parts[1])));
                 System.out.println(tileRef.get(player.getPosition()).gettDescription());
                 break;
             }
@@ -153,6 +154,9 @@ public String[] pickItem(String item, String pInven[]) {
                     }
                 }
             }
+            default:{
+                System.out.println("Bad Input try again");
+            }
         }
     }
 
@@ -168,13 +172,13 @@ public String[] pickItem(String item, String pInven[]) {
 
         //Main game loop after intro
 
-
+        System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
         do{
 
             System.out.print(">");
             temp = input.nextLine();
             newGame.inputHandler(temp);
-            
+
         }while(!newGame.pipelineFixed && newGame.player.isAlive() && !newGame.quit && !newGame.exitFacility);
 
     }
