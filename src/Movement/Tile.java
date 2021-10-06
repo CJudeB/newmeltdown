@@ -5,15 +5,15 @@ public class Tile {
 
     public Tile(){}
 
-    private String tDescription, tIteractable, tPuzzle;
+    private String tDescription, tIntractable, tPuzzle;
     private ArrayList <String> tItems = new ArrayList<>();
     private boolean tN, tE, tS,tW;
     private int damVal;
 
-    public Tile(String tDescription, String tInteractable, String tPuzzle, Boolean tN, Boolean tE, Boolean tS, Boolean tW, int damVal) {
+    public Tile(String tDescription, String tIntractable, String tPuzzle, Boolean tN, Boolean tE, Boolean tS, Boolean tW, int damVal) {
 
         this.tDescription = tDescription;
-        this.tIteractable = tInteractable;
+        this.tIntractable = tIntractable;
         this.tPuzzle = tPuzzle;
         this.tN = tN;
         this.tE = tE;
@@ -47,8 +47,8 @@ public class Tile {
         return tDescription;
     }
 
-    public String gettIteractable() {
-        return tIteractable;
+    public String gettIntractable() {
+        return tIntractable;
     }
 
     public int getDamVal() {

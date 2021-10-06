@@ -14,20 +14,20 @@ public class Items {
         return fuelUsed;
     }
 
-    public void useItem(String invenItem, String tInteractable) {
-        String interactable = tInteractable.toLowerCase();
+    public void useItem(String invenItem, String tIntractable) {
+        String intractable = tIntractable.toLowerCase();
         String item = invenItem.toLowerCase();
 
         //Super messy but wanted to add interaction with cart to include re-fuel first then key.
         // I do think re-fueling and using key should happen in one turn.
         // TBH not sure where useItem should be called to get let the player to also use the key.
 
-        if (item.equals("fuel") && interactable.equals("cart")) {
+        if (item.equals("fuel") && intractable.equals("cart")) {
             this.fuelUsed = true;
             System.out.println("You've re-fueled the cart. What next?");
-            useItem(invenItem, tInteractable);
+            useItem(invenItem, tIntractable);
 
-            if (item.equals("cart key") && interactable.equals("cart")) {
+            if (item.equals("cart key") && intractable.equals("cart")) {
                 this.cartKeyUsed = true;
                 System.out.println("You use the key to start the cart");
             } else {
@@ -38,11 +38,10 @@ public class Items {
         }
     }
 
-    public static boolean useCart(String item, String tInteractable, Player player) {
+    public static boolean useCart(String item, String tIntractable, Player player) {
         Validation v = new Validation();
-        if (item.equalsIgnoreCase(tInteractable)){
+        if (item.equalsIgnoreCase(tIntractable)){
             if (v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
-
                 System.out.println("You re-fuel the cart and start it with the key");
                 return true;
             } else if (v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && !v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
@@ -57,17 +56,30 @@ public class Items {
         return false;
     }
 
-    public static boolean useWrench (String item, String tInteractable, Player player){
+    public static boolean useWrench (String item, String tIntractable, Player player) {
         Validation v = new Validation();
-        if(item.equalsIgnoreCase(tInteractable)){
-            if(v.validateInput("wrench", player.getInventory()).equalsIgnoreCase("wrench")){
-                System.out.println("You use the wrench to fix the pipe");
-                return true;
-            }
+        //If not holding wrench
+        if (!v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench")) {
+            //If player on 2C
+            if(tIntractable.equalsIgnoreCase("pipeline")){
+                System.out.println("If you had a tool you might be able to  fix the pipe");
+            }else
+                System.out.println("I'm not holding an item like that");
+            return false;
         }
-        System.out.println("If you had a tool you could fix the pipeline");
-        return false;
+        //If wrench is in inventory and on 2C
+        else if(v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench") && tIntractable.equalsIgnoreCase("pipeline")) {
+            System.out.println("You use the wrench to fix the pipe");
+            return true;
+        }
+        //If wrench is in inventory and not on 2C
+        else if (v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench") && !tIntractable.equalsIgnoreCase("pipeline")){
+            System.out.println("I'm not sure what I would use that for here");
+            return false;
+        } else
+            return false;
     }
+
 
     public static boolean useHazmat (String item, Player player){
         Validation v = new Validation();

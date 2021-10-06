@@ -32,8 +32,8 @@ public class Validation {
         return badInput;
     }
 
-    public String validateInput(String input, String tInteractable){
-        if(input.equalsIgnoreCase(tInteractable)){
+    public String validateInput(String input, String tIntractable){
+        if(input.equalsIgnoreCase(tIntractable)){
             return input;
         }else
             return badInput;
@@ -47,6 +47,17 @@ public class Validation {
 
         }
         return badInput;
+    }
+
+    public static boolean onCartTile(int tRef, Player player){
+
+        if(player.isInCart()){
+        if((tRef == 0 || tRef == 1 || tRef == 2 || tRef == 5 || tRef == 10)){
+            return true;
+        }else
+        return false;
+        }
+        return player.isInCart();
     }
 }
 

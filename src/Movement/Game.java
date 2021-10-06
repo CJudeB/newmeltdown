@@ -5,7 +5,7 @@ package Movement;
 import java.util.ArrayList;
 import java.util.Scanner;
 import static Movement.Items.*;
-
+import static Movement.Validation.*;
 public class Game {
 
 
@@ -15,7 +15,7 @@ public class Game {
     public Game() {
         this.tileRef = new ArrayList<Tile>();
         //row 1
-        this.tileRef.add(new Tile("1A", "cart", "", false, true, true, false, 8));
+        this.tileRef.add(new Tile("1A", "", "", false, true, true, false, 8));
         this.tileRef.add(new Tile("1B", "", "", false, true, false, true, 8));
         this.tileRef.add(new Tile("1C", "", "", false, false, true, true, 10));
         this.tileRef.add(new Tile("1D(Unreachable)", "", "", false, false, false, false, 0));
@@ -23,7 +23,7 @@ public class Game {
         //row 2
         this.tileRef.add(new Tile("2A", "", "", true, false, true, false, 6));
         this.tileRef.add(new Tile("2B(Unreachable)", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("2C", "", "", true, false, false, false, 10));
+        this.tileRef.add(new Tile("2C", "pipeline", "", true, false, false, false, 10));
         this.tileRef.add(new Tile("2D(Unreachable)", "", "", true, false, false, false, 0));
         this.tileRef.add(new Tile("2E(Unreachable)", "", "", false, false, false, false, 0));
         //row 3
@@ -45,14 +45,18 @@ public class Game {
         this.tileRef.add(new Tile("5D", "", "", false, true, false, true, 3));
         this.tileRef.add(new Tile("5E", "", "", true, false, false, true, 3));
 
-        //Add items to tile 4E
+        //Add items to tile 4D
         this.tileRef.get(18).settItems("wrench");
         //Add items to tile 5A
         this.tileRef.get(19).settItems("fuel");
         //Add items to tile 5C
         this.tileRef.get(22).settItems("delimiter");
-        this.tileRef.get(22).settItems("cart key");
+        this.tileRef.get(22).settItems("cart-key");
         this.tileRef.get(22).settItems("protective clothing");
+
+        //Test items
+        this.tileRef.get(10).settItems("fuel");
+        this.tileRef.get(10).settItems("cart-key");
 
         //Create player
         player = new Player("Tester");
@@ -65,8 +69,7 @@ public class Game {
     public void moveTile(String dir, int newTile) {
 
         //Notes
-        //Needs statments for exiting the game at 3a
-        //Also needs statments for traveling in the cart 3a-1a,1a-1c
+        //Also needs statements for traveling in the cart 3a-1a,1a-1c
 
         if (dir.equals("n") && this.tileRef.get(this.player.getPosition()).gettN()) {
             this.player.setPosition(this.player.getPosition() + newTile);
@@ -77,7 +80,7 @@ public class Game {
         } else if (dir.equals("w") && this.tileRef.get(this.player.getPosition()).gettW()) {
             this.player.setPosition(this.player.getPosition() + newTile);
         } else if (dir.equals("badInput")) {
-            System.out.println("Bad input try again");
+            System.out.println("That's not a direction I can move");
         } else {
             System.out.println("You cannot go that way");
         }
@@ -126,8 +129,14 @@ public String[] pickItem(String item, String pInven[]) {
         Selection s = new Selection();
         String[] parts = temp.split(" ");
         switch(parts[0]){
+            case "p":{
+                System.out.println(tileRef.get(player.getPosition()).gettDescription());
+                System.out.println(player.getPosition());
+                System.out.println(player.isInCart());
+                break;
+            }
             case "Move", "move":{
-                moveTile(v.validateInput(parts[1]), s.directionSelection(v.validateInput(parts[1])));
+                moveTile(v.validateInput(parts[1]), s.directionSelection(v.validateInput(parts[1]),player));
                 System.out.println(tileRef.get(player.getPosition()).gettDescription());
                 break;
             }
@@ -142,7 +151,7 @@ public String[] pickItem(String item, String pInven[]) {
             case "Use", "use":{
                 switch(parts[1]){
                     case "cart","Cart":{
-                        player.setInCart(useCart(parts[1], tileRef.get(player.getPosition()).gettIteractable(),player));
+                        player.setInCart(useCart(parts[1], tileRef.get(player.getPosition()).gettIntractable(),player));
                         break;
                     }
                     case "Hazmat", "hazmat":{
@@ -150,12 +159,32 @@ public String[] pickItem(String item, String pInven[]) {
                         break;
                     }
                     case "wrench", "Wrench":{
-                        setPipelineFixed(useWrench(parts[1], tileRef.get(player.getPosition()).gettIteractable(), player));
+                            setPipelineFixed(useWrench(parts[1], tileRef.get(player.getPosition()).gettIntractable(), player));
+                            break;
                     }
                 }
+                break;
             }
+            case "I", "i":{
+                player.printInventory();
+                break;
+            }
+            case "Q","q","Quit","quit":{
+                this.quit = true;
+                break;
+            }
+            case "Exit","exit":{
+                if(tileRef.get(player.getPosition()).gettDescription().equalsIgnoreCase("3A")) {
+                    this.exitFacility = true;
+                    break;
+                }else
+                    System.out.println("There's no where for me to exit the facility from here");
+                    break;
+            }
+
             default:{
                 System.out.println("Bad Input try again");
+                break;
             }
         }
     }
@@ -170,16 +199,31 @@ public String[] pickItem(String item, String pInven[]) {
         Scanner input = new Scanner(System.in);
         String temp;
 
-        //Main game loop after intro
 
+        //Prologue
+        newGame.player.setPosition(10);
         System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
-        do{
 
+        //Main game loop after intro
+        do{
             System.out.print(">");
             temp = input.nextLine();
             newGame.inputHandler(temp);
+            newGame.player.setInCart(onCartTile(newGame.player.getPosition(), newGame.player));
 
         }while(!newGame.pipelineFixed && newGame.player.isAlive() && !newGame.quit && !newGame.exitFacility);
+
+        //Epilogue
+        if(newGame.quit){
+            System.out.println("Quitting Game");
+            return;
+        }else if(newGame.exitFacility){
+            System.out.println("You leave the facility");
+            return;
+        }else if(newGame.pipelineFixed){
+            System.out.println("You fix the pipe but are overwhelmed by the radiation");
+            return;
+        }
 
     }
 

@@ -70,7 +70,9 @@ public class Player {
     public void printInventory(){
         System.out.println("Inventory:");
         for (String i:inventory) {
-            System.out.println(i);
+            if(!(i == null)) {
+                System.out.println(i);
+            }
         }
     }
 }
