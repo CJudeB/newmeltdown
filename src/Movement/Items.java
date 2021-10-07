@@ -14,6 +14,14 @@ public class Items {
         return fuelUsed;
     }
 
+    public void setCartKeyUsed(boolean cartKeyUsed) {
+        this.cartKeyUsed = cartKeyUsed;
+    }
+
+    public void setFuelUsed(boolean fuelUsed) {
+        this.fuelUsed = fuelUsed;
+    }
+
     public void useItem(String invenItem, String tIntractable) {
         String intractable = tIntractable.toLowerCase();
         String item = invenItem.toLowerCase();
@@ -38,23 +46,7 @@ public class Items {
         }
     }
 
-    public static boolean useCart(String item, String tIntractable, Player player) {
-        Validation v = new Validation();
-        if (item.equalsIgnoreCase(tIntractable)){
-            if (v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
-                System.out.println("You re-fuel the cart and start it with the key");
-                return true;
-            } else if (v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && !v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
-                System.out.println("It seems you're missing the key");
-                return false;
-            } else if (!v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && !v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
-                System.out.println("It seems to be out of fuel");
-                return false;
-            }
-        }
-        System.out.println("The cart seems to need fuel and a key to work");
-        return false;
-    }
+
 
     public static boolean useWrench (String item, String tIntractable, Player player) {
         Validation v = new Validation();

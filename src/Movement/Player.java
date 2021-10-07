@@ -13,6 +13,7 @@ public class Player {
     private boolean inCart = false, hasProtectiveClothing = false, isAlive = true;
     private String[] inventory = new String[5];
 
+
     public Player(String name) {
         this.name = name;
         this.Position = 18;
@@ -65,13 +66,27 @@ public class Player {
     public void setInventory(String[] inventory) {
         this.inventory = inventory;
     }
+    public void removeItems(String item){
+        for( int  i = 0 ; i < inventory.length; i++){
+            if(inventory[i].equalsIgnoreCase(item)){
+                this.inventory[i] ="";
+            }
+        }
+    }
 
 
     public void printInventory(){
-        System.out.println("Inventory:");
         for (String i:inventory) {
             if(!(i == null)) {
-                System.out.println(i);
+                System.out.print("Inventory: ");
+            }else{
+                System.out.println("I don't have anything on me");
+            }
+            break;
+        }
+        for (String i:inventory) {
+            if(!(i == null)) {
+                System.out.println(i + ", ");
             }
         }
     }

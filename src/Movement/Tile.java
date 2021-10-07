@@ -51,6 +51,10 @@ public class Tile {
         return tIntractable;
     }
 
+    public void settIntractable(String tIntractable) {
+        this.tIntractable = tIntractable;
+    }
+
     public int getDamVal() {
         return damVal;
 

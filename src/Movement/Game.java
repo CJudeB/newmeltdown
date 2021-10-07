@@ -6,12 +6,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import static Movement.Items.*;
 import static Movement.Validation.*;
+
 public class Game {
 
 
     private ArrayList<Tile> tileRef;
     private Player player;
     private boolean pipelineFixed = false, quit = false, exitFacility = false;
+    private Cart cart;
+
     public Game() {
         this.tileRef = new ArrayList<Tile>();
         //row 1
@@ -60,6 +63,8 @@ public class Game {
 
         //Create player
         player = new Player("Tester");
+        //Create Cart
+        cart = new Cart();
     }
 
     public void setPipelineFixed(boolean pipelineFixed) {
@@ -68,9 +73,14 @@ public class Game {
 
     public void moveTile(String dir, int newTile) {
 
-        //Notes
-        //Also needs statements for traveling in the cart 3a-1a,1a-1c
 
+        //Removing cart from tile if needed
+        if(player.isInCart() && !(player.getPosition() == 10 || player.getPosition() == 2)){
+            tileRef.get(player.getPosition()).settIntractable("");
+        }else if(player.isInCart() && player.getPosition() == 10 && dir.equals("n")){
+            tileRef.get(player.getPosition()).settIntractable("");
+        }
+        //Move the player from one space to the next if possible otherwise tell them they can't
         if (dir.equals("n") && this.tileRef.get(this.player.getPosition()).gettN()) {
             this.player.setPosition(this.player.getPosition() + newTile);
         } else if (dir.equals("s") && this.tileRef.get(this.player.getPosition()).gettS()) {
@@ -83,6 +93,10 @@ public class Game {
             System.out.println("That's not a direction I can move");
         } else {
             System.out.println("You cannot go that way");
+        }
+        //Setting cart into tile if needed
+        if(player.isInCart() && !(player.getPosition() == 15 || player.getPosition() == 7)){
+            tileRef.get(player.getPosition()).settIntractable("cart");
         }
     }
 
@@ -127,12 +141,16 @@ public String[] pickItem(String item, String pInven[]) {
         public void inputHandler(String temp){
         Validation v = new Validation();
         Selection s = new Selection();
+
         String[] parts = temp.split(" ");
         switch(parts[0]){
             case "p":{
                 System.out.println(tileRef.get(player.getPosition()).gettDescription());
+                System.out.println(tileRef.get(player.getPosition()).gettIntractable());
                 System.out.println(player.getPosition());
                 System.out.println(player.isInCart());
+                System.out.println(cart.isFuelUsed());
+                System.out.println(cart.isCartKeyUsed());
                 break;
             }
             case "Move", "move":{
@@ -151,7 +169,7 @@ public String[] pickItem(String item, String pInven[]) {
             case "Use", "use":{
                 switch(parts[1]){
                     case "cart","Cart":{
-                        player.setInCart(useCart(parts[1], tileRef.get(player.getPosition()).gettIntractable(),player));
+                        player.setInCart(cart.useCart(parts[1], tileRef.get(player.getPosition()).gettIntractable(),player));
                         break;
                     }
                     case "Hazmat", "hazmat":{
@@ -194,7 +212,6 @@ public String[] pickItem(String item, String pInven[]) {
         Game newGame = new Game();
         Selection s = new Selection();
         Validation v = new Validation();
-        Items i = new Items();
         CalculateDamage cd = new CalculateDamage();
         Scanner input = new Scanner(System.in);
         String temp;
@@ -210,7 +227,6 @@ public String[] pickItem(String item, String pInven[]) {
             temp = input.nextLine();
             newGame.inputHandler(temp);
             newGame.player.setInCart(onCartTile(newGame.player.getPosition(), newGame.player));
-
         }while(!newGame.pipelineFixed && newGame.player.isAlive() && !newGame.quit && !newGame.exitFacility);
 
         //Epilogue
