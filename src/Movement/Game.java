@@ -1,7 +1,7 @@
 package Movement;
 
 //import MultiArray.CalculateDamage;
-
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
 import static Movement.Items.*;
@@ -18,7 +18,7 @@ public class Game {
     public Game() {
         this.tileRef = new ArrayList<Tile>();
         //row 1
-        this.tileRef.add(new Tile("1A", "", "", false, true, true, false, 8));
+        this.tileRef.add(new Tile("1A", "Stairs", "", false, true, true, false, 8));
         this.tileRef.add(new Tile("1B", "", "", false, true, false, true, 8));
         this.tileRef.add(new Tile("1C", "", "", false, false, true, true, 10));
         this.tileRef.add(new Tile("1D(Unreachable)", "", "", false, false, false, false, 0));
@@ -55,11 +55,15 @@ public class Game {
         //Add items to tile 5C
         this.tileRef.get(22).settItems("delimiter");
         this.tileRef.get(22).settItems("cart-key");
-        this.tileRef.get(22).settItems("protective clothing");
+        this.tileRef.get(22).settItems("Hazmat");
 
         //Test items
         this.tileRef.get(10).settItems("fuel");
         this.tileRef.get(10).settItems("cart-key");
+        this.tileRef.get(10).settItems("delimiter");
+        this.tileRef.get(10).settItems("Med-kit");
+        this.tileRef.get(10).settItems("Hazmat");
+        this.tileRef.get(10).settItems("wrench");
 
         //Create player
         player = new Player("Tester");
@@ -120,28 +124,52 @@ public class Game {
 
 //Method to pickup items from tile inventory and add to the player inventory
 public String[] pickItem(String item, String pInven[]) {
-        if (item.equals("badInput")) {
+    String itemToDrop;
+    Scanner input = new Scanner(System.in);
+    Validation v = new Validation();
+    boolean itemDropped = true;
+    if (item.equals("badInput")) {
         System.out.println("There doesn't seem to be an item like that here");
         return pInven;
-        }
-        for (int i = 0; i < pInven.length; i++) {
+    }
+    for (int i = 0; i < pInven.length; i++) {
         if (pInven[i] == null) {
-        pInven[i] = item;
-        this.tileRef.get(this.player.getPosition()).removeItem(item);
-        System.out.println("You picked up the " + item);
-        return pInven;
+            pInven[i] = item;
+            this.tileRef.get(this.player.getPosition()).removeItem(item);
+            System.out.println("You picked up the " + item);
+            return pInven;
         } else if (i == pInven.length - 1) {
-        System.out.println("You can't carry anything else");
-        return pInven;
+            System.out.println("You’re feeling very weak – there’s no way you can carry more. 'Why am I carrying all this stuff', you think to yourself.");
+            System.out.println("What should I drop for the item?");
+            player.printInventory();
+            do {
+                System.out.print(">");
+                itemToDrop = input.nextLine();
+                for (int a = 0; a < pInven.length; a++) {
+                    if (pInven[a].equalsIgnoreCase(itemToDrop)) {
+                        pInven[a] = item;
+                        this.tileRef.get(this.player.getPosition()).settItems(itemToDrop);
+                        System.out.println("You drop the " + itemToDrop + " for the " + item);
+                        itemDropped = false;
+                        break;
+                    } else if (a == pInven.length - 1)
+                        System.out.println("I'm not carrying that item");
+                }
+            } while (itemDropped);
+            return pInven;
         }
-        }
-        return pInven;
-        }
+    }
+    return pInven;
+}
+
 
         public void inputHandler(String temp){
         Validation v = new Validation();
         Selection s = new Selection();
-
+        Scanner input = new Scanner(System.in);
+        String itemToDrop;
+        boolean itemDropped = false;
+        String [] copyOfPlayerInven = Arrays.copyOf(player.getInventory(),5);
         String[] parts = temp.split(" ");
         switch(parts[0]){
             case "p":{
@@ -223,10 +251,12 @@ public String[] pickItem(String item, String pInven[]) {
 
         //Main game loop after intro
         do{
+
             System.out.print(">");
             temp = input.nextLine();
             newGame.inputHandler(temp);
             newGame.player.setInCart(onCartTile(newGame.player.getPosition(), newGame.player));
+
         }while(!newGame.pipelineFixed && newGame.player.isAlive() && !newGame.quit && !newGame.exitFacility);
 
         //Epilogue

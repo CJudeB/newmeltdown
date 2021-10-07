@@ -21,6 +21,7 @@ public class Cart {
         this.fuelUsed = fuelUsed;
     }
 
+    
     public boolean useCart(String item, String tIntractable, Player player) {
         Validation v = new Validation();
         if (item.equalsIgnoreCase(tIntractable)) {
@@ -28,6 +29,7 @@ public class Cart {
                 System.out.println("You re-fuel the cart and start it with the key and get in");
                 this.cartKeyUsed = true;
                 this.fuelUsed = true;
+
             } else if (v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && !v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
                 System.out.println("You re-fuel the cart but it's still needs a key to start it");
                 this.fuelUsed = true;

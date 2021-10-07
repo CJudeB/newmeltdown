@@ -86,7 +86,7 @@ public class Player {
         }
         for (String i:inventory) {
             if(!(i == null)) {
-                System.out.println(i + ", ");
+                System.out.print(i + " | ");
             }
         }
     }
