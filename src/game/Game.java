@@ -1,209 +1,132 @@
 package game;
-import java.io.IOException;
 import java.util.*;
 import objects.Player;
 import objects.Tile;
-import position.Direct;
-
-import java.io.BufferedReader;
-
-import java.io.InputStreamReader;
-
+import position.Direction;
+import objects.Validation;
 
 public class Game {
-
-
+    //Game variables
     private ArrayList<Tile> grid;
     private Player player;
+    private boolean inPlay = true;
 
-    List<String> direct = new ArrayList<>(Arrays.asList("n", "s", "e", "w"));
-
+    //Game constructor
     public Game() {
         this.grid = new ArrayList<Tile>();
 
-        grid.add(new Tile("Control Centre (Tile 4d).", " where the game starts.", Direct.NOX, Direct.NOX, 1, 2));
-        grid.add(new Tile("Tile 4c.", " West of Control Centre", Direct.NOX, Direct.NOX, 0, 0));
-        grid.add(new Tile("Tile 4e.", " East of Control Centre", Direct.NOX, 2, 0, Direct.NOX));
-        grid.add(new Tile("Tile 4b,", " east of Control Centre", 1, Direct.NOX, Direct.NOX, 0));
-        grid.add(new Tile("Tile 4a.", " east of Control Centre", Direct.NOX, Direct.NOX, Direct.NOX, 0));
-
+        grid.add(new Tile("Control Centre (Tile 4d).", " where the game starts.", Direction.NOEXIT, Direction.NOEXIT, 2, 1));
+        grid.add(new Tile("Tile 4c.", " west of Control Centre", Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT));
+        grid.add(new Tile("Tile 4e.", " east of Control Centre", Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, 0));
 
         player = new Player("You", "nuclear power plant technician", grid.get(0));
+    }
 
+    //Getters
+    public Player getPlayer() {
+        return player;
+    }
+
+    public boolean isInPlay() {
+        return inPlay;
     }
 
     ArrayList getGrid() {
         return grid;
     }
 
-    void setGrid(ArrayList theGrid) {
-        grid = theGrid;
-    }
-    public Player getPlayer() {
-        return player;
-    }
-    public void setPlayer(Player thePlayer) {
-        player = thePlayer;
-
-    }
-    void movePlayer(Player p, Tile theTile) {
-        p.setTile(theTile);
+    //setters
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
-    int movePlayerTo(Player player, Direct dir) {
+    public void setInPlay(boolean inPlay) {
+        this.inPlay = inPlay;
+    }
+
+    //Choose method to change position
+    public void ChooseDirection(String getDirect) {
+
+        if ("n".equals(getDirect)) {
+            moveN();
+        } else if ("s".equals(getDirect)) {
+            moveS();
+        } else if ("e".equals(getDirect)) {
+            moveE();
+        } else if ("w".equals(getDirect)) {
+            moveW();
+        }else{
+            System.out.println(getDirect);
+        }
+
+    }
+
+    //Call position updaters with parameters
+    private void moveN() {
+        upDate(moveTo(player, Direction.NORTH));
+    }
+
+    private void moveS() {
+        upDate(moveTo(player, Direction.SOUTH));
+    }
+
+    private void moveE() {
+        upDate(moveTo(player, Direction.EAST));
+    }
+
+    private void moveW() {
+        upDate(moveTo(player, Direction.WEST));
+    }
+
+    //Select tile number of next tile
+    public int moveTo(Player player, Direction dir) {
 
         Tile t = player.getTile();
-        int exit = switch (dir) {
-            case NORTH -> t.getN();
-            case SOUTH -> t.getS();
-            case EAST -> t.getE();
-            case WEST -> t.getW();
-            default -> Direct.NOX; // noexit - stay in same room
-        };
+        int exit;
 
-        if (exit != Direct.NOX) {
-            movePlayer(player, grid.get(exit));
+        if (dir == Direction.NORTH) {
+            exit = t.getN();
+        } else if (dir == Direction.SOUTH) {
+            exit = t.getS();
+        } else if (dir == Direction.EAST) {
+            exit = t.getE();
+        } else if (dir == Direction.WEST) {
+            exit = t.getW();
+        } else {
+            exit = Direction.NOEXIT;
         }
         return exit;
     }
 
-    public int movePlayerTo(Direct dir) {
-
-        return movePlayerTo(player, dir);
-    }
-
-
-    private void moveN() {
-        upDate(movePlayerTo(Direct.NORTH));
-    }
-
-    private void moveS() {
-        upDate(movePlayerTo(Direct.SOUTH));
-    }
-
-    private void moveE() {
-        upDate(movePlayerTo(Direct.EAST));
-    }
-
-    private void moveW() {
-        upDate(movePlayerTo(Direct.WEST));
-    }
-
+    //Update the player position
     void upDate(int tileNum) {
         String str;
-        if (tileNum == Direct.NOX) {
-            str = "You cannot go that way";
+        if (tileNum == Direction.NOEXIT) {
+            System.out.println("You cannot go that way");
         } else {
 
-            Tile t = getPlayer().getTile();
-            str = "You are located " + t.getName() + " . " + t.getDescribe();
+            player.setTile(grid.get(tileNum));
+            System.out.println(player.getTile().getDescribe());
         }
-        System.out.println(str);
     }
 
-    public String ProcessVerb(List<String> wordlist) {
-        String verb;
-        String msg = "";
-        verb = wordlist.get(0);
-        if (!direct.contains(verb)) {
-            msg = verb + " is not a known verb! ";
-        } else {
-            switch (verb) {
-                case "n" -> moveN();
-                case "s" -> moveS();
-                case "e" -> moveE();
-                case "w" -> moveW();
-                default -> msg = verb + " default msg";
+
+        public static void main (String[] args) {
+
+
+            Game theGame = new Game();
+            Scanner s = new Scanner(System.in);
+            Validation v = new Validation();
+
+
+
+            System.out.println(theGame.getPlayer().getTile().getDescribe());
+
+            while(theGame.isInPlay()) {
+                System.out.println("Which direction will you travel?");
+                theGame.ChooseDirection(v.validateInput(s.nextLine()));
+
             }
-        }
-        return msg;
+
     }
-
-
-    public String ProcessVerbNoun(List<String> wordlist) {
-        String verb;
-        String noun;
-        String msg = "";
-        verb = wordlist.get(0);
-        noun = wordlist.get(1);
-        if (!direct.contains(verb)) {
-            msg = verb + " is not a known verb! ";
-        }
-        msg += " (not yet implemented)";
-        return msg;
     }
-
-    public String ParseCommand(List<String> wordlist) {
-        String msg;
-        if (wordlist.size() == 1) {
-            msg = ProcessVerb(wordlist);
-        } else if (wordlist.size() == 2) {
-            msg = ProcessVerbNoun(wordlist);
-        } else {
-            msg = "Only 2 word commands allowed!";
-        }
-        return msg;
-    }
-
-    public List<String> WordList(String input) {
-        String delims = " \t,.:;?!\"'";
-        List<String> strlist = new ArrayList<>();
-        StringTokenizer tokenizer = new StringTokenizer(input, delims);
-        String t;
-
-        while (tokenizer.hasMoreTokens()) {
-            t = tokenizer.nextToken();
-            strlist.add(t);
-        }
-        return strlist;
-    }
-
-    public void showIntro(){
-        String s;
-        s = " Testing to see if player is able to move [Enter n, s, w or e]?\n" +
-                "(or enter q to quit)";
-        System.out.println(s);
-    }
-
-    public String RunCommand(String inputstr) {
-        List<String> wordlist;
-        String s = "ok";
-        String lowstr = inputstr.trim().toLowerCase();
-        if (!lowstr.equals("q")) {
-            if (lowstr.equals("")) {
-                s = "You must enter a command";
-            } else {
-                wordlist = WordList(lowstr);
-                s = ParseCommand(wordlist);
-            }
-        }
-        return s;
-    }
-
-
-
-
-
-    public static void main(String[] args) throws IOException {
-        BufferedReader in;
-        String input;
-        String output;
-        Game game = new Game();
-        in = new BufferedReader(new InputStreamReader(System.in));
-        game.showIntro();
-        do {
-            System.out.print("> ");
-            input = in.readLine();
-            output = game.RunCommand(input);
-            System.out.println(output);
-        } while (!"q".equals(input));
-    }
-
-}
-
-
-
-
-
-
-

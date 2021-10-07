@@ -19,6 +19,11 @@ public class RoomsWithExits {
 
      */
 
+    public class Player{
+
+
+    }
+
     public static class Room {
         private int location;
         private int wall;
