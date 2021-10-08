@@ -18,35 +18,35 @@ public class Game {
     public Game() {
         this.tileRef = new ArrayList<Tile>();
         //row 1
-        this.tileRef.add(new Tile("1A", "Stairs", "", false, true, true, false, 8));
-        this.tileRef.add(new Tile("1B", "", "", false, true, false, true, 8));
-        this.tileRef.add(new Tile("1C", "", "", false, false, true, true, 10));
-        this.tileRef.add(new Tile("1D(Unreachable)", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("1E(Unreachable)", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("1A", "Stairs", "", "", false, true, true, false, 8));
+        this.tileRef.add(new Tile("1B", "", "", "", false, true, false, true, 8));
+        this.tileRef.add(new Tile("1C", "", "", "", false, false, true, true, 10));
+        this.tileRef.add(new Tile("1D(Unreachable)", "", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("1E(Unreachable)", "", "", "", false, false, false, false, 0));
         //row 2
-        this.tileRef.add(new Tile("2A", "", "", true, false, true, false, 6));
-        this.tileRef.add(new Tile("2B(Unreachable)", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("2C", "pipeline", "", true, false, false, false, 10));
-        this.tileRef.add(new Tile("2D(Unreachable)", "", "", true, false, false, false, 0));
-        this.tileRef.add(new Tile("2E(Unreachable)", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("2A", "", "", "", true, false, true, false, 6));
+        this.tileRef.add(new Tile("2B(Unreachable)", "", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("2C", "pipeline", "", "", true, false, false, false, 10));
+        this.tileRef.add(new Tile("2D(Unreachable)", "", "", "", true, false, false, false, 0));
+        this.tileRef.add(new Tile("2E(Unreachable)", "", "", "", false, false, false, false, 0));
         //row 3
-        this.tileRef.add(new Tile("3A(Exit via West)", "cart", "", true, false, true, false, 6));
-        this.tileRef.add(new Tile("3B(Unreachable)", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("3C(Unreachable)", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("3D(Unreachable)", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("3E(Unreachable)", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("3A(Exit via West)", "", "", "cart", true, false, true, false, 6));
+        this.tileRef.add(new Tile("3B(Unreachable)", "", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("3C(Unreachable)", "", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("3D(Unreachable)", "", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("3E(Unreachable)", "", "", "", false, false, false, false, 0));
         //row 4
-        this.tileRef.add(new Tile("4A", "", "", true, true, true, false, 5));
-        this.tileRef.add(new Tile("4B", "", "", false, true, false, true, 35));
-        this.tileRef.add(new Tile("4C(West of Start)", "", "", false, true, false, true, 35));
-        this.tileRef.add(new Tile("4D(Start)", "", "", false, true, false, true, 3));
-        this.tileRef.add(new Tile("4E(East of Start)", "instruments", "", false, false, true, true, 3));
+        this.tileRef.add(new Tile("4A", "", "", "", true, true, true, false, 5));
+        this.tileRef.add(new Tile("4B", "", "", "", false, true, false, true, 35));
+        this.tileRef.add(new Tile("4C(West of Start)", "", "", "", false, true, false, true, 35));
+        this.tileRef.add(new Tile("4D(Start)", "", "", "", false, true, false, true, 3));
+        this.tileRef.add(new Tile("4E(East of Start)", "instruments", "", "", false, false, true, true, 3));
         //row 5
-        this.tileRef.add(new Tile("5A", "", "", true, true, false, false, 3));
-        this.tileRef.add(new Tile("5B", "", "", false, true, false, true, 3));
-        this.tileRef.add(new Tile("5C", "cabinet", "", false, true, false, true, 3));
-        this.tileRef.add(new Tile("5D", "", "", false, true, false, true, 3));
-        this.tileRef.add(new Tile("5E", "", "", true, false, false, true, 3));
+        this.tileRef.add(new Tile("5A", "", "", "", true, true, false, false, 3));
+        this.tileRef.add(new Tile("5B", "", "", "", false, true, false, true, 3));
+        this.tileRef.add(new Tile("5C", "cabinet", "", "", false, true, false, true, 3));
+        this.tileRef.add(new Tile("5D", "", "", "", false, true, false, true, 3));
+        this.tileRef.add(new Tile("5E", "", "", "", true, false, false, true, 3));
 
         //Add items to tile 4D
         this.tileRef.get(18).settItems("wrench");
@@ -79,10 +79,8 @@ public class Game {
 
 
         //Removing cart from tile if needed
-        if(player.isInCart() && !(player.getPosition() == 10 || player.getPosition() == 2)){
-            tileRef.get(player.getPosition()).settIntractable("");
-        }else if(player.isInCart() && player.getPosition() == 10 && dir.equals("n")){
-            tileRef.get(player.getPosition()).settIntractable("");
+        if(player.isInCart() && !(player.getPosition() == 2)){
+            tileRef.get(player.getPosition()).settCart("");
         }
         //Move the player from one space to the next if possible otherwise tell them they can't
         if (dir.equals("n") && this.tileRef.get(this.player.getPosition()).gettN()) {
@@ -99,8 +97,8 @@ public class Game {
             System.out.println("You cannot go that way");
         }
         //Setting cart into tile if needed
-        if(player.isInCart() && !(player.getPosition() == 15 || player.getPosition() == 7)){
-            tileRef.get(player.getPosition()).settIntractable("cart");
+        if(player.isInCart() && !(player.getPosition() == 7)){
+            tileRef.get(player.getPosition()).settCart("cart");
         }
     }
 
@@ -174,7 +172,7 @@ public String[] pickItem(String item, String pInven[]) {
         switch(parts[0]){
             case "p":{
                 System.out.println(tileRef.get(player.getPosition()).gettDescription());
-                System.out.println(tileRef.get(player.getPosition()).gettIntractable());
+                System.out.println(tileRef.get(player.getPosition()).gettCart());
                 System.out.println(player.getPosition());
                 System.out.println(player.isInCart());
                 System.out.println(cart.isFuelUsed());
@@ -197,7 +195,7 @@ public String[] pickItem(String item, String pInven[]) {
             case "Use", "use":{
                 switch(parts[1]){
                     case "cart","Cart":{
-                        player.setInCart(cart.useCart(parts[1], tileRef.get(player.getPosition()).gettIntractable(),player));
+                        player.setInCart(cart.useCart(parts[1], tileRef.get(player.getPosition()).gettCart(),player));
                         break;
                     }
                     case "Hazmat", "hazmat":{
@@ -255,7 +253,6 @@ public String[] pickItem(String item, String pInven[]) {
             System.out.print(">");
             temp = input.nextLine();
             newGame.inputHandler(temp);
-            newGame.player.setInCart(onCartTile(newGame.player.getPosition(), newGame.player));
 
         }while(!newGame.pipelineFixed && newGame.player.isAlive() && !newGame.quit && !newGame.exitFacility);
 

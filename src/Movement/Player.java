@@ -88,7 +88,9 @@ public class Player {
             if(!(i == null)) {
                 System.out.print(i + " | ");
             }
+
         }
+        System.out.print("\n");
     }
 }
 

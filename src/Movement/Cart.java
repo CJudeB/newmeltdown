@@ -21,7 +21,7 @@ public class Cart {
         this.fuelUsed = fuelUsed;
     }
 
-    
+
     public boolean useCart(String item, String tIntractable, Player player) {
         Validation v = new Validation();
         if (item.equalsIgnoreCase(tIntractable)) {

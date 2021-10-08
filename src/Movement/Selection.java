@@ -7,7 +7,9 @@ public class Selection {
         int output;
         switch (input) {
             case "n" -> {
-                if(player.isInCart()){
+                if(player.isInCart() && (player.getPosition() == 24 || player.getPosition() == 5)){
+                    output = -5;
+                }else if(player.isInCart()) {
                     output = -10;
                 }else
                     output = -5;
@@ -21,9 +23,11 @@ public class Selection {
                 return output;
             }
             case "s" -> {
-                if(player.isInCart()){
+                if(player.isInCart() && (player.getPosition() == 2 || player.getPosition() == 15 || player.getPosition() == 19)){
+                    output = 5;
+                }else if(player.isInCart())
                     output = 10;
-                }else
+                else
                     output = 5;
                 return output;
             }
