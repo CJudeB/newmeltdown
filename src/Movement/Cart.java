@@ -2,43 +2,72 @@ package Movement;
 
 public class Cart {
 
-    private boolean cartKeyUsed = false;
-    private boolean fuelUsed = false;
+    private  static boolean cartKeyUsed = false;
+    private  static boolean fuelUsed = false;
 
-    public boolean isCartKeyUsed() {
+    public static boolean isCartKeyUsed() {
         return cartKeyUsed;
     }
 
-    public boolean isFuelUsed() {
+    public  static boolean isFuelUsed() {
         return fuelUsed;
     }
 
-    public void setCartKeyUsed(boolean cartKeyUsed) {
-        this.cartKeyUsed = cartKeyUsed;
+    public static void setCartKeyUsed(boolean cartKeyUsed) {
+        cartKeyUsed = cartKeyUsed;
     }
 
-    public void setFuelUsed(boolean fuelUsed) {
-        this.fuelUsed = fuelUsed;
+    public static void setFuelUsed(boolean fuelUsed) {
+        fuelUsed = fuelUsed;
     }
 
 
-    public boolean useCart(String item, String tIntractable, Player player) {
+    public static boolean useCart(String item, String tIntractable, Player player) {
         Validation v = new Validation();
+        String [] pInven = player.getInventory();
         if (item.equalsIgnoreCase(tIntractable)) {
             if (v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
                 System.out.println("You re-fuel the cart and start it with the key and get in");
-                this.cartKeyUsed = true;
-                this.fuelUsed = true;
+                cartKeyUsed = true;
+                fuelUsed = true;
+                for (int i = 0; i < pInven.length; i++) {
+                    if (pInven[i].equals("fuel")) {
+                        pInven[i] = null;
+                        player.setInventory(pInven);
+                        break;
+                    }
+                }
+                for (int i = 0; i < pInven.length; i++) {
+                    if (pInven[i].equals("cart-key")) {
+                        pInven[i] = null;
+                        player.setInventory(pInven);
+                        break;
+                    }
+                }
 
             } else if (v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && !v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
                 System.out.println("You re-fuel the cart but it's still needs a key to start it");
-                this.fuelUsed = true;
+                fuelUsed = true;
+                for (int i = 0; i < pInven.length; i++) {
+                    if (pInven[i].equals("fuel")) {
+                        pInven[i] = null;
+                        player.setInventory(pInven);
+                        break;
+                    }
+                }
             } else if (!v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && !v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
                 System.out.println("It seems to need fuel and a key");
             }else if(!v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")){
-                if(this.fuelUsed){
+                if(fuelUsed){
                     System.out.println("You use the cart-key to start the cart and get in");
-                    this.cartKeyUsed = true;
+                    cartKeyUsed = true;
+                    for (int i = 0; i < pInven.length; i++) {
+                        if (pInven[i].equals("cart-key")) {
+                            pInven[i] = null;
+                            player.setInventory(pInven);
+                            break;
+                        }
+                    }
                 }else
                 System.out.println("I have the key for the cart but it seems to be out of fuel");
             }

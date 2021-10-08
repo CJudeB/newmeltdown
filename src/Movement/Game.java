@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
 import static Movement.Items.*;
+import static Movement.Cart.*;
 import static Movement.Validation.*;
 
 public class Game {
@@ -13,7 +14,6 @@ public class Game {
     private ArrayList<Tile> tileRef;
     private Player player;
     private boolean pipelineFixed = false, quit = false, exitFacility = false;
-    private Cart cart;
 
     public Game() {
         this.tileRef = new ArrayList<Tile>();
@@ -44,31 +44,24 @@ public class Game {
         //row 5
         this.tileRef.add(new Tile("5A", "", "", "", true, true, false, false, 3));
         this.tileRef.add(new Tile("5B", "", "", "", false, true, false, true, 3));
-        this.tileRef.add(new Tile("5C", "cabinet", "", "", false, true, false, true, 3));
+        this.tileRef.add(new Tile("5C: \nYou notice a small walk-in closet with a cabinet, table and small sofa.\nA break room for staff.\nThe ticking seems to be coming from in there, maybe I should investigate the furniture inside.", "cabinet", "", "", false, true, false, true, 3));
         this.tileRef.add(new Tile("5D", "", "", "", false, true, false, true, 3));
         this.tileRef.add(new Tile("5E", "", "", "", true, false, false, true, 3));
 
         //Add items to tile 4D
-        this.tileRef.get(18).settItems("wrench");
+        this.tileRef.get(19).settItems("wrench");
         //Add items to tile 5A
-        this.tileRef.get(19).settItems("fuel");
+        this.tileRef.get(20).settItems("fuel");
         //Add items to tile 5C
-        this.tileRef.get(22).settItems("delimiter");
         this.tileRef.get(22).settItems("cart-key");
         this.tileRef.get(22).settItems("Hazmat");
 
         //Test items
-        this.tileRef.get(10).settItems("fuel");
         this.tileRef.get(10).settItems("cart-key");
-        this.tileRef.get(10).settItems("delimiter");
-        this.tileRef.get(10).settItems("Med-kit");
-        this.tileRef.get(10).settItems("Hazmat");
-        this.tileRef.get(10).settItems("wrench");
-
+        this.tileRef.get(10).settItems("fuel");
         //Create player
         player = new Player("Tester");
-        //Create Cart
-        cart = new Cart();
+
     }
 
     public void setPipelineFixed(boolean pipelineFixed) {
@@ -175,8 +168,8 @@ public String[] pickItem(String item, String pInven[]) {
                 System.out.println(tileRef.get(player.getPosition()).gettCart());
                 System.out.println(player.getPosition());
                 System.out.println(player.isInCart());
-                System.out.println(cart.isFuelUsed());
-                System.out.println(cart.isCartKeyUsed());
+                System.out.println(isFuelUsed());
+                System.out.println(isCartKeyUsed());
                 break;
             }
             case "Move", "move":{
@@ -195,7 +188,7 @@ public String[] pickItem(String item, String pInven[]) {
             case "Use", "use":{
                 switch(parts[1]){
                     case "cart","Cart":{
-                        player.setInCart(cart.useCart(parts[1], tileRef.get(player.getPosition()).gettCart(),player));
+                        player.setInCart(useCart(parts[1], tileRef.get(player.getPosition()).gettCart(),player));
                         break;
                     }
                     case "Hazmat", "hazmat":{
@@ -205,6 +198,10 @@ public String[] pickItem(String item, String pInven[]) {
                     case "wrench", "Wrench":{
                             setPipelineFixed(useWrench(parts[1], tileRef.get(player.getPosition()).gettIntractable(), player));
                             break;
+                    }
+                    case "cabinet", "Cabinet","Table","table", "Sofa","sofa":{
+
+                        break;
                     }
                 }
                 break;

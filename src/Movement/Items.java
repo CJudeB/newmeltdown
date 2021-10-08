@@ -1,6 +1,7 @@
 package Movement;
 
 import java.util.Locale;
+import java.util.Scanner;
 
 public class Items {
     private boolean cartKeyUsed = false;
@@ -21,31 +22,6 @@ public class Items {
     public void setFuelUsed(boolean fuelUsed) {
         this.fuelUsed = fuelUsed;
     }
-
-    public void useItem(String invenItem, String tIntractable) {
-        String intractable = tIntractable.toLowerCase();
-        String item = invenItem.toLowerCase();
-
-        //Super messy but wanted to add interaction with cart to include re-fuel first then key.
-        // I do think re-fueling and using key should happen in one turn.
-        // TBH not sure where useItem should be called to get let the player to also use the key.
-
-        if (item.equals("fuel") && intractable.equals("cart")) {
-            this.fuelUsed = true;
-            System.out.println("You've re-fueled the cart. What next?");
-            useItem(invenItem, tIntractable);
-
-            if (item.equals("cart key") && intractable.equals("cart")) {
-                this.cartKeyUsed = true;
-                System.out.println("You use the key to start the cart");
-            } else {
-                System.out.println("This item can't be used here");
-            }
-        } else {
-            System.out.println("This item can't be used here");
-        }
-    }
-
 
 
     public static boolean useWrench (String item, String tIntractable, Player player) {
@@ -73,15 +49,30 @@ public class Items {
     }
 
 
-    public static boolean useHazmat (String item, Player player){
+    public static boolean useHazmat (String item, Player player) {
         Validation v = new Validation();
-        if(v.validateInput(item, player.getInventory()).equalsIgnoreCase("hazmat")){
-
-            System.out.println("You change into the lead lined clothing");
-            return true;
-        }
+        String[] pInven = player.getInventory();
+        if (v.validateInput(item, player.getInventory()).equalsIgnoreCase("hazmat")) {
+            System.out.println("You change into the Hazmat suit\nYou notice it has a inbuilt geiger counter");
+            for (int i = 0; i < pInven.length; i++) {
+                if (pInven[i].equals("hazmat")) {
+                    pInven[i] = null;
+                    player.setInventory(pInven);
+                    break; 
+                }
+                return true;
+            }
+        }else
         System.out.println("You don't have any protective clothing");
         return false;
+    }
+
+    public static void useCabinets (String item, Tile tile){
+        if(item.equalsIgnoreCase("cabinet")){
+            System.out.println("You turn the cabinet over, as you do so a Hazmat suit and ");
+        }
+
+
     }
 }
 

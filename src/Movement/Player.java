@@ -76,13 +76,14 @@ public class Player {
 
 
     public void printInventory(){
-        for (String i:inventory) {
-            if(!(i == null)) {
+        for (int i = 0; i < inventory.length ; i++) {
+            if (!(inventory[i] == null)) {
                 System.out.print("Inventory: ");
-            }else{
+                break;
+            } else if (i == inventory.length - 1) {
                 System.out.println("I don't have anything on me");
+                break;
             }
-            break;
         }
         for (String i:inventory) {
             if(!(i == null)) {
