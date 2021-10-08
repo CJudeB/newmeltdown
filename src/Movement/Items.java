@@ -58,7 +58,7 @@ public class Items {
                 if (pInven[i].equals("hazmat")) {
                     pInven[i] = null;
                     player.setInventory(pInven);
-                    break; 
+                    break;
                 }
                 return true;
             }
