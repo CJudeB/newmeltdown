@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import static Movement.Items.*;
 import static Movement.Cart.*;
-import static Movement.Validation.*;
 
 public class Game {
 
