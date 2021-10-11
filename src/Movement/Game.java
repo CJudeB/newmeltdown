@@ -58,6 +58,11 @@ public class Game {
         //Test items
         this.tileRef.get(10).settItems("cart-key");
         this.tileRef.get(10).settItems("fuel");
+        this.tileRef.get(10).settItems("Hazmat");
+        this.tileRef.get(10).settItems("2");
+        this.tileRef.get(10).settItems("3");
+        this.tileRef.get(10).settItems("4");
+        this.tileRef.get(10).settItems("5");
         //Create player
         player = new Player("Tester");
 
@@ -102,8 +107,8 @@ public class Game {
             return pInven;
 }
         for (int i = 0; i < pInven.length; i++) {
-        if (pInven[i].equals(item)) {
-        pInven[i] = null;
+        if (pInven[i].equals(item)){
+        pInven[i] = " ";
         System.out.println("You dropped the " + item);
         this.tileRef.get(this.player.getPosition()).settItems(item);
         return pInven;
@@ -123,7 +128,7 @@ public String[] pickItem(String item, String pInven[]) {
         return pInven;
     }
     for (int i = 0; i < pInven.length; i++) {
-        if (pInven[i] == null) {
+        if (pInven[i].equals(" ")) {
             pInven[i] = item;
             this.tileRef.get(this.player.getPosition()).removeItem(item);
             System.out.println("You picked up the " + item);

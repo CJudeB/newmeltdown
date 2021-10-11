@@ -25,23 +25,18 @@ public class Cart {
     public static boolean useCart(String item, String tIntractable, Player player) {
         Validation v = new Validation();
         String [] pInven = player.getInventory();
+        if(player.isInCart()){
+            return false;
+        }
         if (item.equalsIgnoreCase(tIntractable)) {
             if (v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
                 System.out.println("You re-fuel the cart and start it with the key and get in");
                 cartKeyUsed = true;
                 fuelUsed = true;
                 for (int i = 0; i < pInven.length; i++) {
-                    if (pInven[i].equals("fuel")) {
-                        pInven[i] = null;
+                    if (pInven[i].equals("cart-key") || pInven[i].equals("fuel")) {
+                        pInven[i] = " ";
                         player.setInventory(pInven);
-                        break;
-                    }
-                }
-                for (int i = 0; i < pInven.length; i++) {
-                    if (pInven[i].equals("cart-key")) {
-                        pInven[i] = null;
-                        player.setInventory(pInven);
-                        break;
                     }
                 }
 
@@ -50,7 +45,7 @@ public class Cart {
                 fuelUsed = true;
                 for (int i = 0; i < pInven.length; i++) {
                     if (pInven[i].equals("fuel")) {
-                        pInven[i] = null;
+                        pInven[i] = " ";
                         player.setInventory(pInven);
                         break;
                     }
@@ -63,7 +58,7 @@ public class Cart {
                     cartKeyUsed = true;
                     for (int i = 0; i < pInven.length; i++) {
                         if (pInven[i].equals("cart-key")) {
-                            pInven[i] = null;
+                            pInven[i] = " ";
                             player.setInventory(pInven);
                             break;
                         }
