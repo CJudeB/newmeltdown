@@ -65,6 +65,24 @@ public class Player {
         this.inventory = inventory;
     }
 
+    public void removeItems(String item) {
+
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i].equals(item)) {
+                inventory[i] = " ";
+                break;
+            }
+        }
+    }
+    public void addItems(String item) {
+
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i].equals(" ")) {
+                inventory[i] = item;
+            }
+        }
+    }
+
     public void printInventory(){
         for (int i = 0; i < inventory.length ; i++) {
             if (!(inventory[i] == " ")) {

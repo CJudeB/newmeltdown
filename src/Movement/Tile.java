@@ -68,10 +68,6 @@ public class Tile {
         return damVal;
 
     }
-        /*
-   public void settDescription(String tDescription) {
-        this.tDescription.add(tDescription);
-    }   */
 
     public String gettItems(int index) {
         return tItems.get(index);

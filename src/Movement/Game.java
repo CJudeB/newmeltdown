@@ -12,7 +12,7 @@ public class Game {
 
     private ArrayList<Tile> tileRef;
     private Player player;
-    private boolean pipelineFixed = false, quit = false, exitFacility = false;
+    private boolean pipelineFixed = false, quit = false, exitFacility = false, catwalk = false;
 
     public Game() {
         this.tileRef = new ArrayList<Tile>();
@@ -59,10 +59,6 @@ public class Game {
         this.tileRef.get(10).settItems("cart-key");
         this.tileRef.get(10).settItems("fuel");
         this.tileRef.get(10).settItems("Hazmat");
-        this.tileRef.get(10).settItems("2");
-        this.tileRef.get(10).settItems("3");
-        this.tileRef.get(10).settItems("4");
-        this.tileRef.get(10).settItems("5");
         //Create player
         player = new Player("Tester");
 
@@ -100,21 +96,14 @@ public class Game {
     }
 
     //Method to drop items from player inventory and add to the tile inventory
-    public String[] dropItem(String item, String pInven[]) {
+    public void dropItem(String item) {
         //If validate returns badInput print
         if (item.equals("badInput")) {
             System.out.println("You aren't holding a item like that");
-            return pInven;
-}
-        for (int i = 0; i < pInven.length; i++) {
-        if (pInven[i].equals(item)){
-        pInven[i] = " ";
+        }else
+        player.removeItems(item);
         System.out.println("You dropped the " + item);
         this.tileRef.get(this.player.getPosition()).settItems(item);
-        return pInven;
-        }
-        }
-        return pInven;
         }
 
 //Method to pickup items from tile inventory and add to the player inventory
@@ -166,67 +155,74 @@ public String[] pickItem(String item, String pInven[]) {
         boolean itemDropped = false;
         String [] copyOfPlayerInven = Arrays.copyOf(player.getInventory(),5);
         String[] parts = temp.split(" ");
-        switch(parts[0]){
-            case "p":{
+        switch(parts[0]) {
+            case "p": {
                 System.out.println(tileRef.get(player.getPosition()).gettDescription());
                 System.out.println(tileRef.get(player.getPosition()).gettCart());
-                System.out.println(player.getPosition());
+                tileRef.get(player.getPosition()).printItems();
                 System.out.println(player.isInCart());
                 System.out.println(isFuelUsed());
                 System.out.println(isCartKeyUsed());
                 break;
             }
-            case "Move", "move":{
-                moveTile(v.validateInput(parts[1]), s.directionSelection(v.validateInput(parts[1]),player));
+            case "Move", "move": {
+                moveTile(v.validateInput(parts[1]), s.directionSelection(v.validateInput(parts[1]), player));
                 System.out.println(tileRef.get(player.getPosition()).gettDescription());
                 break;
             }
-            case "Drop", "drop":{
-                player.setInventory(dropItem(v.validateInput(parts[1], player.getInventory()), player.getInventory()));
+            case "Drop", "drop": {
+                dropItem(v.validateInput(parts[1], player.getInventory()));
                 break;
             }
-            case "Pick-up", "pick-up":{
+            case "Pick-up", "pick-up": {
                 player.setInventory(pickItem(v.validateInput(parts[1], tileRef.get(player.getPosition()).gettItems()), player.getInventory()));
                 break;
             }
-            case "Use", "use":{
-                switch(parts[1]){
-                    case "cart","Cart":{
-                        player.setInCart(useCart(parts[1], tileRef.get(player.getPosition()).gettCart(),player));
+            case "Use", "use": {
+                switch (parts[1]) {
+                    case "cart", "Cart": {
+                        player.setInCart(useCart(parts[1], tileRef.get(player.getPosition()).gettCart(), player));
                         break;
                     }
-                    case "Hazmat", "hazmat":{
+                    case "Hazmat", "hazmat": {
                         player.setHasProtectiveClothing(useHazmat(parts[1], player));
                         break;
                     }
-                    case "wrench", "Wrench":{
-                            setPipelineFixed(useWrench(parts[1], tileRef.get(player.getPosition()).gettIntractable(), player));
-                            break;
+                    case "wrench", "Wrench": {
+                        setPipelineFixed(useWrench(parts[1], tileRef.get(player.getPosition()).gettIntractable(), player));
+                        break;
                     }
-                    case "cabinet", "Cabinet","Table","table", "Sofa","sofa":{
+                    case "cabinet", "Cabinet", "Table", "table", "Sofa", "sofa": {
 
                         break;
                     }
                 }
                 break;
             }
-            case "I", "i":{
+            case "I", "i": {
                 player.printInventory();
                 break;
             }
-            case "Q","q","Quit","quit":{
+            case "Q", "q", "Quit", "quit": {
                 this.quit = true;
                 break;
             }
-            case "Exit","exit":{
-                if(tileRef.get(player.getPosition()).gettDescription().equalsIgnoreCase("3A")) {
+            case "Exit", "exit": {
+                if (tileRef.get(player.getPosition()).gettDescription().equalsIgnoreCase("3A")) {
                     this.exitFacility = true;
                     break;
-                }else
+                } else
                     System.out.println("There's no where for me to exit the facility from here");
-                    break;
+                break;
             }
-
+            case "Yes", "yes", "No", "no": {
+                if ((parts[0].equalsIgnoreCase("yes") && (player.getPosition()) == 0)) {
+                    catwalk = true;
+                }else {
+                    System.out.println("You move back down the stairs.");
+                }
+                break;
+            }
             default:{
                 System.out.println("Bad Input try again");
                 break;
@@ -255,7 +251,7 @@ public String[] pickItem(String item, String pInven[]) {
             temp = input.nextLine();
             newGame.inputHandler(temp);
 
-        }while(!newGame.pipelineFixed && newGame.player.isAlive() && !newGame.quit && !newGame.exitFacility);
+        }while(!newGame.pipelineFixed && newGame.player.isAlive() && !newGame.quit && !newGame.exitFacility && !newGame.catwalk);
 
         //Epilogue
         if(newGame.quit){
@@ -267,6 +263,9 @@ public String[] pickItem(String item, String pInven[]) {
         }else if(newGame.pipelineFixed){
             System.out.println("You fix the pipe but are overwhelmed by the radiation");
             return;
+        }else if(newGame.catwalk){
+            System.out.println("You walk up the 4 flights of stairs to the кошачья прогулка. \nAs you move towards the cooling tower, each step you take becomes more cumbersome. \nYou're head is splitting with pain. \nYou push on reaching the tower." +
+                    "\nYou fall against the rail, you can barely stand. \nThe rail creaks and bends weakened by the explosion, it can no longer support your weight. \nThe rail fails completely and you plummet from the кошачья прогулка. SPLAT!!!!");
         }
 
     }
