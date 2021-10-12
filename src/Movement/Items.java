@@ -1,8 +1,5 @@
 package Movement;
 
-import java.util.Locale;
-import java.util.Scanner;
-
 public class Items {
     private boolean cartKeyUsed = false;
     private boolean fuelUsed = false;
@@ -30,7 +27,7 @@ public class Items {
         if (!v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench")) {
             //If player on 2C
             if(tIntractable.equalsIgnoreCase("pipeline")){
-                System.out.println("If you had a tool you might be able to  fix the pipe");
+                System.out.println("If you had a tool you might be able to fix the pipe");
             }else
                 System.out.println("I'm not holding an item like that");
             return false;
@@ -67,6 +64,9 @@ public class Items {
         return false;
     }
 
+
+    public static void useMapPane(String item, Tile tile){
+    }
     public static void useCabinets (String item, Tile tile){
         if(item.equalsIgnoreCase("cabinet")){
             System.out.println("You turn the cabinet over, as you do so a Hazmat suit and ");

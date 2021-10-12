@@ -1,11 +1,10 @@
 package objects;
 
-
-public class Definer {
+public class Situation {
     private String name;
     private String describe;
 
-    public Definer(String vName, String vDescribe) {
+    public Situation(String vName, String vDescribe) {
         this.name = vName;
         this.describe = vDescribe;
     }

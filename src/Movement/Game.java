@@ -1,52 +1,58 @@
 package Movement;
 
-//import MultiArray.CalculateDamage;
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
-import static Movement.Items.*;
+
+import static Movement.CalculateDamage.calculateDamage;
 import static Movement.Cart.*;
-import static Movement.Validation.*;
+import static Movement.Event.currentEvent;
+import static Movement.Event.getPrologue;
+import static Movement.Items.useHazmat;
+import static Movement.Items.useWrench;
+
 
 public class Game {
 
-
+    private static int health;
+    private Map mapPane;
     private ArrayList<Tile> tileRef;
     private Player player;
     private boolean pipelineFixed = false, quit = false, exitFacility = false;
 
-    public Game() {
+    public Game() throws IOException {
         this.tileRef = new ArrayList<Tile>();
         //row 1
-        this.tileRef.add(new Tile("1A", "Stairs", "", "", false, true, true, false, 8));
-        this.tileRef.add(new Tile("1B", "", "", "", false, true, false, true, 8));
-        this.tileRef.add(new Tile("1C", "", "", "", false, false, true, true, 10));
-        this.tileRef.add(new Tile("1D(Unreachable)", "", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("1E(Unreachable)", "", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("\n\n0.1A", "Stairs", null, "", false, true, true, false, 8));
+        this.tileRef.add(new Tile("1.1B", "", null, "", false, true, false, true, 8));
+        this.tileRef.add(new Tile("2.1C", "", null, "", false, false, true, true, 10));
+        this.tileRef.add(new Tile("3.1D(Unreachable)", "", null, "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("4.1E(Unreachable)", "", null, "", false, false, false, false, 0));
         //row 2
-        this.tileRef.add(new Tile("2A", "", "", "", true, false, true, false, 6));
-        this.tileRef.add(new Tile("2B(Unreachable)", "", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("2C", "pipeline", "", "", true, false, false, false, 10));
-        this.tileRef.add(new Tile("2D(Unreachable)", "", "", "", true, false, false, false, 0));
-        this.tileRef.add(new Tile("2E(Unreachable)", "", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("5.2A", "", null, "", true, false, true, false, 6));
+        this.tileRef.add(new Tile("6.2B(Unreachable)", "", null, "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("7.2C", "pipeline", null, "", true, false, false, false, 10));
+        this.tileRef.add(new Tile("8.2D(Unreachable)", "", null, "", true, false, false, false, 0));
+        this.tileRef.add(new Tile("9.2E(Unreachable)", "", null, "", false, false, false, false, 0));
         //row 3
-        this.tileRef.add(new Tile("3A(Exit via West)", "", "", "cart", true, false, true, false, 6));
-        this.tileRef.add(new Tile("3B(Unreachable)", "", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("3C(Unreachable)", "", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("3D(Unreachable)", "", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("3E(Unreachable)", "", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("10.3A(Exit via West)", "", null, "cart", true, false, true, false, 6));
+        this.tileRef.add(new Tile("11.3B(Unreachable)", "", null, "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("12.3C(Unreachable)", "", null, "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("13.3D(Unreachable)", "", null, "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("14.3E(Unreachable)", "", null, "", false, false, false, false, 0));
         //row 4
-        this.tileRef.add(new Tile("4A", "", "", "", true, true, true, false, 5));
-        this.tileRef.add(new Tile("4B", "", "", "", false, true, false, true, 35));
-        this.tileRef.add(new Tile("4C(West of Start)", "", "", "", false, true, false, true, 35));
-        this.tileRef.add(new Tile("4D(Start)", "", "", "", false, true, false, true, 3));
-        this.tileRef.add(new Tile("4E(East of Start)", "instruments", "", "", false, false, true, true, 3));
+        this.tileRef.add(new Tile("15.4A", "", null, "", true, true, true, false, 5));
+        this.tileRef.add(new Tile("16.4B", "", null, "", false, true, false, true, 35));
+        this.tileRef.add(new Tile("17.4C(West of Start)", "", null, "", false, true, false, true, 35));
+        this.tileRef.add(new Tile("18.4D(Start)", "", mapPane, "", false, true, false, true, 3));
+        this.tileRef.add(new Tile("19.4E(East of Start)", "instruments", null, "", false, false, true, true, 3));
         //row 5
-        this.tileRef.add(new Tile("5A", "", "", "", true, true, false, false, 3));
-        this.tileRef.add(new Tile("5B", "", "", "", false, true, false, true, 3));
-        this.tileRef.add(new Tile("5C: \nYou notice a small walk-in closet with a cabinet, table and small sofa.\nA break room for staff.\nThe ticking seems to be coming from in there, maybe I should investigate the furniture inside.", "cabinet", "", "", false, true, false, true, 3));
-        this.tileRef.add(new Tile("5D", "", "", "", false, true, false, true, 3));
-        this.tileRef.add(new Tile("5E", "", "", "", true, false, false, true, 3));
+        this.tileRef.add(new Tile("\n\n20.5A", "", null, "", true, true, false, false, 3));
+        this.tileRef.add(new Tile("21.5B", "", null, "", false, true, false, true, 3));
+        this.tileRef.add(new Tile("22.5C: \nYou notice a small walk-in closet with a cabinet, table and small sofa.\nA break room for staff.\nThe ticking seems to be coming from in there, maybe I should investigate the furniture inside.", "cabinet", null, "", false, true, false, true, 3));
+        this.tileRef.add(new Tile("23.5D", "", null, "", false, true, false, true, 3));
+        this.tileRef.add(new Tile("24.5E", "", null, "", true, false, false, true, 3));
 
         //Add items to tile 4D
         this.tileRef.get(19).settItems("wrench");
@@ -61,11 +67,16 @@ public class Game {
         this.tileRef.get(10).settItems("fuel");
         //Create player
         player = new Player("Tester");
+        mapPane = new Map();
 
     }
 
+
     public void setPipelineFixed(boolean pipelineFixed) {
         this.pipelineFixed = pipelineFixed;
+    }
+
+    public void setMapPane(Tile tile, Player player) {
     }
 
     public void moveTile(String dir, int newTile) {
@@ -154,60 +165,78 @@ public String[] pickItem(String item, String pInven[]) {
 }
 
 
-        public void inputHandler(String temp){
+    public void inputHandler(String temp) throws IOException {
         Validation v = new Validation();
         Selection s = new Selection();
         Scanner input = new Scanner(System.in);
         String itemToDrop;
         boolean itemDropped = false;
-        String [] copyOfPlayerInven = Arrays.copyOf(player.getInventory(),5);
+        String[] copyOfPlayerInven = Arrays.copyOf(player.getInventory(), 5);
         String[] parts = temp.split(" ");
-        switch(parts[0]){
-            case "p":{
+        switch (parts[0]) {
+            case "p": {
                 System.out.println(tileRef.get(player.getPosition()).gettDescription());
                 System.out.println(tileRef.get(player.getPosition()).gettCart());
                 System.out.println(player.getPosition());
                 System.out.println(player.isInCart());
                 System.out.println(isFuelUsed());
                 System.out.println(isCartKeyUsed());
+                System.out.println(player.getHealth());
+                currentEvent(player);
+                calculateDamage(player);
+
+
                 break;
             }
-            case "Move", "move":{
-                moveTile(v.validateInput(parts[1]), s.directionSelection(v.validateInput(parts[1]),player));
+            case "Move", "move": {
+                moveTile(v.validateInput(parts[1]), s.directionSelection(v.validateInput(parts[1]), player));
                 System.out.println(tileRef.get(player.getPosition()).gettDescription());
+                calculateDamage(player);
                 break;
             }
-            case "Drop", "drop":{
+            case "Drop", "drop": {
                 player.setInventory(dropItem(v.validateInput(parts[1], player.getInventory()), player.getInventory()));
+                calculateDamage(player);
                 break;
             }
-            case "Pick-up", "pick-up":{
+            case "Pick-up", "pick-up": {
                 player.setInventory(pickItem(v.validateInput(parts[1], tileRef.get(player.getPosition()).gettItems()), player.getInventory()));
+                calculateDamage(player);
                 break;
             }
-            case "Use", "use":{
-                switch(parts[1]){
-                    case "cart","Cart":{
-                        player.setInCart(useCart(parts[1], tileRef.get(player.getPosition()).gettCart(),player));
+            case "Use", "use": {
+                switch (parts[1]) {
+                    case "cart", "Cart": {
+                        player.setInCart(useCart(parts[1], tileRef.get(player.getPosition()).gettCart(), player));
                         break;
                     }
-                    case "Hazmat", "hazmat":{
+                    case "Hazmat", "hazmat": {
                         player.setHasProtectiveClothing(useHazmat(parts[1], player));
                         break;
                     }
-                    case "wrench", "Wrench":{
-                            setPipelineFixed(useWrench(parts[1], tileRef.get(player.getPosition()).gettIntractable(), player));
-                            break;
+                    case "wrench", "Wrench": {
+                        setPipelineFixed(useWrench(parts[1], tileRef.get(player.getPosition()).gettIntractable(), player));
+                        break;
                     }
-                    case "cabinet", "Cabinet","Table","table", "Sofa","sofa":{
+                    case "cabinet", "Cabinet", "Table", "table", "Sofa", "sofa": {
 
                         break;
                     }
+                    case "map", "Map", "m": {
+                        player.useMapPane(tileRef.get(player.getPosition()));
+                        break;
+                    }
                 }
+                calculateDamage(player);
                 break;
             }
             case "I", "i":{
                 player.printInventory();
+                break;
+            }
+            case "menu", "m", "Menu":{
+              //  player.displayMenu();
+                Event.displayMenu();
                 break;
             }
             case "Q","q","Quit","quit":{
@@ -220,52 +249,67 @@ public String[] pickItem(String item, String pInven[]) {
                     break;
                 }else
                     System.out.println("There's no where for me to exit the facility from here");
-                    break;
+                break;
             }
 
-            default:{
+            default: {
                 System.out.println("Bad Input try again");
                 break;
             }
         }
     }
+    
+      
+    
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        Map map = new Map();
         Game newGame = new Game();
         Selection s = new Selection();
         Validation v = new Validation();
-        CalculateDamage cd = new CalculateDamage();
         Scanner input = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
         String temp;
+        String go = "start";
 
+        //Intro description before the game begins.
+        //user can type start to begin game
+        do {
+            Event.initialDescription(getPrologue());
+            System.out.print(">");
+
+        } while (!go.equalsIgnoreCase(scan.nextLine()));
+        System.out.print("\n\nGood Luck\n\n");
 
         //Prologue
-        newGame.player.setPosition(10);
-        System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
+        newGame.player.setPosition(18);
+       // System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
 
         //Main game loop after intro
-        do{
-
+        do {
+            System.out.println(currentEvent(newGame.player));
             System.out.print(">");
             temp = input.nextLine();
             newGame.inputHandler(temp);
 
-        }while(!newGame.pipelineFixed && newGame.player.isAlive() && !newGame.quit && !newGame.exitFacility);
+
+        } while (!newGame.pipelineFixed && newGame.player.isAlive() && !newGame.quit && !newGame.exitFacility);
 
         //Epilogue
-        if(newGame.quit){
+        if (newGame.quit) {
             System.out.println("Quitting Game");
             return;
-        }else if(newGame.exitFacility){
+        } else if (newGame.exitFacility) {
             System.out.println("You leave the facility");
             return;
-        }else if(newGame.pipelineFixed){
+        } else if (newGame.pipelineFixed) {
             System.out.println("You fix the pipe but are overwhelmed by the radiation");
             return;
         }
 
     }
+
 
 }
 

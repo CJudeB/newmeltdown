@@ -1,7 +1,7 @@
 package objects;
 
 
-public class Tile extends Definer{
+public class Tile extends Situation{
 
     private int n, s, e, w;
 

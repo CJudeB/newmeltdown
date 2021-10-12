@@ -1,27 +1,28 @@
 package Movement;
 
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
-public class Player {
+public class Player<displayM> {
 
 
     private String name;
     private int Position, health = 100;
     private boolean inCart = false, hasProtectiveClothing = false, isAlive = true;
     private String[] inventory = new String[5];
+    private Map mapPane;
 
 
     public Player(String name) {
         this.name = name;
         this.Position = 18;
+
     }
 
-    public int getPosition() {
-        return Position;
+
+    public Player() {
+
     }
+
+
+    public int getPosition() {return Position;}
 
     public void setPosition(int Position) {
         this.Position = Position;
@@ -46,10 +47,19 @@ public class Player {
     public boolean isHasProtectiveClothing() {
         return hasProtectiveClothing;
     }
-
     public void setHasProtectiveClothing(boolean hasProtectiveClothing) {
         this.hasProtectiveClothing = hasProtectiveClothing;
     }
+
+    public Map getMapPane(){ return mapPane; }
+
+
+
+    public void setMapPane(Map mapPane) {
+       this.mapPane = mapPane;
+    }
+
+
 
     public boolean isAlive() {
         return isAlive;
@@ -92,6 +102,22 @@ public class Player {
 
         }
         System.out.print("\n");
+    }
+
+
+
+
+    public void useMapPane(Tile tile) {
+    }
+
+    public void displayMenu() {
+        String displayM;
+        displayM = (String) getTiles().get("25");
+        System.out.println(displayM);
+    }
+
+    private java.util.Map<Object, Object> getTiles() {
+        return null;
     }
 }
 

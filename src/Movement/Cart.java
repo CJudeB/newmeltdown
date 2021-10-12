@@ -21,7 +21,6 @@ public class Cart {
         fuelUsed = fuelUsed;
     }
 
-
     public static boolean useCart(String item, String tIntractable, Player player) {
         Validation v = new Validation();
         String [] pInven = player.getInventory();

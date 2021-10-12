@@ -1,20 +1,28 @@
 package Movement;
 import java.util.ArrayList;
 
-public class Tile {
+public class Tile{
 
-    public Tile(){}
+
+
+    public Tile(){
+
+    }
+
 
     private String tDescription, tIntractable, tPuzzle, tCart;
+  //  private static LinkedHashMap<String, String> tiles = new LinkedHashMap<>();
     private ArrayList <String> tItems = new ArrayList<>();
     private boolean tN, tE, tS,tW;
     private int damVal;
+    private static Map mapPane;
 
-    public Tile(String tDescription, String tIntractable, String tPuzzle, String tCart, Boolean tN, Boolean tE, Boolean tS, Boolean tW, int damVal) {
+
+    public Tile(String tDescription, String tIntractable, Map mapPane, String tCart, Boolean tN, Boolean tE, Boolean tS, Boolean tW, int damVal) {
 
         this.tDescription = tDescription;
         this.tIntractable = tIntractable;
-        this.tPuzzle = tPuzzle;
+        this.mapPane = mapPane;
         this.tCart = tCart;
         this.tN = tN;
         this.tE = tE;
@@ -22,6 +30,14 @@ public class Tile {
         this.tW = tW;
         this.damVal = damVal;
 
+    }
+
+    public static Map getMapPane() {
+        return mapPane;
+    }
+
+    public static void setMapPane(Map mapPane) {
+        Map.mapPane = mapPane;
     }
 
     public Boolean gettN()
@@ -64,14 +80,15 @@ public class Tile {
         this.tCart = tCart;
     }
 
+
+  //  public static LinkedHashMap<String, String> getTiles() {
+  //      return tiles;
+ //   }
+
     public int getDamVal() {
         return damVal;
 
     }
-        /*
-   public void settDescription(String tDescription) {
-        this.tDescription.add(tDescription);
-    }   */
 
     public String gettItems(int index) {
         return tItems.get(index);

@@ -1,7 +1,7 @@
 package objects;
 
 
-public class Player extends Definer{
+public class Player extends Situation{
 
         private Tile tile;
         private Player player;
