@@ -1,6 +1,8 @@
 package Movement;
 
 public class Items {
+
+
     private boolean cartKeyUsed = false;
     private boolean fuelUsed = false;
 
@@ -21,6 +23,15 @@ public class Items {
     }
 
 
+    /**
+     * Use wrench boolean. The interaction method for using the wrench.
+     * Includes blocks for the player not having the wrench and trying to use the pipeline
+     *
+     * @param item         the item that the user input to interact with
+     * @param tIntractable the tiles intractable item
+     * @param player       the player instance from game
+     * @return the boolean
+     */
     public static boolean useWrench (String item, String tIntractable, Player player) {
         Validation v = new Validation();
         //If not holding wrench
@@ -51,15 +62,8 @@ public class Items {
         String[] pInven = player.getInventory();
         if (v.validateInput(item, player.getInventory()).equalsIgnoreCase("hazmat")) {
             System.out.println("You change into the Hazmat suit\nYou notice it has a inbuilt geiger counter");
-            for (int i = 0; i < pInven.length; i++) {
-                if (pInven[i].equals("hazmat")) {
-                    pInven[i] = null;
-                    player.setInventory(pInven);
-                    break;
-                }
                 return true;
-            }
-        }else
+            } else
         System.out.println("You don't have any protective clothing");
         return false;
     }

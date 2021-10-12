@@ -1,28 +1,25 @@
 package Movement;
 
-public class Player<displayM> {
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Player {
 
 
     private String name;
     private int Position, health = 100;
     private boolean inCart = false, hasProtectiveClothing = false, isAlive = true;
-    private String[] inventory = new String[5];
-    private Map mapPane;
-
-
+    private String[] inventory = {" "," "," "," "," "};
     public Player(String name) {
         this.name = name;
         this.Position = 18;
-
     }
 
-
-    public Player() {
-
+    public int getPosition() {
+        return Position;
     }
-
-
-    public int getPosition() {return Position;}
 
     public void setPosition(int Position) {
         this.Position = Position;
@@ -47,19 +44,10 @@ public class Player<displayM> {
     public boolean isHasProtectiveClothing() {
         return hasProtectiveClothing;
     }
+
     public void setHasProtectiveClothing(boolean hasProtectiveClothing) {
         this.hasProtectiveClothing = hasProtectiveClothing;
     }
-
-    public Map getMapPane(){ return mapPane; }
-
-
-
-    public void setMapPane(Map mapPane) {
-       this.mapPane = mapPane;
-    }
-
-
 
     public boolean isAlive() {
         return isAlive;
@@ -76,18 +64,28 @@ public class Player<displayM> {
     public void setInventory(String[] inventory) {
         this.inventory = inventory;
     }
-    public void removeItems(String item){
-        for( int  i = 0 ; i < inventory.length; i++){
-            if(inventory[i].equalsIgnoreCase(item)){
-                this.inventory[i] ="";
+
+    public void removeItems(String item) {
+
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i].equals(item)) {
+                inventory[i] = " ";
+                break;
+            }
+        }
+    }
+    public void addItems(String item) {
+
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i].equals(" ")) {
+                inventory[i] = item;
             }
         }
     }
 
-
     public void printInventory(){
         for (int i = 0; i < inventory.length ; i++) {
-            if (!(inventory[i] == null)) {
+            if (!(inventory[i] == " ")) {
                 System.out.print("Inventory: ");
                 break;
             } else if (i == inventory.length - 1) {
@@ -96,28 +94,12 @@ public class Player<displayM> {
             }
         }
         for (String i:inventory) {
-            if(!(i == null)) {
+            if(!(i == " ")) {
                 System.out.print(i + " | ");
             }
 
         }
         System.out.print("\n");
-    }
-
-
-
-
-    public void useMapPane(Tile tile) {
-    }
-
-    public void displayMenu() {
-        String displayM;
-        displayM = (String) getTiles().get("25");
-        System.out.println(displayM);
-    }
-
-    private java.util.Map<Object, Object> getTiles() {
-        return null;
     }
 }
 

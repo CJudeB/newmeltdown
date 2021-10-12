@@ -1,62 +1,44 @@
 package Movement;
 import java.util.ArrayList;
 
-public class Tile{
+public class Tile {
 
-
-
-    public Tile(){
-
+    public Tile() {
     }
 
-
     private String tDescription, tIntractable, tPuzzle, tCart;
-  //  private static LinkedHashMap<String, String> tiles = new LinkedHashMap<>();
-    private ArrayList <String> tItems = new ArrayList<>();
-    private boolean tN, tE, tS,tW;
+    private ArrayList<String> tItems = new ArrayList<>();
+    private boolean tN, tE, tS, tW, hasVisited;
     private int damVal;
-    private static Map mapPane;
 
-
-    public Tile(String tDescription, String tIntractable, Map mapPane, String tCart, Boolean tN, Boolean tE, Boolean tS, Boolean tW, int damVal) {
+    public Tile(String tDescription, String tIntractable, String tPuzzle, String tCart, Boolean hasVisited, Boolean tN, Boolean tE, Boolean tS, Boolean tW, int damVal) {
 
         this.tDescription = tDescription;
         this.tIntractable = tIntractable;
-        this.mapPane = mapPane;
+        this.tPuzzle = tPuzzle;
         this.tCart = tCart;
         this.tN = tN;
         this.tE = tE;
         this.tS = tS;
         this.tW = tW;
         this.damVal = damVal;
+        this.hasVisited = false;
 
     }
 
-    public static Map getMapPane() {
-        return mapPane;
-    }
-
-    public static void setMapPane(Map mapPane) {
-        Map.mapPane = mapPane;
-    }
-
-    public Boolean gettN()
-    {
+    public Boolean gettN() {
         return tN;
     }
 
-    public Boolean gettE()
-    {
+    public Boolean gettE() {
         return tE;
     }
 
-    public Boolean gettS()
-    {
+    public Boolean gettS() {
         return tS;
     }
 
-    public Boolean gettW()
-    {
+    public Boolean gettW() {
         return tW;
     }
 
@@ -80,18 +62,9 @@ public class Tile{
         this.tCart = tCart;
     }
 
-
-  //  public static LinkedHashMap<String, String> getTiles() {
-  //      return tiles;
- //   }
-
     public int getDamVal() {
         return damVal;
 
-    }
-
-    public String gettItems(int index) {
-        return tItems.get(index);
     }
 
     public void settItems(String item) {
@@ -102,18 +75,27 @@ public class Tile{
         return tItems;
     }
 
-    public void removeItem(String item){
+    public void removeItem(String item) {
 
-        for (int i = 0 ; i < tItems.size(); i++){
-                if(item.equals(this.tItems.get(i))){
-                    this.tItems.remove(i);
+        for (int i = 0; i < tItems.size(); i++) {
+            if (item.equals(this.tItems.get(i))) {
+                this.tItems.remove(i);
             }
         }
     }
 
-    public void printItems(){
-        for (String i:tItems) {
+    public void printItems() {
+        for (String i : tItems) {
             System.out.println(i);
         }
     }
+
+    public boolean isHasVisited() {
+        return hasVisited;
+    }
+
+    public void setHasVisited(boolean hasVisited) {
+        this.hasVisited = hasVisited;
+    }
+
 }
