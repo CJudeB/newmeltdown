@@ -5,23 +5,51 @@ public class Cart {
     private  static boolean cartKeyUsed = false;
     private  static boolean fuelUsed = false;
 
+    /**
+     * Is cart key used boolean.
+     *
+     * @return the boolean
+     */
     public static boolean isCartKeyUsed() {
         return cartKeyUsed;
     }
 
+    /**
+     * Is fuel used boolean.
+     *
+     * @return the boolean
+     */
     public  static boolean isFuelUsed() {
         return fuelUsed;
     }
 
+    /**
+     * Sets cart key used.
+     *
+     * @param cartKeyUsed the cart key used
+     */
     public static void setCartKeyUsed(boolean cartKeyUsed) {
         cartKeyUsed = cartKeyUsed;
     }
 
+    /**
+     * Sets fuel used.
+     *
+     * @param fuelUsed the fuel used
+     */
     public static void setFuelUsed(boolean fuelUsed) {
         fuelUsed = fuelUsed;
     }
 
 
+    /**
+     * Use cart boolean. The method for interacting with the cart.
+     *
+     * @param item         the item entered by the user
+     * @param tIntractable the tiles intractable item
+     * @param player       the instance of the current player
+     * @return the boolean returns to setCart setter
+     */
     public static boolean useCart(String item, String tIntractable, Player player) {
         Validation v = new Validation();
         String [] pInven = player.getInventory();

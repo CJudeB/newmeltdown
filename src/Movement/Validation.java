@@ -2,12 +2,19 @@ package Movement;
 
 import java.util.ArrayList;
 
+
 public class Validation {
 
     private String[] cardinals = {"n", "e", "s", "w"};
     private String[] tileItems = new String[5];
     private String badInput = "badInput";
 
+    /**
+     * Validate input string to insure correct direction has been inputed.
+     *
+     * @param input the input from the user
+     * @return the string back as entered if valid or badInput if not
+     */
     public String validateInput(String input) {
 
 
@@ -23,6 +30,13 @@ public class Validation {
         return badInput;
     }
 
+    /**
+     * Validate input string against the tile items array to ensure that the item the player selected is on the tile
+     *
+     * @param input  the input from the user
+     * @param tInven the tile items inventory
+     * @return the string back as entered if it exists in the array
+     */
     public String validateInput(String input, ArrayList<String> tInven) {
         for (String a : tInven) {
             if (input.equalsIgnoreCase(a)) {
@@ -39,6 +53,13 @@ public class Validation {
             return badInput;
     }
 
+    /**
+     * Validate input string against the tile items array to ensure that the item the player selected is in their inventory
+     *
+     * @param input  the input from the user
+     * @param pInven the player inventory array
+     * @return the string back as entered if it exists in the array
+     */
     public String validateInput(String input, String pInven[]) {
         for (String i : pInven) {
             if (input.equalsIgnoreCase(i)) {
@@ -47,17 +68,6 @@ public class Validation {
 
         }
         return badInput;
-    }
-
-    public static boolean onCartTile(int tRef, Player player){
-
-        if(player.isInCart()){
-        if((tRef == 0 || tRef == 1 || tRef == 2 || tRef == 5 || tRef == 10)){
-            return true;
-        }else
-        return false;
-        }
-        return player.isInCart();
     }
 }
 

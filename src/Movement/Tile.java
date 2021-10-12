@@ -7,10 +7,10 @@ public class Tile {
 
     private String tDescription, tIntractable, tPuzzle, tCart;
     private ArrayList <String> tItems = new ArrayList<>();
-    private boolean tN, tE, tS,tW;
+    private boolean tN, tE, tS,tW, hasVisited;
     private int damVal;
 
-    public Tile(String tDescription, String tIntractable, String tPuzzle, String tCart, Boolean tN, Boolean tE, Boolean tS, Boolean tW, int damVal) {
+    public Tile(String tDescription, String tIntractable, String tPuzzle, String tCart, Boolean hasVisited, Boolean tN, Boolean tE, Boolean tS, Boolean tW, int damVal) {
 
         this.tDescription = tDescription;
         this.tIntractable = tIntractable;
@@ -21,6 +21,7 @@ public class Tile {
         this.tS = tS;
         this.tW = tW;
         this.damVal = damVal;
+        this.hasVisited = false;
 
     }
 
@@ -69,10 +70,6 @@ public class Tile {
 
     }
 
-    public String gettItems(int index) {
-        return tItems.get(index);
-    }
-
     public void settItems(String item) {
         this.tItems.add(item);
     }
@@ -94,5 +91,13 @@ public class Tile {
         for (String i:tItems) {
             System.out.println(i);
         }
+    }
+
+    public boolean isHasVisited() {
+        return hasVisited;
+    }
+
+    public void setHasVisited(boolean hasVisited) {
+        this.hasVisited = hasVisited;
     }
 }

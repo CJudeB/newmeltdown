@@ -4,6 +4,8 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Items {
+
+
     private boolean cartKeyUsed = false;
     private boolean fuelUsed = false;
 
@@ -24,6 +26,14 @@ public class Items {
     }
 
 
+    /**
+     * Use wrench boolean. The interaction method for using the wrench 
+     *
+     * @param item         the item
+     * @param tIntractable the t intractable
+     * @param player       the player
+     * @return the boolean
+     */
     public static boolean useWrench (String item, String tIntractable, Player player) {
         Validation v = new Validation();
         //If not holding wrench
@@ -54,7 +64,6 @@ public class Items {
         String[] pInven = player.getInventory();
         if (v.validateInput(item, player.getInventory()).equalsIgnoreCase("hazmat")) {
             System.out.println("You change into the Hazmat suit\nYou notice it has a inbuilt geiger counter");
-            player.removeItems(item);
                 return true;
             } else
         System.out.println("You don't have any protective clothing");

@@ -14,38 +14,44 @@ public class Game {
     private Player player;
     private boolean pipelineFixed = false, quit = false, exitFacility = false, catwalk = false;
 
+    /**
+     * Instantiates a new Game.
+     * Creates all tiles through the Tile constructor
+     * Sets static items into tiles
+     * Creates a new player for the game instance
+     */
     public Game() {
         this.tileRef = new ArrayList<Tile>();
         //row 1
-        this.tileRef.add(new Tile("1A", "Stairs", "", "", false, true, true, false, 8));
-        this.tileRef.add(new Tile("1B", "", "", "", false, true, false, true, 8));
-        this.tileRef.add(new Tile("1C", "", "", "", false, false, true, true, 10));
-        this.tileRef.add(new Tile("1D(Unreachable)", "", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("1E(Unreachable)", "", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("1A", "Stairs", "", "", false, false, true, true, false, 8));
+        this.tileRef.add(new Tile("1B", "", "", "", false, false, true, false, true, 8));
+        this.tileRef.add(new Tile("1C", "", "", "", false, false, false, true, true, 10));
+        this.tileRef.add(new Tile("1D(Unreachable)", "", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("1E(Unreachable)", "", "", "", false, false, false, false, false, 0));
         //row 2
-        this.tileRef.add(new Tile("2A", "", "", "", true, false, true, false, 6));
-        this.tileRef.add(new Tile("2B(Unreachable)", "", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("2C", "pipeline", "", "", true, false, false, false, 10));
-        this.tileRef.add(new Tile("2D(Unreachable)", "", "", "", true, false, false, false, 0));
-        this.tileRef.add(new Tile("2E(Unreachable)", "", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("2A", "", "", "", false, true, false, true, false, 6));
+        this.tileRef.add(new Tile("2B(Unreachable)", "", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("2C", "pipeline", "", "", false, true, false, false, false, 10));
+        this.tileRef.add(new Tile("2D(Unreachable)", "", "", "", false, true, false, false, false, 0));
+        this.tileRef.add(new Tile("2E(Unreachable)", "", "", "", false, false, false, false, false, 0));
         //row 3
-        this.tileRef.add(new Tile("3A(Exit via West)", "", "", "cart", true, false, true, false, 6));
-        this.tileRef.add(new Tile("3B(Unreachable)", "", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("3C(Unreachable)", "", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("3D(Unreachable)", "", "", "", false, false, false, false, 0));
-        this.tileRef.add(new Tile("3E(Unreachable)", "", "", "", false, false, false, false, 0));
+        this.tileRef.add(new Tile("3A(Exit via West)", "", "", "cart", false, true, false, true, false, 6));
+        this.tileRef.add(new Tile("3B(Unreachable)", "", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("3C(Unreachable)", "", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("3D(Unreachable)", "", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("3E(Unreachable)", "", "", "", false, false, false, false, false, 0));
         //row 4
-        this.tileRef.add(new Tile("4A", "", "", "", true, true, true, false, 5));
-        this.tileRef.add(new Tile("4B", "", "", "", false, true, false, true, 35));
-        this.tileRef.add(new Tile("4C(West of Start)", "", "", "", false, true, false, true, 35));
-        this.tileRef.add(new Tile("4D(Start)", "", "", "", false, true, false, true, 3));
-        this.tileRef.add(new Tile("4E(East of Start)", "instruments", "", "", false, false, true, true, 3));
+        this.tileRef.add(new Tile("4A", "", "", "", false, true, true, true, false, 5));
+        this.tileRef.add(new Tile("4B", "", "", "", false, false, true, false, true, 35));
+        this.tileRef.add(new Tile("4C(West of Start)", "", "", "", false, false, true, false, true, 35));
+        this.tileRef.add(new Tile("4D(Start)", "", "", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("4E(East of Start)", "instruments", "", "", false, false, false, true, true, 3));
         //row 5
-        this.tileRef.add(new Tile("5A", "", "", "", true, true, false, false, 3));
-        this.tileRef.add(new Tile("5B", "", "", "", false, true, false, true, 3));
-        this.tileRef.add(new Tile("5C: \nYou notice a small walk-in closet with a cabinet, table and small sofa.\nA break room for staff.\nThe ticking seems to be coming from in there, maybe I should investigate the furniture inside.", "cabinet", "", "", false, true, false, true, 3));
-        this.tileRef.add(new Tile("5D", "", "", "", false, true, false, true, 3));
-        this.tileRef.add(new Tile("5E", "", "", "", true, false, false, true, 3));
+        this.tileRef.add(new Tile("5A", "", "", "", false, true, true, false, false, 3));
+        this.tileRef.add(new Tile("5B", "", "", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("5C", "cabinet", "", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("5D", "", "", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("5E", "", "", "", false, true, false, false, true, 3));
 
         //Add items to tile 4D
         this.tileRef.get(19).settItems("wrench");
@@ -64,10 +70,22 @@ public class Game {
 
     }
 
+    /**
+     * Sets pipeline fixed.
+     *
+     * @param pipelineFixed takes in a boolean which comes from the method useWrench
+     */
     public void setPipelineFixed(boolean pipelineFixed) {
         this.pipelineFixed = pipelineFixed;
     }
 
+    /**
+     * Move tile. Changes the value of the players position with reference to the tile array,
+     * It also moves the carts position around the array if the player is in it.
+     *
+     * @param dir     The direction the player intends to move comes from validation class
+     * @param newTile The integer value to move within the array comes from the selection class
+     */
     public void moveTile(String dir, int newTile) {
 
 
@@ -93,21 +111,38 @@ public class Game {
         if(player.isInCart() && !(player.getPosition() == 7)){
             tileRef.get(player.getPosition()).settCart("cart");
         }
+        if(!(tileRef.get(player.getPosition()).isHasVisited())){
+            tileRef.get(player.getPosition()).setHasVisited(true);
+        }
     }
 
-    //Method to drop items from player inventory and add to the tile inventory
+
+    /**
+     * Drop item. Drops the selected item if it exists in the player inventory
+     *
+     * @param item the item that is entered in after the drop key word
+     */
     public void dropItem(String item) {
         //If validate returns badInput print
         if (item.equals("badInput")) {
             System.out.println("You aren't holding a item like that");
-        }else
+        }else if(item.equals("hazmat")){
+            System.out.println("It would be a bad idea to take the radiation suit off");
+        } else
         player.removeItems(item);
         System.out.println("You dropped the " + item);
         this.tileRef.get(this.player.getPosition()).settItems(item);
         }
 
-//Method to pickup items from tile inventory and add to the player inventory
-public String[] pickItem(String item, String pInven[]) {
+
+    /**
+     * Picks up the selected item from the tile if it exists within the tiles items array
+     *
+     * @param item   the item that is entered in after the drop key word
+     * @param pInven the players inventory
+     * @return the string [ ], returned to be set as the player inventory
+     */
+    public String[] pickItem(String item, String pInven[]) {
     String itemToDrop;
     Scanner input = new Scanner(System.in);
     Validation v = new Validation();
@@ -147,7 +182,14 @@ public String[] pickItem(String item, String pInven[]) {
 }
 
 
-        public void inputHandler(String temp){
+    /**
+     * Input handler. Handles the user input by splitting the scanner in string into two words,
+     * the first is the key word used to define what action the user wants to take. The second is what item
+     * the user wants to interact with. Each case calls a method or set of methods to handle each situation.
+     *
+     * @param temp the temporary storage for user inputs.
+     */
+    public void inputHandler(String temp){
         Validation v = new Validation();
         Selection s = new Selection();
         Scanner input = new Scanner(System.in);
@@ -231,6 +273,13 @@ public String[] pickItem(String item, String pInven[]) {
     }
 
 
+    /**
+     * The entry point of application. Has three sections the prologue which is a cutscene to introduce the story.
+     * The main game loop that occurs until an exit condition is met.
+     * The epilogue; after an exit condition is meet an outro cutscene occurs before the game ends
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         Game newGame = new Game();
         Selection s = new Selection();
