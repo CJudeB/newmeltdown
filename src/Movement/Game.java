@@ -93,6 +93,11 @@ public class Game {
         if(player.isInCart() && !(player.getPosition() == 2)){
             tileRef.get(player.getPosition()).settCart("");
         }
+        //Set tile visited to true before leaving it.
+        if(!(tileRef.get(player.getPosition()).isHasVisited())){
+            tileRef.get(player.getPosition()).setHasVisited(true);
+        }
+
         //Move the player from one space to the next if possible otherwise tell them they can't
         if (dir.equals("n") && this.tileRef.get(this.player.getPosition()).gettN()) {
             this.player.setPosition(this.player.getPosition() + newTile);
@@ -110,9 +115,6 @@ public class Game {
         //Setting cart into tile if needed
         if(player.isInCart() && !(player.getPosition() == 7)){
             tileRef.get(player.getPosition()).settCart("cart");
-        }
-        if(!(tileRef.get(player.getPosition()).isHasVisited())){
-            tileRef.get(player.getPosition()).setHasVisited(true);
         }
     }
 

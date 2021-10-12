@@ -3,11 +3,12 @@ import java.util.ArrayList;
 
 public class Tile {
 
-    public Tile(){}
+    public Tile() {
+    }
 
     private String tDescription, tIntractable, tPuzzle, tCart;
-    private ArrayList <String> tItems = new ArrayList<>();
-    private boolean tN, tE, tS,tW, hasVisited;
+    private ArrayList<String> tItems = new ArrayList<>();
+    private boolean tN, tE, tS, tW, hasVisited;
     private int damVal;
 
     public Tile(String tDescription, String tIntractable, String tPuzzle, String tCart, Boolean hasVisited, Boolean tN, Boolean tE, Boolean tS, Boolean tW, int damVal) {
@@ -25,23 +26,19 @@ public class Tile {
 
     }
 
-    public Boolean gettN()
-    {
+    public Boolean gettN() {
         return tN;
     }
 
-    public Boolean gettE()
-    {
+    public Boolean gettE() {
         return tE;
     }
 
-    public Boolean gettS()
-    {
+    public Boolean gettS() {
         return tS;
     }
 
-    public Boolean gettW()
-    {
+    public Boolean gettW() {
         return tW;
     }
 
@@ -78,17 +75,17 @@ public class Tile {
         return tItems;
     }
 
-    public void removeItem(String item){
+    public void removeItem(String item) {
 
-        for (int i = 0 ; i < tItems.size(); i++){
-                if(item.equals(this.tItems.get(i))){
-                    this.tItems.remove(i);
+        for (int i = 0; i < tItems.size(); i++) {
+            if (item.equals(this.tItems.get(i))) {
+                this.tItems.remove(i);
             }
         }
     }
 
-    public void printItems(){
-        for (String i:tItems) {
+    public void printItems() {
+        for (String i : tItems) {
             System.out.println(i);
         }
     }
@@ -100,4 +97,5 @@ public class Tile {
     public void setHasVisited(boolean hasVisited) {
         this.hasVisited = hasVisited;
     }
+
 }
