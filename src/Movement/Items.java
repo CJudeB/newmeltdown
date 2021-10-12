@@ -27,11 +27,12 @@ public class Items {
 
 
     /**
-     * Use wrench boolean. The interaction method for using the wrench 
+     * Use wrench boolean. The interaction method for using the wrench.
+     * Includes blocks for the player not having the wrench and trying to use the pipeline
      *
-     * @param item         the item
-     * @param tIntractable the t intractable
-     * @param player       the player
+     * @param item         the item that the user input to interact with
+     * @param tIntractable the tiles intractable item
+     * @param player       the player instance from game
      * @return the boolean
      */
     public static boolean useWrench (String item, String tIntractable, Player player) {

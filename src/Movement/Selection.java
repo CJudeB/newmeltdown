@@ -3,6 +3,13 @@ package Movement;
 public class Selection {
 
 
+    /**
+     * Direction selection int. Selects the integer amount the player should move in reference to the tile array
+     *
+     * @param input  the input from the user
+     * @param player the player instance from game
+     * @return the integer value that the player should move
+     */
     public int directionSelection(String input, Player player) {
         int output;
         switch (input) {
