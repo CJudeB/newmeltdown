@@ -10,7 +10,7 @@ public class Validation {
     private String badInput = "badInput";
 
     /**
-     * Validate input string to insure correct direction has been input.
+     * Validate input string to insure correct direction has been inputted.
      *
      * @param input the input from the user
      * @return the string back as entered if valid or badInput if not
