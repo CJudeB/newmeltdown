@@ -1,5 +1,7 @@
 package Movement;
 
+import static Movement.CalculateDamage.calculateDamage;
+
 public class Cart {
 
     private  static boolean cartKeyUsed = false;
@@ -55,9 +57,11 @@ public class Cart {
         String [] pInven = player.getInventory();
         if(player.isInCart()){
             System.out.println("You get out of the cart");
+            calculateDamage(player);
             return false;
         }else if(!player.isInCart() && fuelUsed && cartKeyUsed){
             System.out.println("You get into the cart");
+            calculateDamage(player);
             return true;
         }
         if (item.equalsIgnoreCase(tIntractable)) {
@@ -67,11 +71,13 @@ public class Cart {
                 fuelUsed = true;
                 player.removeItems("cart-key");
                 player.removeItems("fuel");
+                calculateDamage(player);
 
             } else if (v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && !v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
                 System.out.println("You re-fuel the cart but it's still needs a key to start it");
                 fuelUsed = true;
                 player.removeItems("fuel");
+                calculateDamage(player);
 
                 } else if (!v.validateInput("fuel", player.getInventory()).equalsIgnoreCase("fuel") && !v.validateInput("cart-key", player.getInventory()).equalsIgnoreCase("cart-key")) {
                 if(fuelUsed){
@@ -84,6 +90,7 @@ public class Cart {
                     System.out.println("You use the cart-key to start the cart and get in");
                     cartKeyUsed = true;
                     player.removeItems("cart-key");
+                    calculateDamage(player);
 
                 }else
                 System.out.println("I have the key for the cart but it seems to be out of fuel");

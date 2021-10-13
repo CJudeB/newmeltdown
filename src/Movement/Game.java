@@ -7,9 +7,10 @@ import java.util.Scanner;
 
 import static Movement.CalculateDamage.calculateDamage;
 import static Movement.Cart.*;
+import static Movement.Event.currentEvent;
+import static Movement.Event.getPrologue;
 import static Movement.Items.useHazmat;
 import static Movement.Items.useWrench;
-import static Movement.Event.*;
 
 
 public class Game {
@@ -107,12 +108,16 @@ public class Game {
         //Move the player from one space to the next if possible otherwise tell them they can't
         if (dir.equals("n") && this.tileRef.get(this.player.getPosition()).gettN()) {
             this.player.setPosition(this.player.getPosition() + newTile);
+            calculateDamage(player);
         } else if (dir.equals("s") && this.tileRef.get(this.player.getPosition()).gettS()) {
             this.player.setPosition(this.player.getPosition() + newTile);
+            calculateDamage(player);
         } else if (dir.equals("e") && this.tileRef.get(this.player.getPosition()).gettE()) {
             this.player.setPosition(this.player.getPosition() + newTile);
+            calculateDamage(player);
         } else if (dir.equals("w") && this.tileRef.get(this.player.getPosition()).gettW()) {
             this.player.setPosition(this.player.getPosition() + newTile);
+            calculateDamage(player);
         } else if (dir.equals("badInput")) {
             System.out.println("That's not a direction I can move");
         } else {
@@ -140,6 +145,7 @@ public class Game {
             player.removeItems(item);
         System.out.println("You dropped the " + item);
         this.tileRef.get(this.player.getPosition()).settItems(item);
+        calculateDamage(player);
     }
 
 
@@ -164,6 +170,7 @@ public class Game {
                 pInven[i] = item;
                 this.tileRef.get(this.player.getPosition()).removeItem(item);
                 System.out.println("You picked up the " + item);
+                calculateDamage(player);
                 return pInven;
             } else if (i == pInven.length - 1) {
                 System.out.println("You’re feeling very weak – there’s no way you can carry more. 'Why am I carrying all this stuff', you think to yourself.");
@@ -178,6 +185,7 @@ public class Game {
                             this.tileRef.get(this.player.getPosition()).settItems(itemToDrop);
                             System.out.println("You drop the " + itemToDrop + " for the " + item);
                             itemDropped = false;
+                            calculateDamage(player);
                             break;
                         } else if (a == pInven.length - 1)
                             System.out.println("I'm not carrying that item");
@@ -197,13 +205,9 @@ public class Game {
      *
      * @param temp the temporary storage for user inputs.
      */
-    public void inputHandler(String temp) {
+    public void inputHandler(String temp) throws IOException {
         Validation v = new Validation();
         Selection s = new Selection();
-        Scanner input = new Scanner(System.in);
-        String itemToDrop;
-        boolean itemDropped = false;
-        String[] copyOfPlayerInven = Arrays.copyOf(player.getInventory(), 5);
         String[] parts = temp.split(" ");
         switch (parts[0]) {
             case "p": {
@@ -213,11 +217,11 @@ public class Game {
                 System.out.println(player.isInCart());
                 System.out.println(isFuelUsed());
                 System.out.println(isCartKeyUsed());
-
+                System.out.println(tileRef.get(player.getPosition()).isHasVisited());
 
                 //print to console for testing
-
-                calculateDamage(player, tileRef.get(player.getPosition()));
+                currentEvent(player, tileRef.get(player.getPosition()).isHasVisited());
+                calculateDamage(player);
                 System.out.println(player.getHealth()); // this is returning correct value
                 System.out.println(player.getDamVal()); //is not passing damVal to Calculate Damage. this is here for testing if I decide to fix
                 break;
@@ -225,17 +229,14 @@ public class Game {
             case "Move", "move": {
                 moveTile(v.validateInput(parts[1]), s.directionSelection(v.validateInput(parts[1]), player));
                 System.out.println(tileRef.get(player.getPosition()).gettDescription());
-                calculateDamage(player, tileRef.get(player.getPosition()));
                 break;
             }
             case "Drop", "drop": {
                 dropItem(v.validateInput(parts[1], player.getInventory()));
-                calculateDamage(player, tileRef.get(player.getPosition()));
                 break;
             }
             case "Pick-up", "pick-up": {
                 player.setInventory(pickItem(v.validateInput(parts[1], tileRef.get(player.getPosition()).gettItems()), player.getInventory()));
-                calculateDamage(player, tileRef.get(player.getPosition()));
                 break;
             }
             case "Use", "use": {
@@ -256,13 +257,12 @@ public class Game {
 
                         break;
                     }
-                 /*   case "reactorMap", "Map", "m": {
-                        player.getReactorMap(tileRef.get(player.getPosition()));
+                   case "reactorMap", "Map", "m": {
+                       Map map = new Map();
+                       map.reactorMap();
                         break;
-                    }*/
+                    }
                 }
-                calculateDamage(player, tileRef.get(player.getPosition()));;
-                break;
             }
             case "I", "i": {
                 player.printInventory();
@@ -304,7 +304,6 @@ public class Game {
      * @param args the input arguments
      */
     public static void main(String[] args) throws IOException {
-        Map reactorMap = new Map();
         Game newGame = new Game();
         Selection s = new Selection();
         Validation v = new Validation();
@@ -317,7 +316,7 @@ public class Game {
         //Intro description before the game begins.
         //To begin game user types start
         do {
-            initialDescription();
+            Event.initialDescription(getPrologue());
             System.out.print(">");
         } while (!go.equalsIgnoreCase(scan.nextLine()));
         System.out.print("\n\nGood Luck\n\n");
@@ -329,7 +328,7 @@ public class Game {
 
         //Main game loop after intro
         do {
-            currentEvent(newGame.player, newGame.tileRef.get(newGame.player.getPosition()).isHasVisited());
+            currentEvent(newGame.player,  newGame.tileRef.get(newGame.player.getPosition()).isHasVisited());
             System.out.print(">");
             temp = input.nextLine();
             newGame.inputHandler(temp);
@@ -349,6 +348,7 @@ public class Game {
         } else if (newGame.catwalk) {
             System.out.println("You walk up the 4 flights of stairs to the кошачья прогулка. \nAs you move towards the cooling tower, each step you take becomes more cumbersome. \nYou're head is splitting with pain. \nYou push on reaching the tower." +
                     "\nYou fall against the rail, you can barely stand. \nThe rail creaks and bends weakened by the explosion, it can no longer support your weight. \nThe rail fails completely and you plummet from the кошачья прогулка. SPLAT!!!!");
+            return;
         }
 
     }

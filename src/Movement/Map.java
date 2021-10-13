@@ -23,10 +23,9 @@ public class Map {
     }
 
 
+    public void reactorMap() throws IOException {
 
-    public Map reactorMap() throws IOException {
-
-        BufferedImage visual = ImageIO.read(Objects.requireNonNull(getClass().getResource("/map/package/smallMap.jpg")));
+        BufferedImage visual = ImageIO.read(Objects.requireNonNull(getClass().getResource("/map/package/img.png")));
         ImageIcon iMap = new ImageIcon(visual);
         JFrame pane = new JFrame();
         pane.getContentPane().setBackground(Color.BLACK);
@@ -38,8 +37,8 @@ public class Map {
         pane.setVisible(true);
         pane.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        return reactorMap;
-
     }
 }
+
+
 
