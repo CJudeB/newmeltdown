@@ -57,9 +57,11 @@ public class Cart {
         String [] pInven = player.getInventory();
         if(player.isInCart()){
             System.out.println("You get out of the cart");
+            calculateDamage(player);
             return false;
         }else if(!player.isInCart() && fuelUsed && cartKeyUsed){
             System.out.println("You get into the cart");
+            calculateDamage(player);
             return true;
         }
         if (item.equalsIgnoreCase(tIntractable)) {
