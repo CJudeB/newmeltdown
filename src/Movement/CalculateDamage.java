@@ -110,7 +110,6 @@ public class CalculateDamage {
             }
             System.out.println("You died. Game over.");
         }
-
     }
 
 
