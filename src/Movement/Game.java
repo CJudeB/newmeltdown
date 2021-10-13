@@ -139,11 +139,12 @@ public class Game {
             System.out.println("You aren't holding a item like that");
         } else if (item.equals("hazmat")) {
             System.out.println("It would be a bad idea to take the radiation suit off");
-        } else
+        } else {
             player.removeItems(item);
-        System.out.println("You dropped the " + item);
-        this.tileRef.get(this.player.getPosition()).settItems(item);
-        calculateDamage(player, tileRef.get(player.getPosition()));
+            System.out.println("You dropped the " + item);
+            this.tileRef.get(this.player.getPosition()).settItems(item);
+            calculateDamage(player, tileRef.get(player.getPosition()));
+        }
     }
 
 
