@@ -7,10 +7,9 @@ import java.util.Scanner;
 
 import static Movement.CalculateDamage.calculateDamage;
 import static Movement.Cart.*;
-import static Movement.Event.currentEvent;
-import static Movement.Event.getPrologue;
 import static Movement.Items.useHazmat;
 import static Movement.Items.useWrench;
+import static Movement.Event.*;
 
 
 public class Game {
@@ -215,9 +214,10 @@ public class Game {
                 System.out.println(isFuelUsed());
                 System.out.println(isCartKeyUsed());
 
+
                 //print to console for testing
-                currentEvent(player);
-                calculateDamage(player);
+
+                calculateDamage(player, tileRef.get(player.getPosition()));
                 System.out.println(player.getHealth()); // this is returning correct value
                 System.out.println(player.getDamVal()); //is not passing damVal to Calculate Damage. this is here for testing if I decide to fix
                 break;
@@ -225,17 +225,17 @@ public class Game {
             case "Move", "move": {
                 moveTile(v.validateInput(parts[1]), s.directionSelection(v.validateInput(parts[1]), player));
                 System.out.println(tileRef.get(player.getPosition()).gettDescription());
-                calculateDamage(player);
+                calculateDamage(player, tileRef.get(player.getPosition()));
                 break;
             }
             case "Drop", "drop": {
                 dropItem(v.validateInput(parts[1], player.getInventory()));
-                calculateDamage(player);
+                calculateDamage(player, tileRef.get(player.getPosition()));
                 break;
             }
             case "Pick-up", "pick-up": {
                 player.setInventory(pickItem(v.validateInput(parts[1], tileRef.get(player.getPosition()).gettItems()), player.getInventory()));
-                calculateDamage(player);
+                calculateDamage(player, tileRef.get(player.getPosition()));
                 break;
             }
             case "Use", "use": {
@@ -257,11 +257,11 @@ public class Game {
                         break;
                     }
                  /*   case "reactorMap", "Map", "m": {
-                        player.getMapPane(tileRef.get(player.getPosition()));
+                        player.getReactorMap(tileRef.get(player.getPosition()));
                         break;
                     }*/
                 }
-                calculateDamage(player);
+                calculateDamage(player, tileRef.get(player.getPosition()));;
                 break;
             }
             case "I", "i": {
@@ -317,7 +317,7 @@ public class Game {
         //Intro description before the game begins.
         //To begin game user types start
         do {
-            Event.initialDescription(getPrologue());
+            initialDescription();
             System.out.print(">");
         } while (!go.equalsIgnoreCase(scan.nextLine()));
         System.out.print("\n\nGood Luck\n\n");
@@ -329,7 +329,7 @@ public class Game {
 
         //Main game loop after intro
         do {
-            System.out.println(currentEvent(newGame.player));
+            currentEvent(newGame.player, newGame.tileRef.get(newGame.player.getPosition()).isHasVisited());
             System.out.print(">");
             temp = input.nextLine();
             newGame.inputHandler(temp);

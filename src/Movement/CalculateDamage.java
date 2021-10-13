@@ -8,6 +8,7 @@ public class CalculateDamage {
     private static Random randMed;
     private static Random randHigh;
     private static Random randExt;
+    private static Tile tile;
     private static int totalDam;
     private static int damVal;
 
@@ -58,7 +59,7 @@ public class CalculateDamage {
 
 
 
-    public static void calculateDamage(Player player) {
+    public static void calculateDamage(Player player, Tile tile) {
 
         int damValLow = 3;
         int damValMed = 5;
@@ -71,8 +72,9 @@ public class CalculateDamage {
         if (player.alive()) {
 
             if (player.getPosition() >= 18 && player.getPosition() < 24) {
+
                  int subTotalDam = randLowMethod() + getDamVal();
-              //  int subTotalDam = randLowMethod() + damValLow;
+               //int subTotalDam = randLowMethod() + damValLow;
                 tempDam -= subTotalDam;
 
                 if (player.isHasProtectiveClothing()) {
@@ -111,9 +113,9 @@ public class CalculateDamage {
                 }
                 player.setHealth(tempDam);
             }
-
+            else System.out.println("You died. Game over.");
         }
-        else System.out.println("You died. Game over.");
+
     }
 
 

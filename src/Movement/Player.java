@@ -10,8 +10,6 @@ public class Player {
     private boolean hasProtectiveClothing = false;
     private String[] inventory = {" ", " ", " ", " ", " "};
 
-
-
     public String getName() {
         return name;
     }
