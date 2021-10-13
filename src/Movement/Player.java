@@ -17,8 +17,8 @@ public class Player {
 
     public Player(String name, int health) {
         this.name = name;
-        this.health = 0;
-       this.Position = 18;
+        int health1 = this.health;
+        this.Position = 18;
     }
 
     public int getPosition() {

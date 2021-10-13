@@ -35,7 +35,7 @@ class Event {
 
 
         tiles.put("0", """
-                /-------------------------------------------------------------------------------------------------------\\\n
+                /-------------------------------------------------------------------------------------------------------\n
                 (Storyline takes control of player here).\n
                 You decide to climb the exterior bridge where you can turn on an auxiliary coolant system.
                 As you climb stairs the dosimeter cuts out. Story driven choice presented here.\sGo up or – you die on the roof.\n
@@ -45,14 +45,14 @@ class Event {
 
 
         tiles.put("1", """
-                /-------------------------------------------------------------------------------------------------------\\\n
+                /-------------------------------------------------------------------------------------------------------\n
                 You either skip this tile in cart or there’s nothing to see here especially. 1b
                                       
                 """);
 
 
         tiles.put("2", """
-                /-------------------------------------------------------------------------------------------------------\\\n
+                /-------------------------------------------------------------------------------------------------------\n
                 Storyline makes it clear you have to exit cart if you want to go south into coolant facility. 2c\s
                 """);
 
@@ -122,7 +122,7 @@ class Event {
                 """);
 
         tiles.put("18", """
-                /-------------------------------------------------------------------------------------------------------\\\n
+                /-------------------------------------------------------------------------------------------------------\n
                 You get up, woozy, legs like lead. This is a control room, you recall, or what’s left of it.\s
                 On the far side of the room where the damage is worst you see two bodies, a mess of limbs and masonry.\s 
                 You shudder – that’s Alexi and Pasha from your section. \nYou have to get out of here.\n
@@ -202,17 +202,17 @@ class Event {
 
     public static String initialDescription(String prologue) {
 
-        prologue = "\n\n\n" +
+        prologue = "\n" +
                 "" +
-                "/-------------------------------------------------------------------------------------------------------\\\n" +
-                "\n\nSomewhere in the Soviet Union, 1984.\n\n\nThe siren jolts you from unconsciousness.\n\n" +
+                "/-------------------------------------------------------------------------------------------------------\n" +
+                "\nSomewhere in the Soviet Union, 1984.\n\nThe siren jolts you from unconsciousness.\n\n" +
                 "You come-to in what looks like a warzone, lying among rubble and dust, a pulsing ache in your head.\n" +
                 "The first thing you notice, beside the pain, is that the ceiling has partially collapsed. \n" +
-                "This explains your headache. Perhaps your confusion too? You have no memory of where you are, or what's happening. It's a blank slate.\n" +
-                "For a moment the memory of who YOU ARE feels like it might slip away. \n" +
+                "This explains your headache, and your confusion - You have no memory of where you are, or what's happening,\n" +
+                "you realise - It's a blank slate. For a moment the memory of who YOU ARE feels like it might slip away.\n\n" +
                 "No. that memory you still have.\n\n" +
-                "I’m an Energetiki power engineer with the ministry of Electrification. You say resolutely. \n\n" +
-                "You work here, at this nuclear power plant.\n\n" +
+                "'I’m an Energetiki power engineer with the ministry of Electrification'. You say resolutely. \n" +
+                "'I work here, at this nuclear power plant'.\n\n" +
                 "To begin type start.\n\n";
 
         System.out.println(prologue);

@@ -213,10 +213,12 @@ private int health;
                 System.out.println(player.isInCart());
                 System.out.println(isFuelUsed());
                 System.out.println(isCartKeyUsed());
+
+                //print to console for testing
                 currentEvent(player);
                 calculateDamage(player);
-                System.out.println(player.getHealth());
-                System.out.println(player.getDamVal());
+                System.out.println(player.getHealth()); // this is returning correct value
+                System.out.println(player.getDamVal()); //is not passing damVal to Calculate Damage. this is here for testing if I decide to fix
                 break;
             }
             case "Move", "move": {

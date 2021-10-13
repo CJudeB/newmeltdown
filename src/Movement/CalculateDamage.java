@@ -108,8 +108,9 @@ public class CalculateDamage {
                 }
                 player.setHealth(tempDam);
             }
-            System.out.println("You died. Game over.");
+
         }
+        else System.out.println("You died. Game over.");
     }
 
 
