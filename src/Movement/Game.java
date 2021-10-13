@@ -205,7 +205,7 @@ public class Game {
      *
      * @param temp the temporary storage for user inputs.
      */
-    public void inputHandler(String temp) {
+    public void inputHandler(String temp) throws IOException {
         Validation v = new Validation();
         Selection s = new Selection();
         String[] parts = temp.split(" ");
@@ -256,10 +256,11 @@ public class Game {
 
                         break;
                     }
-                 /*   case "reactorMap", "Map", "m": {
-                        player.getMapPane(tileRef.get(player.getPosition()));
+                   case "reactorMap", "Map", "m": {
+                       Map map = new Map();
+                       map.reactorMap();
                         break;
-                    }*/
+                    }
                 }
             }
             case "I", "i": {
@@ -302,7 +303,6 @@ public class Game {
      * @param args the input arguments
      */
     public static void main(String[] args) throws IOException {
-        Map reactorMap = new Map();
         Game newGame = new Game();
         Selection s = new Selection();
         Validation v = new Validation();
