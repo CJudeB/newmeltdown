@@ -62,7 +62,7 @@ public class Items {
         String[] pInven = player.getInventory();
         if (v.validateInput(item, player.getInventory()).equalsIgnoreCase("hazmat")) {
             System.out.println("You change into the Hazmat suit\nYou notice it has a inbuilt geiger counter");
-                return true;
+            return true;
             } else
         System.out.println("You don't have any protective clothing");
         return false;
