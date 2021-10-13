@@ -2,13 +2,11 @@ package Movement;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import static Movement.CalculateDamage.calculateDamage;
 import static Movement.Cart.*;
 import static Movement.Event.currentEvent;
-import static Movement.Event.getPrologue;
 import static Movement.Items.useHazmat;
 import static Movement.Items.useWrench;
 
@@ -108,16 +106,16 @@ public class Game {
         //Move the player from one space to the next if possible otherwise tell them they can't
         if (dir.equals("n") && this.tileRef.get(this.player.getPosition()).gettN()) {
             this.player.setPosition(this.player.getPosition() + newTile);
-            calculateDamage(player);
+            calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("s") && this.tileRef.get(this.player.getPosition()).gettS()) {
             this.player.setPosition(this.player.getPosition() + newTile);
-            calculateDamage(player);
+            calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("e") && this.tileRef.get(this.player.getPosition()).gettE()) {
             this.player.setPosition(this.player.getPosition() + newTile);
-            calculateDamage(player);
+            calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("w") && this.tileRef.get(this.player.getPosition()).gettW()) {
             this.player.setPosition(this.player.getPosition() + newTile);
-            calculateDamage(player);
+            calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("badInput")) {
             System.out.println("That's not a direction I can move");
         } else {
@@ -145,7 +143,7 @@ public class Game {
             player.removeItems(item);
         System.out.println("You dropped the " + item);
         this.tileRef.get(this.player.getPosition()).settItems(item);
-        calculateDamage(player);
+        calculateDamage(player, tileRef.get(player.getPosition()));
     }
 
 
@@ -170,7 +168,7 @@ public class Game {
                 pInven[i] = item;
                 this.tileRef.get(this.player.getPosition()).removeItem(item);
                 System.out.println("You picked up the " + item);
-                calculateDamage(player);
+                calculateDamage(player, tileRef.get(player.getPosition()));
                 return pInven;
             } else if (i == pInven.length - 1) {
                 System.out.println("You’re feeling very weak – there’s no way you can carry more. 'Why am I carrying all this stuff', you think to yourself.");
@@ -185,7 +183,7 @@ public class Game {
                             this.tileRef.get(this.player.getPosition()).settItems(itemToDrop);
                             System.out.println("You drop the " + itemToDrop + " for the " + item);
                             itemDropped = false;
-                            calculateDamage(player);
+                            calculateDamage(player, tileRef.get(player.getPosition()));
                             break;
                         } else if (a == pInven.length - 1)
                             System.out.println("I'm not carrying that item");
@@ -211,7 +209,7 @@ public class Game {
         String[] parts = temp.split(" ");
         switch (parts[0]) {
             case "p": {
-                System.out.println(tileRef.get(player.getPosition()).gettDescription());
+          /*    System.out.println(tileRef.get(player.getPosition()).gettDescription());
                 System.out.println(tileRef.get(player.getPosition()).gettCart());
                 tileRef.get(player.getPosition()).printItems();
                 System.out.println(player.isInCart());
@@ -219,16 +217,17 @@ public class Game {
                 System.out.println(isCartKeyUsed());
                 System.out.println(tileRef.get(player.getPosition()).isHasVisited());
 
-                //print to console for testing
-                currentEvent(player, tileRef.get(player.getPosition()).isHasVisited());
-                calculateDamage(player);
+
+               currentEvent(player, tileRef.get(player.getPosition()).isHasVisited());
                 System.out.println(player.getHealth()); // this is returning correct value
-                System.out.println(player.getDamVal()); //is not passing damVal to Calculate Damage. this is here for testing if I decide to fix
+                System.out.println(player.getDamVal()); //is not passing damVal to Calculate Damage. this is here for testing if I decide to fix*/
+                System.out.println(player.getHealth());
                 break;
+
             }
             case "Move", "move": {
                 moveTile(v.validateInput(parts[1]), s.directionSelection(v.validateInput(parts[1]), player));
-                System.out.println(tileRef.get(player.getPosition()).gettDescription());
+                currentEvent(player, tileRef.get(player.getPosition()).isHasVisited()); // this prints out tile location need to replace with event
                 break;
             }
             case "Drop", "drop": {
@@ -242,7 +241,7 @@ public class Game {
             case "Use", "use": {
                 switch (parts[1]) {
                     case "cart", "Cart": {
-                        player.setInCart(useCart(parts[1], tileRef.get(player.getPosition()).gettCart(), player));
+                        player.setInCart(useCart(parts[1], tileRef.get(player.getPosition()).gettCart(), player, tileRef.get(player.getPosition())));
                         break;
                     }
                     case "Hazmat", "hazmat": {
@@ -257,9 +256,9 @@ public class Game {
 
                         break;
                     }
-                   case "reactorMap", "Map", "m": {
-                       Map map = new Map();
-                       map.reactorMap();
+                    case "reactorMap", "Map", "m": {
+                        Map map = new Map();
+                        map.reactorMap();
                         break;
                     }
                 }
@@ -316,7 +315,7 @@ public class Game {
         //Intro description before the game begins.
         //To begin game user types start
         do {
-            Event.initialDescription(getPrologue());
+            Event.initialDescription();
             System.out.print(">");
         } while (!go.equalsIgnoreCase(scan.nextLine()));
         System.out.print("\n\nGood Luck\n\n");
@@ -328,7 +327,7 @@ public class Game {
 
         //Main game loop after intro
         do {
-            currentEvent(newGame.player,  newGame.tileRef.get(newGame.player.getPosition()).isHasVisited());
+
             System.out.print(">");
             temp = input.nextLine();
             newGame.inputHandler(temp);
@@ -349,10 +348,11 @@ public class Game {
             System.out.println("You walk up the 4 flights of stairs to the кошачья прогулка. \nAs you move towards the cooling tower, each step you take becomes more cumbersome. \nYou're head is splitting with pain. \nYou push on reaching the tower." +
                     "\nYou fall against the rail, you can barely stand. \nThe rail creaks and bends weakened by the explosion, it can no longer support your weight. \nThe rail fails completely and you plummet from the кошачья прогулка. SPLAT!!!!");
             return;
+        } else if (!newGame.player.alive()) {
+            System.out.println("You died. Game over.");
+            return;
         }
-
     }
-
 }
 
 

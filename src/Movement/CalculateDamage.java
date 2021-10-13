@@ -73,7 +73,7 @@ public class CalculateDamage {
 
             if (player.getPosition() >= 18 && player.getPosition() < 24) {
 
-                 int subTotalDam = randLowMethod() + getDamVal();
+                 int subTotalDam = randLowMethod() + tile.getDamVal();
                //int subTotalDam = randLowMethod() + damValLow;
                 tempDam -= subTotalDam;
 
@@ -84,7 +84,7 @@ public class CalculateDamage {
 
 
             } else if (player.getPosition() >= 10 && player.getPosition() <= 15) {
-                int subTotalDam = randMedMethod() + getDamVal();
+                int subTotalDam = randMedMethod() +  tile.getDamVal();
              //   int subTotalDam = randMedMethod() + damValMed;
                 tempDam -= subTotalDam;
 
@@ -94,7 +94,7 @@ public class CalculateDamage {
                 player.setHealth(tempDam);
 
             } else if (player.getPosition() >= 0 && player.getPosition() <= 7) {
-                int subTotalDam = randHighMethod() + getDamVal();
+                int subTotalDam = randHighMethod() +  tile.getDamVal();
              //   int subTotalDam = randHighMethod() + damValHigh;
                 tempDam -= subTotalDam;
 
@@ -104,7 +104,7 @@ public class CalculateDamage {
                 player.setHealth(tempDam);
 
             } else if (player.getPosition() >= 16 && player.getPosition() <= 17) {
-                int subTotalDam = randExtMethod() + getDamVal();
+                int subTotalDam = randExtMethod() +  tile.getDamVal();
               //  int subTotalDam = randExtMethod() + damValExt;
                 tempDam -= subTotalDam;
 
@@ -113,7 +113,7 @@ public class CalculateDamage {
                 }
                 player.setHealth(tempDam);
             }
-            else System.out.println("You died. Game over.");
+
         }
 
     }
