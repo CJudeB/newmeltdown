@@ -15,7 +15,7 @@ import static Movement.Items.useWrench;
 
 public class Game {
 
-private int health;
+    private int health;
     private Map reactorMap;
     private ArrayList<Tile> tileRef;
     private Player player;
@@ -30,9 +30,9 @@ private int health;
     public Game() throws IOException {
         this.tileRef = new ArrayList<Tile>();
         //row 1
-        this.tileRef.add(new Tile("1A", "Stairs", null, "", false, false, true, true, false, 8));
-        this.tileRef.add(new Tile("1B", "", null, "", false, false, true, false, true, 8));
-        this.tileRef.add(new Tile("1C", "", null, "", false, false, false, true, true, 10));
+        this.tileRef.add(new Tile("1.1A", "Stairs", null, "", false, false, true, true, false, 6));
+        this.tileRef.add(new Tile("2.1B", "", null, "", false, false, true, false, true, 6));
+        this.tileRef.add(new Tile("3.1C", "", null, "", false, false, false, true, true, 6));
         this.tileRef.add(new Tile("1D(Unreachable)", "", null, "", false, false, false, false, false, 0));
         this.tileRef.add(new Tile("1E(Unreachable)", "", null, "", false, false, false, false, false, 0));
         //row 2
@@ -40,24 +40,25 @@ private int health;
         this.tileRef.add(new Tile("2B(Unreachable)", "", null, "", false, false, false, false, false, 0));
         this.tileRef.add(new Tile("2C", "pipeline", null, "", false, true, false, false, false, 10));
         this.tileRef.add(new Tile("2D(Unreachable)", "", null, "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("2E(Unreachable)", "", null, "", false, false, false, false, false, 0));
         //row 3
-        this.tileRef.add(new Tile("3A(Exit via West)", "", null, "cart", false, true, false, true, false, 6));
+        this.tileRef.add(new Tile("3A(Exit via West)", "", null, "cart", false, true, false, true, false, 5));
         this.tileRef.add(new Tile("3B(Unreachable)", "", null, "", false, false, false, false, false, 0));
         this.tileRef.add(new Tile("3C(Unreachable)", "", null, "", false, false, false, false, false, 0));
         this.tileRef.add(new Tile("3D(Unreachable)", "", null, "", false, false, false, false, false, 0));
         this.tileRef.add(new Tile("3E(Unreachable)", "", null, "", false, false, false, false, false, 0));
         //row 4
-        this.tileRef.add(new Tile("4A", "", null, "", false, true, true, true, false, 5));
-        this.tileRef.add(new Tile("4B", "", null, "", false, false, true, false, true, 35));
-        this.tileRef.add(new Tile("4C(West of Start)", "", reactorMap, "", false, false, true, false, true, 35));
-        this.tileRef.add(new Tile("4D(Start)", "", null, "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("4E(East of Start)", "instruments", null, "", false, false, false, true, true, 3));
+        this.tileRef.add(new Tile("15.4A", "", null, "", false, true, true, true, false, 5));
+        this.tileRef.add(new Tile("16.4B", "", null, "", false, false, true, false, true, 25));
+        this.tileRef.add(new Tile("17.4C(West of Start)", "", null, "", false, false, true, false, true, 25));
+        this.tileRef.add(new Tile("18.4D(Start)", "", reactorMap, "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("19.4E(East of Start)", "instruments", null, "", false, false, false, true, true, 3));
         //row 5
-        this.tileRef.add(new Tile("5A", "", null, "", false, true, true, false, false, 3));
-        this.tileRef.add(new Tile("5B", "", null, "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("5C", "cabinet", null, "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("5D", "", null, "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("5E", "", null, "", false, true, false, false, true, 3));
+        this.tileRef.add(new Tile("20.5A", "", null, "", false, true, true, false, false, 3));
+        this.tileRef.add(new Tile("21.5B", "", null, "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("22.5C", "cabinet", null, "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("23.5D", "", null, "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("24.5E", "", null, "", false, true, false, false, true, 3));
 
         //Add items to tile 4D
         this.tileRef.get(19).settItems("wrench");
@@ -96,11 +97,11 @@ private int health;
 
 
         //Removing cart from tile if needed
-        if(player.isInCart() && !(player.getPosition() == 2)){
+        if (player.isInCart() && !(player.getPosition() == 2)) {
             tileRef.get(player.getPosition()).settCart("");
         }
         //Set tile visited to true before leaving it.
-        if(!(tileRef.get(player.getPosition()).isHasVisited())){
+        if (!(tileRef.get(player.getPosition()).isHasVisited())) {
             tileRef.get(player.getPosition()).setHasVisited(true);
         }
 
@@ -119,7 +120,7 @@ private int health;
             System.out.println("You cannot go that way");
         }
         //Setting cart into tile if needed
-        if(player.isInCart() && !(player.getPosition() == 7)){
+        if (player.isInCart() && !(player.getPosition() == 7)) {
             tileRef.get(player.getPosition()).settCart("cart");
         }
     }
@@ -134,13 +135,13 @@ private int health;
         //If validate returns badInput print
         if (item.equals("badInput")) {
             System.out.println("You aren't holding a item like that");
-        }else if(item.equals("hazmat")){
+        } else if (item.equals("hazmat")) {
             System.out.println("It would be a bad idea to take the radiation suit off");
         } else
-        player.removeItems(item);
+            player.removeItems(item);
         System.out.println("You dropped the " + item);
         this.tileRef.get(this.player.getPosition()).settItems(item);
-        }
+    }
 
 
     /**
@@ -151,43 +152,43 @@ private int health;
      * @return the string [ ], returned to be set as the player inventory
      */
     public String[] pickItem(String item, String pInven[]) {
-    String itemToDrop;
-    Scanner input = new Scanner(System.in);
-    Validation v = new Validation();
-    boolean itemDropped = true;
-    if (item.equals("badInput")) {
-        System.out.println("There doesn't seem to be an item like that here");
-        return pInven;
-    }
-    for (int i = 0; i < pInven.length; i++) {
-        if (pInven[i].equals(" ")) {
-            pInven[i] = item;
-            this.tileRef.get(this.player.getPosition()).removeItem(item);
-            System.out.println("You picked up the " + item);
-            return pInven;
-        } else if (i == pInven.length - 1) {
-            System.out.println("You’re feeling very weak – there’s no way you can carry more. 'Why am I carrying all this stuff', you think to yourself.");
-            System.out.println("What should I drop for the item?");
-            player.printInventory();
-            do {
-                System.out.print(">");
-                itemToDrop = input.nextLine();
-                for (int a = 0; a < pInven.length; a++) {
-                    if (pInven[a].equalsIgnoreCase(itemToDrop)) {
-                        pInven[a] = item;
-                        this.tileRef.get(this.player.getPosition()).settItems(itemToDrop);
-                        System.out.println("You drop the " + itemToDrop + " for the " + item);
-                        itemDropped = false;
-                        break;
-                    } else if (a == pInven.length - 1)
-                        System.out.println("I'm not carrying that item");
-                }
-            } while (itemDropped);
+        String itemToDrop;
+        Scanner input = new Scanner(System.in);
+        Validation v = new Validation();
+        boolean itemDropped = true;
+        if (item.equals("badInput")) {
+            System.out.println("There doesn't seem to be an item like that here");
             return pInven;
         }
+        for (int i = 0; i < pInven.length; i++) {
+            if (pInven[i].equals(" ")) {
+                pInven[i] = item;
+                this.tileRef.get(this.player.getPosition()).removeItem(item);
+                System.out.println("You picked up the " + item);
+                return pInven;
+            } else if (i == pInven.length - 1) {
+                System.out.println("You’re feeling very weak – there’s no way you can carry more. 'Why am I carrying all this stuff', you think to yourself.");
+                System.out.println("What should I drop for the item?");
+                player.printInventory();
+                do {
+                    System.out.print(">");
+                    itemToDrop = input.nextLine();
+                    for (int a = 0; a < pInven.length; a++) {
+                        if (pInven[a].equalsIgnoreCase(itemToDrop)) {
+                            pInven[a] = item;
+                            this.tileRef.get(this.player.getPosition()).settItems(itemToDrop);
+                            System.out.println("You drop the " + itemToDrop + " for the " + item);
+                            itemDropped = false;
+                            break;
+                        } else if (a == pInven.length - 1)
+                            System.out.println("I'm not carrying that item");
+                    }
+                } while (itemDropped);
+                return pInven;
+            }
+        }
+        return pInven;
     }
-    return pInven;
-}
 
 
     /**
@@ -197,15 +198,15 @@ private int health;
      *
      * @param temp the temporary storage for user inputs.
      */
-    public void inputHandler(String temp){
+    public void inputHandler(String temp) {
         Validation v = new Validation();
         Selection s = new Selection();
         Scanner input = new Scanner(System.in);
         String itemToDrop;
         boolean itemDropped = false;
-        String [] copyOfPlayerInven = Arrays.copyOf(player.getInventory(),5);
+        String[] copyOfPlayerInven = Arrays.copyOf(player.getInventory(), 5);
         String[] parts = temp.split(" ");
-        switch(parts[0]) {
+        switch (parts[0]) {
             case "p": {
                 System.out.println(tileRef.get(player.getPosition()).gettDescription());
                 System.out.println(tileRef.get(player.getPosition()).gettCart());
@@ -282,12 +283,12 @@ private int health;
             case "Yes", "yes", "No", "no": {
                 if ((parts[0].equalsIgnoreCase("yes") && (player.getPosition()) == 0)) {
                     catwalk = true;
-                }else {
+                } else {
                     System.out.println("You move back down the stairs.");
                 }
                 break;
             }
-            default:{
+            default: {
                 System.out.println("Bad Input try again");
                 break;
             }
@@ -315,36 +316,37 @@ private int health;
 
         //Intro description before the game begins.
         //To begin game user types start
-        do {Event.initialDescription(getPrologue());
+        do {
+            Event.initialDescription(getPrologue());
             System.out.print(">");
         } while (!go.equalsIgnoreCase(scan.nextLine()));
         System.out.print("\n\nGood Luck\n\n");
 
         //Prologue
 
-        newGame.player.setPosition(23);
+        newGame.player.setPosition(18);
         System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
 
         //Main game loop after intro
-        do{
+        do {
             System.out.println(currentEvent(newGame.player));
             System.out.print(">");
             temp = input.nextLine();
             newGame.inputHandler(temp);
 
-        }while(!newGame.pipelineFixed && newGame.player.isAlive() && !newGame.quit && !newGame.exitFacility && !newGame.catwalk);
+        } while (!newGame.pipelineFixed && newGame.player.alive() && !newGame.quit && !newGame.exitFacility && !newGame.catwalk);
 
         //Epilogue
-        if(newGame.quit){
+        if (newGame.quit) {
             System.out.println("Quitting Game");
             return;
-        }else if(newGame.exitFacility){
+        } else if (newGame.exitFacility) {
             System.out.println("You leave the facility");
             return;
-        }else if(newGame.pipelineFixed){
+        } else if (newGame.pipelineFixed) {
             System.out.println("You fix the pipe but are overwhelmed by the radiation");
             return;
-        }else if(newGame.catwalk){
+        } else if (newGame.catwalk) {
             System.out.println("You walk up the 4 flights of stairs to the кошачья прогулка. \nAs you move towards the cooling tower, each step you take becomes more cumbersome. \nYou're head is splitting with pain. \nYou push on reaching the tower." +
                     "\nYou fall against the rail, you can barely stand. \nThe rail creaks and bends weakened by the explosion, it can no longer support your weight. \nThe rail fails completely and you plummet from the кошачья прогулка. SPLAT!!!!");
         }

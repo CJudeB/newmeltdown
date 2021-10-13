@@ -39,7 +39,7 @@ class Event {
                 (Storyline takes control of player here).\n
                 You decide to climb the exterior bridge where you can turn on an auxiliary coolant system.
                 As you climb stairs the dosimeter cuts out. Story driven choice presented here.\sGo up or – you die on the roof.\n
-                Stay ground level – remain downstairs you can save the day.
+                Stay ground level – remain downstairs you can save the day. 1a
                                                            
                 """);
 
@@ -53,7 +53,7 @@ class Event {
 
         tiles.put("2", """
                 /-------------------------------------------------------------------------------------------------------\n
-                Storyline makes it clear you have to exit cart if you want to go south into coolant facility. 2c\s
+                Storyline makes it clear you have to exit cart if you want to go south into coolant facility. 1c\s
                 """);
 
 
@@ -102,7 +102,7 @@ class Event {
         tiles.put("15", """
                 /-------------------------------------------------------------------------------------------------------\\\n
                 You arrive at a T junction. Deserted administration offices line the walls. Your memory is retuning though. \s
-                The main entrance is to the north, not far away. To the south there there a just more offices.
+                The main entrance is to the north, not far away. To the south there there a just more offices. 4a
                 """);
 
 
@@ -118,7 +118,7 @@ class Event {
                 \nYou enter a wide hall. The damage here is worse than the control room whole sections of the
                 building have caved in. Through gaps in the ceiling you notice plumes of smoke billowing overhead
                 rising from the north east, where the reactor is.\n
-                Silvery ash fills the air, falling like snow. You notice a metallic taste in your mouth.\s\s
+                Silvery ash fills the air, falling like snow. You notice a metallic taste in your mouth.4c\s\s
                 """);
 
         tiles.put("18", """
@@ -159,7 +159,7 @@ class Event {
 
         tiles.put("22", """ 
                 /-------------------------------------------------------------------------------------------------------\\\n
-                \nYou can make out a bend in the hall ahead. You have to use the wall to support yourself now.
+                \nYou can make out a bend in the hall ahead. You have to use the wall to support yourself now. 5c
                 """);
 
         tiles.put("23", """ 

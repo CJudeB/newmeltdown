@@ -61,18 +61,18 @@ public class CalculateDamage {
     public static void calculateDamage(Player player) {
 
         int damValLow = 3;
-        int damValMed = 4;
-        int damValHigh = 6;
+        int damValMed = 5;
+        int damValHigh = 8;
         int damValExt = 35;
         int tempDam = player.getHealth();
         int totalDam = tempDam;
 
         //if (player.getPosition() >= 18 && player.getPosition() < 24)
-        if (player.isAlive()) {
+        if (player.alive()) {
 
             if (player.getPosition() >= 18 && player.getPosition() < 24) {
-                // int subTotalDam = randLowMethod() + getDamVal();
-                int subTotalDam = randLowMethod() + damValLow;
+                 int subTotalDam = randLowMethod() + getDamVal();
+              //  int subTotalDam = randLowMethod() + damValLow;
                 tempDam -= subTotalDam;
 
                 if (player.isHasProtectiveClothing()) {
@@ -82,7 +82,8 @@ public class CalculateDamage {
 
 
             } else if (player.getPosition() >= 10 && player.getPosition() <= 15) {
-                int subTotalDam = randMedMethod() + damValMed;
+                int subTotalDam = randMedMethod() + getDamVal();
+             //   int subTotalDam = randMedMethod() + damValMed;
                 tempDam -= subTotalDam;
 
                 if (player.isHasProtectiveClothing()) {
@@ -91,7 +92,8 @@ public class CalculateDamage {
                 player.setHealth(tempDam);
 
             } else if (player.getPosition() >= 0 && player.getPosition() <= 7) {
-                int subTotalDam = randHighMethod() + damValHigh;
+                int subTotalDam = randHighMethod() + getDamVal();
+             //   int subTotalDam = randHighMethod() + damValHigh;
                 tempDam -= subTotalDam;
 
                 if (player.isHasProtectiveClothing()) {
@@ -100,7 +102,8 @@ public class CalculateDamage {
                 player.setHealth(tempDam);
 
             } else if (player.getPosition() >= 16 && player.getPosition() <= 17) {
-                int subTotalDam = randExtMethod() + damValExt;
+                int subTotalDam = randExtMethod() + getDamVal();
+              //  int subTotalDam = randExtMethod() + damValExt;
                 tempDam -= subTotalDam;
 
                 if (player.isHasProtectiveClothing()) {

@@ -5,8 +5,11 @@ public class Player {
 
     private String name;
     private int Position, health = 100;
-    private boolean inCart = false, hasProtectiveClothing = false, isAlive = true;
-    private String[] inventory = {" "," "," "," "," "};
+    private boolean inCart = false;
+    private boolean isAlive = true;
+    private boolean hasProtectiveClothing = false;
+    private String[] inventory = {" ", " ", " ", " ", " "};
+
 
 
     public String getName() {
@@ -53,13 +56,25 @@ public class Player {
         this.hasProtectiveClothing = hasProtectiveClothing;
     }
 
-    public boolean isAlive() {
-        return isAlive;
+  //  public void setAlive (boolean alive) {
+   //    this.alive = alive;
+   // }
+    public boolean alive() {
+        if (health >= 1) {
+            return true;
+        }
+        else
+        return false;
     }
 
-    public void setAlive(boolean alive) {
-        isAlive = alive;
-    }
+
+
+  /* public void isAlive(boolean alive) {
+
+        if (health >= 1) {
+            isAlive = alive;
+        }
+   } */
 
     public String[] getInventory() {
         return inventory;
@@ -78,6 +93,8 @@ public class Player {
             }
         }
     }
+
+
     public void addItems(String item) {
 
         for (int i = 0; i < inventory.length; i++) {
@@ -87,8 +104,8 @@ public class Player {
         }
     }
 
-    public void printInventory(){
-        for (int i = 0; i < inventory.length ; i++) {
+    public void printInventory() {
+        for (int i = 0; i < inventory.length; i++) {
             if (!(inventory[i] == " ")) {
                 System.out.print("Inventory: ");
                 break;
@@ -97,8 +114,8 @@ public class Player {
                 break;
             }
         }
-        for (String i:inventory) {
-            if(!(i == " ")) {
+        for (String i : inventory) {
+            if (!(i == " ")) {
                 System.out.print(i + " | ");
             }
 
@@ -109,12 +126,17 @@ public class Player {
     public static void setReactorMap(Map reactorMap) {
         Player.reactorMap = reactorMap;
     }
+
     public Map getReactorMap() {
         return reactorMap;
     }
 
     public int getDamVal() {
         return CalculateDamage.getDamVal();
+    }
+
+    public void setAlive(boolean isAlive) {
+        isAlive = isAlive;
     }
 }
 
