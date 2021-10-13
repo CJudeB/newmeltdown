@@ -257,7 +257,7 @@ public class Game {
 
                         break;
                     }
-                    case "reactorMap", "Map", "m": {
+                    case "reactorMap", "map", "Map", "m", "M": {
                         Map map = new Map();
                         map.reactorMap();
                         break;
