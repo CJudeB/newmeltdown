@@ -242,7 +242,6 @@ class Event {
 
             String alt = Integer.toString(player.getPosition());
             System.out.println(alternateTiles.get(alt));
-
         }
 
        }
