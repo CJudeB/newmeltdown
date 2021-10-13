@@ -263,6 +263,7 @@ public class Game {
                         break;
                     }
                 }
+                break;
             }
             case "I", "i": {
                 player.printInventory();
