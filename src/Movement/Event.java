@@ -31,7 +31,7 @@ class Event {
         Event.tiles = tiles;
     }
 
-    public static String currentEvent(Player player) {
+    public static String currentEvent(Player player, boolean hasVisited) {
 
 
         tiles.put("0", """

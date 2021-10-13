@@ -217,9 +217,10 @@ public class Game {
                 System.out.println(player.isInCart());
                 System.out.println(isFuelUsed());
                 System.out.println(isCartKeyUsed());
+                System.out.println(tileRef.get(player.getPosition()).isHasVisited());
 
                 //print to console for testing
-                currentEvent(player);
+                currentEvent(player, tileRef.get(player.getPosition()).isHasVisited());
                 calculateDamage(player);
                 System.out.println(player.getHealth()); // this is returning correct value
                 System.out.println(player.getDamVal()); //is not passing damVal to Calculate Damage. this is here for testing if I decide to fix
@@ -327,7 +328,7 @@ public class Game {
 
         //Main game loop after intro
         do {
-            System.out.println(currentEvent(newGame.player));
+            currentEvent(newGame.player,  newGame.tileRef.get(newGame.player.getPosition()).isHasVisited());
             System.out.print(">");
             temp = input.nextLine();
             newGame.inputHandler(temp);

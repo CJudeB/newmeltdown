@@ -14,7 +14,7 @@ public class Tile {
     private int damVal;
     private Map reactorMap;
 
-    public Tile(String tDescription, String tIntractable, Map reactorMap, String tCart, Boolean hasVisited, Boolean tN, Boolean tE, Boolean tS, Boolean tW, int damVal) {
+    public Tile(String tDescription, String tIntractable, Map reactorMap, String tCart, boolean hasVisited, boolean tN, boolean tE, boolean tS, boolean tW, int damVal) {
 
         this.tDescription = tDescription;
         this.tIntractable = tIntractable;
