@@ -69,7 +69,7 @@ public class Items {
     }
 
 
-    public static void useMapPane(String item, Tile tile){
+    public static void useReactorMap(String item, Tile tile){
     }
     public static void useCabinets (String item, Tile tile){
         if(item.equalsIgnoreCase("cabinet")){

@@ -9,22 +9,22 @@ import java.util.Objects;
 
 public class Map {
 
-    private BufferedImage visual = null;
+    private BufferedImage visual;
     private Player player;
     private Tile tile;
-    static Map mapPane;
+    static Map reactorMap;
 
-    public static Map getMapPane() {
-        return mapPane;
+    public Map geReactorMap() {
+        return reactorMap;
     }
 
-    public static void setMapPane(Map mapPane) {
-        Map.mapPane = mapPane;
+    public static void setReactorMap(Map reactorMap) {
+        Map.reactorMap = reactorMap;
     }
 
-    //public static Map mapPane = new Map(Player player);
 
-    public Map mapPane() throws IOException {
+
+    public Map reactorMap() throws IOException {
 
         BufferedImage visual = ImageIO.read(Objects.requireNonNull(getClass().getResource("/map/package/smallMap.jpg")));
         ImageIcon iMap = new ImageIcon(visual);
@@ -38,7 +38,7 @@ public class Map {
         pane.setVisible(true);
         pane.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        return mapPane;
+        return reactorMap;
 
     }
 }

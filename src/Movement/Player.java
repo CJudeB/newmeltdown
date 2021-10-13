@@ -1,10 +1,5 @@
 package Movement;
 
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
 public class Player {
 
 
@@ -12,9 +7,18 @@ public class Player {
     private int Position, health = 100;
     private boolean inCart = false, hasProtectiveClothing = false, isAlive = true;
     private String[] inventory = {" "," "," "," "," "};
-    public Player(String name) {
+
+
+    public String getName() {
+        return name;
+    }
+
+    static Map reactorMap;
+
+    public Player(String name, int health) {
         this.name = name;
-        this.Position = 18;
+        this.health = 0;
+       this.Position = 18;
     }
 
     public int getPosition() {
@@ -100,6 +104,17 @@ public class Player {
 
         }
         System.out.print("\n");
+    }
+
+    public static void setReactorMap(Map reactorMap) {
+        Player.reactorMap = reactorMap;
+    }
+    public Map getReactorMap() {
+        return reactorMap;
+    }
+
+    public int getDamVal() {
+        return CalculateDamage.getDamVal();
     }
 }
 

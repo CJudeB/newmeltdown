@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 public class Tile {
 
+
+
     public Tile() {
     }
 
@@ -10,12 +12,13 @@ public class Tile {
     private ArrayList<String> tItems = new ArrayList<>();
     private boolean tN, tE, tS, tW, hasVisited;
     private int damVal;
+    private Map reactorMap;
 
-    public Tile(String tDescription, String tIntractable, String tPuzzle, String tCart, Boolean hasVisited, Boolean tN, Boolean tE, Boolean tS, Boolean tW, int damVal) {
+    public Tile(String tDescription, String tIntractable, Map reactorMap, String tCart, Boolean hasVisited, Boolean tN, Boolean tE, Boolean tS, Boolean tW, int damVal) {
 
         this.tDescription = tDescription;
         this.tIntractable = tIntractable;
-        this.tPuzzle = tPuzzle;
+        this.reactorMap = reactorMap;
         this.tCart = tCart;
         this.tN = tN;
         this.tE = tE;
@@ -98,4 +101,11 @@ public class Tile {
         this.hasVisited = hasVisited;
     }
 
+    public Map getReactorMap() {
+        return reactorMap;
+    }
+
+    public void setReactorMap(Map reactorMap) {
+        this.reactorMap = reactorMap;
+    }
 }

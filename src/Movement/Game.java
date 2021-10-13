@@ -1,15 +1,22 @@
 package Movement;
 
-//import MultiArray.CalculateDamage;
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
-import static Movement.Items.*;
+
+import static Movement.CalculateDamage.calculateDamage;
 import static Movement.Cart.*;
+import static Movement.Event.currentEvent;
+import static Movement.Event.getPrologue;
+import static Movement.Items.useHazmat;
+import static Movement.Items.useWrench;
+
 
 public class Game {
 
-
+private int health;
+    private Map reactorMap;
     private ArrayList<Tile> tileRef;
     private Player player;
     private boolean pipelineFixed = false, quit = false, exitFacility = false, catwalk = false;
@@ -20,38 +27,37 @@ public class Game {
      * Sets static items into tiles
      * Creates a new player for the game instance
      */
-    public Game() {
+    public Game() throws IOException {
         this.tileRef = new ArrayList<Tile>();
         //row 1
-        this.tileRef.add(new Tile("1A", "Stairs", "", "", false, false, true, true, false, 8));
-        this.tileRef.add(new Tile("1B", "", "", "", false, false, true, false, true, 8));
-        this.tileRef.add(new Tile("1C", "", "", "", false, false, false, true, true, 10));
-        this.tileRef.add(new Tile("1D(Unreachable)", "", "", "", false, false, false, false, false, 0));
-        this.tileRef.add(new Tile("1E(Unreachable)", "", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("1A", "Stairs", null, "", false, false, true, true, false, 8));
+        this.tileRef.add(new Tile("1B", "", null, "", false, false, true, false, true, 8));
+        this.tileRef.add(new Tile("1C", "", null, "", false, false, false, true, true, 10));
+        this.tileRef.add(new Tile("1D(Unreachable)", "", null, "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("1E(Unreachable)", "", null, "", false, false, false, false, false, 0));
         //row 2
-        this.tileRef.add(new Tile("2A", "", "", "", false, true, false, true, false, 6));
-        this.tileRef.add(new Tile("2B(Unreachable)", "", "", "", false, false, false, false, false, 0));
-        this.tileRef.add(new Tile("2C", "pipeline", "", "", false, true, false, false, false, 10));
-        this.tileRef.add(new Tile("2D(Unreachable)", "", "", "", false, true, false, false, false, 0));
-        this.tileRef.add(new Tile("2E(Unreachable)", "", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("2A", "", null, "", false, true, false, true, false, 6));
+        this.tileRef.add(new Tile("2B(Unreachable)", "", null, "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("2C", "pipeline", null, "", false, true, false, false, false, 10));
+        this.tileRef.add(new Tile("2D(Unreachable)", "", null, "", false, false, false, false, false, 0));
         //row 3
-        this.tileRef.add(new Tile("3A(Exit via West)", "", "", "cart", false, true, false, true, false, 6));
-        this.tileRef.add(new Tile("3B(Unreachable)", "", "", "", false, false, false, false, false, 0));
-        this.tileRef.add(new Tile("3C(Unreachable)", "", "", "", false, false, false, false, false, 0));
-        this.tileRef.add(new Tile("3D(Unreachable)", "", "", "", false, false, false, false, false, 0));
-        this.tileRef.add(new Tile("3E(Unreachable)", "", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("3A(Exit via West)", "", null, "cart", false, true, false, true, false, 6));
+        this.tileRef.add(new Tile("3B(Unreachable)", "", null, "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("3C(Unreachable)", "", null, "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("3D(Unreachable)", "", null, "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("3E(Unreachable)", "", null, "", false, false, false, false, false, 0));
         //row 4
-        this.tileRef.add(new Tile("4A", "", "", "", false, true, true, true, false, 5));
-        this.tileRef.add(new Tile("4B", "", "", "", false, false, true, false, true, 35));
-        this.tileRef.add(new Tile("4C(West of Start)", "", "", "", false, false, true, false, true, 35));
-        this.tileRef.add(new Tile("4D(Start)", "", "", "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("4E(East of Start)", "instruments", "", "", false, false, false, true, true, 3));
+        this.tileRef.add(new Tile("4A", "", null, "", false, true, true, true, false, 5));
+        this.tileRef.add(new Tile("4B", "", null, "", false, false, true, false, true, 35));
+        this.tileRef.add(new Tile("4C(West of Start)", "", reactorMap, "", false, false, true, false, true, 35));
+        this.tileRef.add(new Tile("4D(Start)", "", null, "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("4E(East of Start)", "instruments", null, "", false, false, false, true, true, 3));
         //row 5
-        this.tileRef.add(new Tile("5A", "", "", "", false, true, true, false, false, 3));
-        this.tileRef.add(new Tile("5B", "", "", "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("5C", "cabinet", "", "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("5D", "", "", "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("5E", "", "", "", false, true, false, false, true, 3));
+        this.tileRef.add(new Tile("5A", "", null, "", false, true, true, false, false, 3));
+        this.tileRef.add(new Tile("5B", "", null, "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("5C", "cabinet", null, "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("5D", "", null, "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("5E", "", null, "", false, true, false, false, true, 3));
 
         //Add items to tile 4D
         this.tileRef.get(19).settItems("wrench");
@@ -66,7 +72,7 @@ public class Game {
         this.tileRef.get(10).settItems("fuel");
         this.tileRef.get(10).settItems("Hazmat");
         //Create player
-        player = new Player("Tester");
+        player = new Player("Tester", health);
 
     }
 
@@ -207,19 +213,26 @@ public class Game {
                 System.out.println(player.isInCart());
                 System.out.println(isFuelUsed());
                 System.out.println(isCartKeyUsed());
+                currentEvent(player);
+                calculateDamage(player);
+                System.out.println(player.getHealth());
+                System.out.println(player.getDamVal());
                 break;
             }
             case "Move", "move": {
                 moveTile(v.validateInput(parts[1]), s.directionSelection(v.validateInput(parts[1]), player));
                 System.out.println(tileRef.get(player.getPosition()).gettDescription());
+                calculateDamage(player);
                 break;
             }
             case "Drop", "drop": {
                 dropItem(v.validateInput(parts[1], player.getInventory()));
+                calculateDamage(player);
                 break;
             }
             case "Pick-up", "pick-up": {
                 player.setInventory(pickItem(v.validateInput(parts[1], tileRef.get(player.getPosition()).gettItems()), player.getInventory()));
+                calculateDamage(player);
                 break;
             }
             case "Use", "use": {
@@ -240,7 +253,12 @@ public class Game {
 
                         break;
                     }
+                 /*   case "reactorMap", "Map", "m": {
+                        player.getMapPane(tileRef.get(player.getPosition()));
+                        break;
+                    }*/
                 }
+                calculateDamage(player);
                 break;
             }
             case "I", "i": {
@@ -282,22 +300,32 @@ public class Game {
      *
      * @param args the input arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        Map reactorMap = new Map();
         Game newGame = new Game();
         Selection s = new Selection();
         Validation v = new Validation();
         CalculateDamage cd = new CalculateDamage();
         Scanner input = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
         String temp;
+        String go = "start";
 
+        //Intro description before the game begins.
+        //To begin game user types start
+        do {Event.initialDescription(getPrologue());
+            System.out.print(">");
+        } while (!go.equalsIgnoreCase(scan.nextLine()));
+        System.out.print("\n\nGood Luck\n\n");
 
         //Prologue
-        newGame.player.setPosition(10);
+
+        newGame.player.setPosition(23);
         System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
 
         //Main game loop after intro
         do{
-
+            System.out.println(currentEvent(newGame.player));
             System.out.print(">");
             temp = input.nextLine();
             newGame.inputHandler(temp);

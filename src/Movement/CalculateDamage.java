@@ -4,13 +4,44 @@ import java.util.Random;
 
 public class CalculateDamage {
 
-    private static Random randLow;
+
     private static Random randMed;
     private static Random randHigh;
     private static Random randExt;
     private static int totalDam;
     private static int damVal;
 
+
+
+    public static void setDamVal(int damVal) {
+        CalculateDamage.damVal = damVal;
+    }
+
+    private static Random randLow;
+
+    public static Random getRandMed() {
+        return randMed;
+    }
+
+    public static void setRandMed(Random randMed) {
+        CalculateDamage.randMed = randMed;
+    }
+
+    public static Random getRandHigh() {
+        return randHigh;
+    }
+
+    public static void setRandHigh(Random randHigh) {
+        CalculateDamage.randHigh = randHigh;
+    }
+
+    public static Random getRandExt() {
+        return randExt;
+    }
+
+    public static void setRandExt(Random randExt) {
+        CalculateDamage.randExt = randExt;
+    }
 
     public static int getDamVal() {
         return damVal;
@@ -24,33 +55,32 @@ public class CalculateDamage {
         totalDam = totalDam;
     }
 
-    public static void setDamVal(int damVal) {
-        damVal = damVal;
-    }
+
+
 
     public static void calculateDamage(Player player) {
 
-        randLow = randLow;
-        randMed = randMed;
-        randHigh = randHigh;
-        randExt = randExt;
-
-
+        int damValLow = 3;
+        int damValMed = 4;
+        int damValHigh = 6;
+        int damValExt = 35;
         int tempDam = player.getHealth();
         int totalDam = tempDam;
 
-        if (player.getPosition() >= 18 && player.getPosition() < 24) {
-            int subTotalDam = randLow1() + getDamVal();
+        //if (player.getPosition() >= 18 && player.getPosition() < 24)
+        if   (player.getPosition() >= 18 && player.getPosition() < 24)  {
+           // int subTotalDam = randLowMethod() + getDamVal();
+            int subTotalDam = randLowMethod() + damValLow;
             tempDam -= subTotalDam;
 
             if (player.isHasProtectiveClothing()) {
                 tempDam += 1;
             }
-          player.setHealth(tempDam);
+            player.setHealth(tempDam);
 
 
         } else if (player.getPosition() >= 10 && player.getPosition() <= 15) {
-            int subTotalDam = randMed1() + getDamVal();
+            int subTotalDam = randMedMethod() + getDamVal();
             tempDam -= subTotalDam;
 
             if (player.isHasProtectiveClothing()) {
@@ -59,7 +89,7 @@ public class CalculateDamage {
             player.setHealth(tempDam);
 
         } else if (player.getPosition() >= 0 && player.getPosition() <= 7) {
-            int subTotalDam = randHigh1() + getDamVal();
+            int subTotalDam = randHighMethod() + getDamVal();
             tempDam -= subTotalDam;
 
             if (player.isHasProtectiveClothing()) {
@@ -68,7 +98,7 @@ public class CalculateDamage {
             player.setHealth(tempDam);
 
         } else if (player.getPosition() >= 16 && player.getPosition() <= 17) {
-            int subTotalDam = randExt1() + getDamVal();
+            int subTotalDam = randExtMethod() + getDamVal();
             tempDam -= subTotalDam;
 
             if (player.isHasProtectiveClothing()) {
@@ -79,67 +109,32 @@ public class CalculateDamage {
 
     }
 
+
     //random number either 1 or 2 add to
-    public static int randLow1() {
+    public static int randLowMethod() {
         randLow = new Random();
         return randLow.nextInt(2 + 1);
     }
 
 
     //random number between 1 and 3
-    public static int randMed1() {
+    public static int randMedMethod() {
         randMed = new Random();
         return randMed.nextInt((2 + 1) + 1);
     }
 
     //random number between 1 and 4
-    public static int randHigh1() {
+    public static int randHighMethod() {
         randHigh = new Random();
         return randHigh.nextInt((3 + 1) + 1);
     }
 
     //random number between 1 and 20
-    public static int randExt1() {
+    public static int randExtMethod() {
         randExt = new Random();
         return randExt.nextInt((19 + 1) + 1);
 
     }
-
-
-    public void setRandLow(Random randLow) {
-        randLow = randLow;
-    }
-
-    public Random getRandLow() {
-        return randLow;
-    }
-
-    public void setRandMed(Random randMed) {
-        randMed = randMed;
-    }
-
-    public Random getRandMed() {
-        return randMed;
-    }
-
-    public void setRandHigh(Random randHigh) {
-        randHigh = randHigh;
-    }
-
-    public Random getRandHigh() {
-        return randHigh;
-    }
-
-    public void setRandExt(Random randExt) {
-        randExt = randExt;
-    }
-
-    public Random getRandExt() {
-        return randExt;
-    }
-
-
-
 
 
 }

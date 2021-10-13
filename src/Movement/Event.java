@@ -8,7 +8,6 @@ class Event {
     private static Player player;
 
 
-
     public Event() {
 
     }
@@ -32,16 +31,14 @@ class Event {
         Event.tiles = tiles;
     }
 
-
     public static String currentEvent(Player player) {
 
-        //       LinkedHashMap<String, String> tiles = new LinkedHashMap<>();
 
         tiles.put("0", """
                 /-------------------------------------------------------------------------------------------------------\\\n
-                (Storyline takes control of player here).\n\n
-                You decide to climb the exterior bridge where you can turn on an auxiliary coolant system.\n
-                As you climb stairs the dosimeter cuts out. Story driven choice presented here.\sGo up or – you die on the roof.\n\n
+                (Storyline takes control of player here).\n
+                You decide to climb the exterior bridge where you can turn on an auxiliary coolant system.
+                As you climb stairs the dosimeter cuts out. Story driven choice presented here.\sGo up or – you die on the roof.\n
                 Stay ground level – remain downstairs you can save the day.
                                                            
                 """);
@@ -85,8 +82,8 @@ class Event {
         tiles.put("10", """
                 /-------------------------------------------------------------------------------------------------------\\\n
                 You arrive at the facilities’ foyer. Through the massive glass lined entrance, you can see emergency services and military congregating.\s
-                Leads to ending 1.\s\n
-                \n\n(‘Another’ if from south) or (‘A’ if from east) + ‘small utility cart is parked nearby, but there’s no key in the ignition.’
+                Leads to ending 1.\n
+                \n(‘Another’ if from south) or (‘A’ if from east) + ‘small utility cart is parked nearby, but there’s no key in the ignition.’
                                                
                 """);
 
@@ -104,30 +101,31 @@ class Event {
 
         tiles.put("15", """
                 /-------------------------------------------------------------------------------------------------------\\\n
-                \nYou arrive at a T junction. Deserted administration offices line the walls. Your memory is retuning though. \s
-                \nThe main entrance is to the north, not far away. To the south there there a just more offices.
+                You arrive at a T junction. Deserted administration offices line the walls. Your memory is retuning though. \s
+                The main entrance is to the north, not far away. To the south there there a just more offices.
                 """);
 
 
         tiles.put("16", """
                 /-------------------------------------------------------------------------------------------------------\\\n
-                \nYou continue west where the hall is heavily obstructed by debris. It’s slow going and by the time you navigate\s
-                 \nthrough, you’re shaking with fatigue. You notice your hands look sunburnt. 4b\s
+                You continue west where the hall is heavily obstructed by debris. It’s slow going and by the time you navigate\s
+                through, you’re shaking with fatigue. You notice your hands look sunburnt. 4b\s
                 """);
 
 
         tiles.put("17", """
                 /-------------------------------------------------------------------------------------------------------\\\n
-                \nYou enter a wide hall. \nThe damage here is worse than the control room - whole sections of the building are
-                caved in.\nThrough gaps in the ceiling you notice plumes of smoke billowing overhead, rising from the north
-                east, where the reactor is. \nWind blows it into the hall, filling it with ash. \n\nYou notice a metallic taste in your mouth.\s\s
+                \nYou enter a wide hall. The damage here is worse than the control room whole sections of the
+                building have caved in. Through gaps in the ceiling you notice plumes of smoke billowing overhead
+                rising from the north east, where the reactor is.\n
+                Silvery ash fills the air, falling like snow. You notice a metallic taste in your mouth.\s\s
                 """);
 
         tiles.put("18", """
                 /-------------------------------------------------------------------------------------------------------\\\n
-                \nYou get up, woozy, legs like lead. This is a control room, you recall, or what’s left of it.\s
+                You get up, woozy, legs like lead. This is a control room, you recall, or what’s left of it.\s
                 On the far side of the room where the damage is worst you see two bodies, a mess of limbs and masonry.\s 
-                \nYou shudder – that’s Alexi and Pasha from your section. \nYou have to get out of here.\s\n
+                You shudder – that’s Alexi and Pasha from your section. \nYou have to get out of here.\n
                 A draft is blowing from the west exit, and an acrid smell.  To the east is another exit. 
                 \nYou try and focus but you've no idea where they lead, the persistent, violent whine of the siren does not help.\s
                 \nA map of the facility has fallen its frame and lies on floor nearby. 4d\n
@@ -135,16 +133,16 @@ class Event {
 
         tiles.put("19", """
                 /-------------------------------------------------------------------------------------------------------\\\n
-                \nYou enter another control room - home to a dizzying array of monitoring apparatus.\nYour memory is returning now - this room is familiar.
-                \n\nYou can't help notice a panel labelled 'Core Regulator', lit-up like an angry fairground attraction.
-                \n\nYou do not like the look of that panel.\n\nThere are two exits -to the west, where you entered, or south. 4e
+                You enter another control room - home to a dizzying array of monitoring apparatus.\nYour memory is returning now - this room is familiar.
+                You can't help notice a panel labelled 'Core Regulator', lit-up like an angry fairground attraction.
+                You do not like the look of that panel.\n\nThere are two exits -to the west, where you entered, or south. 4e
                 """);
 
         tiles.put("20", """      
                 /-------------------------------------------------------------------------------------------------------\\\n
-                \nThe hall bends north and you approach a stretch of workshops. Inside one room you see a utility cart,\s
-                \nthe type used to transport light goods around the facility. It’s in disrepair unfortunately.
-                \nYour legs suddenly turn to jelly and you have to hold onto a workbench to keep from collapsing, almost toppling a row of jerry cans.\n\n
+                The hall bends north and you approach a stretch of workshops. Inside one room you see a utility cart,\s
+                the type used to transport light goods around the facility. It’s in disrepair unfortunately.
+                Your legs suddenly turn to jelly and you have to hold onto a workbench to keep from collapsing, almost toppling a row of jerry cans.\n\n
                 When the spell passes you continue. 5a
                 """);
 
@@ -152,39 +150,39 @@ class Event {
                                               
                  /-------------------------------------------------------------------------------------------------------\\\n
                 You approach a line of built-in storage lockers. Several lie face down on the floor, wrenched from the wall.
-                \nNone of the combination locks are open though. You notice something  etched into the back of one locker.
-                \n\n4b*1c-5c, (2a*3b%1b)-3d, 3d+=3d.\n\n
+                None of the combination locks are open though. You notice something  etched into the back of one locker.
+                \n4b*1c-5c, (2a*3b%1b)-3d, 3d+=3d.\n
                 Did you just hear a Geiger dosimeter? In the moments between siren phases, you swear you did, from this same locker.
-                \nYou put your ear to the metal, and there it is, an urgent clicking. The noise is chilling, only extreme radiation can cause that reading.
-                \n\nYou consider the etchings again - Hazmat suits are stored with Geiger dosimeters you recall. .5b\s
+                \nYou put your ear to the metal and the clicking. The noise is chilling, only extreme radiation can cause that reading.
+                You consider the etchings again - Hazmat suits are stored with Geiger dosimeters you recall. .5b\s
                 """);
 
         tiles.put("22", """ 
                 /-------------------------------------------------------------------------------------------------------\\\n
-                \n\nYou can make out a bend in the hall ahead. You have to use the wall to support yourself now.
+                \nYou can make out a bend in the hall ahead. You have to use the wall to support yourself now.
                 """);
 
         tiles.put("23", """ 
                 /-------------------------------------------------------------------------------------------------------\\\n
-                \\nYou approach an abandoned security checkpoint consisting of a guard’s booth and turnstile.\s
-                \\nOn the floor by the booth, is an overturned card table and a half empty bottle of Stolichnaya.\s
-                \\nLooks like the guard was in a hurry to leave. 5d
+                You approach an abandoned security checkpoint consisting of a guard’s booth and turnstile.\s
+                On the floor by the booth, is an overturned card table and a half empty bottle of Stolichnaya.\s
+                Looks like the guard was in a hurry to leave. 5d
                 \s
                 """);
 
         tiles.put("24", """ 
                 /-------------------------------------------------------------------------------------------------------\\\n
-                \\nYou enter a massive corridor that curves to the west. The reverberating of the siren is especially loud in here, \s
-                \\nA man is slumped on the floor, his white uniform stained dark with blood. He becomes very animated when he sees you, yells and waves you over."\n\n  
-                You approach, and see he his terribly wounded. You can barely hear what he’s saying due to siren. You catch a few words. Something’s blown? Coolant tower?...\s
-                \\nHad you seen the readings he wants to know? What were the readings? 5e
+                \nYou enter a massive corridor that curves to the west. The reverberating of the siren is especially loud in here,
+                A man is slumped on the floor, his white uniform stained dark with blood. He becomes very animated when he sees you,
+                yells and waves you over." You approach, and see he his terribly wounded. You can barely hear what he’s saying due to siren.
+                You catch a few words. Something’s blown? Coolant tower?...Had you seen the readings he wants to know? What were the readings? 5e
                 \s
                 """);
 
         tiles.put("25", """ 
                 /-------------------------------------------------------------------------------------------------------\\\n
                 move n, s, e, w       	|     use (item)      	|       pick-up (item)	|	menu menu
-                inventory i           	|     map m           	|       quit q		    | 	exit exit
+                inventory i           	|     map m           	|       quit q		    | 	exit exit\n
                 Enter text commands to control your character. Take note of the descriptions, and the map.
                 You have 100 health.  You lose health every turn from environmental damage.
                 Each turn you must choose to either move or use/drop an item. You cannot do both.5e
@@ -198,25 +196,22 @@ class Event {
                 """);
 
 
-
-
         String s = Integer.toString(player.getPosition());
         return tiles.get(s);
     }
 
     public static String initialDescription(String prologue) {
 
-
         prologue = "\n\n\n" +
                 "" +
                 "/-------------------------------------------------------------------------------------------------------\\\n" +
-                "\n\nSomewhere in the Soviet Union, 1989.\n\n\nThe siren jolts you from unconsciousness.\n\n" +
-                "You come-to in what looks like a warzone, lying among rubble and dust, a throbbing lump on your head \n" +
-                "The first thing you notice, beside the pain, is the ceiling has partially collapsed. \n" +
-                "Must explain your head. What happened here. What is this place? Nothing seems familiar. \n" +
+                "\n\nSomewhere in the Soviet Union, 1984.\n\n\nThe siren jolts you from unconsciousness.\n\n" +
+                "You come-to in what looks like a warzone, lying among rubble and dust, a pulsing ache in your head.\n" +
+                "The first thing you notice, beside the pain, is that the ceiling has partially collapsed. \n" +
+                "This explains your headache. Perhaps your confusion too? You have no memory of where you are, or what's happening. It's a blank slate.\n" +
                 "For a moment the memory of who YOU ARE feels like it might slip away. \n" +
-                "\nNo. that memory you still have. " +
-                "\nI’m an Energetiki power engineer with the ministry of Electrification. You say resolutely. \n\n" +
+                "No. that memory you still have.\n\n" +
+                "I’m an Energetiki power engineer with the ministry of Electrification. You say resolutely. \n\n" +
                 "You work here, at this nuclear power plant.\n\n" +
                 "To begin type start.\n\n";
 
