@@ -18,6 +18,7 @@ public class Game {
     private ArrayList<Tile> tileRef;
     private Player player;
     private boolean pipelineFixed = false, quit = false, exitFacility = false, catwalk = false;
+    Map map = new Map();
 
     /**
      * Instantiates a new Game.
@@ -258,8 +259,7 @@ public class Game {
                         break;
                     }
                     case "reactorMap", "map", "Map", "m", "M": {
-                        Map map = new Map();
-                        map.reactorMap();
+                        this.map.displayMap();
                         break;
                     }
                 }
