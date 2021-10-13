@@ -68,45 +68,48 @@ public class CalculateDamage {
         int totalDam = tempDam;
 
         //if (player.getPosition() >= 18 && player.getPosition() < 24)
-        if   (player.getPosition() >= 18 && player.getPosition() < 24)  {
-           // int subTotalDam = randLowMethod() + getDamVal();
-            int subTotalDam = randLowMethod() + damValLow;
-            tempDam -= subTotalDam;
+        if (player.isAlive()) {
 
-            if (player.isHasProtectiveClothing()) {
-                tempDam += 1;
+            if (player.getPosition() >= 18 && player.getPosition() < 24) {
+                // int subTotalDam = randLowMethod() + getDamVal();
+                int subTotalDam = randLowMethod() + damValLow;
+                tempDam -= subTotalDam;
+
+                if (player.isHasProtectiveClothing()) {
+                    tempDam += 1;
+                }
+                player.setHealth(tempDam);
+
+
+            } else if (player.getPosition() >= 10 && player.getPosition() <= 15) {
+                int subTotalDam = randMedMethod() + damValMed;
+                tempDam -= subTotalDam;
+
+                if (player.isHasProtectiveClothing()) {
+                    tempDam += 1;
+                }
+                player.setHealth(tempDam);
+
+            } else if (player.getPosition() >= 0 && player.getPosition() <= 7) {
+                int subTotalDam = randHighMethod() + damValHigh;
+                tempDam -= subTotalDam;
+
+                if (player.isHasProtectiveClothing()) {
+                    tempDam += 1;
+                }
+                player.setHealth(tempDam);
+
+            } else if (player.getPosition() >= 16 && player.getPosition() <= 17) {
+                int subTotalDam = randExtMethod() + damValExt;
+                tempDam -= subTotalDam;
+
+                if (player.isHasProtectiveClothing()) {
+                    tempDam += 1;
+                }
+                player.setHealth(tempDam);
             }
-            player.setHealth(tempDam);
-
-
-        } else if (player.getPosition() >= 10 && player.getPosition() <= 15) {
-            int subTotalDam = randMedMethod() + getDamVal();
-            tempDam -= subTotalDam;
-
-            if (player.isHasProtectiveClothing()) {
-                tempDam += 1;
-            }
-            player.setHealth(tempDam);
-
-        } else if (player.getPosition() >= 0 && player.getPosition() <= 7) {
-            int subTotalDam = randHighMethod() + getDamVal();
-            tempDam -= subTotalDam;
-
-            if (player.isHasProtectiveClothing()) {
-                tempDam += 1;
-            }
-            player.setHealth(tempDam);
-
-        } else if (player.getPosition() >= 16 && player.getPosition() <= 17) {
-            int subTotalDam = randExtMethod() + getDamVal();
-            tempDam -= subTotalDam;
-
-            if (player.isHasProtectiveClothing()) {
-                tempDam += 1;
-            }
-            player.setHealth(tempDam);
         }
-
+        System.out.println("You died. Game over.");
     }
 
 
