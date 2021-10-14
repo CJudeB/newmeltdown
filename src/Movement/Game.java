@@ -7,8 +7,7 @@ import java.util.Scanner;
 import static Movement.CalculateDamage.calculateDamage;
 import static Movement.Cart.*;
 import static Movement.Event.currentEvent;
-import static Movement.Items.useHazmat;
-import static Movement.Items.useWrench;
+import static Movement.Items.*;
 
 
 public class Game {
@@ -29,7 +28,7 @@ public class Game {
     public Game() throws IOException {
         this.tileRef = new ArrayList<Tile>();
         //row 1
-        this.tileRef.add(new Tile("1.1A", "Stairs", "", false, false, true, true, false, 6));
+        this.tileRef.add(new Tile("1.1A", "stairs", "", false, false, true, true, false, 6));
         this.tileRef.add(new Tile("2.1B", "", "", false, false, true, false, true, 6));
         this.tileRef.add(new Tile("3.1C", "", "", false, false, false, true, true, 6));
         this.tileRef.add(new Tile("1D(Unreachable)", "", "", false, false, false, false, false, 0));
@@ -54,8 +53,8 @@ public class Game {
         this.tileRef.add(new Tile("19.4E(East of Start)", "instruments", "", false, false, false, true, true, 3));
         //row 5
         this.tileRef.add(new Tile("20.5A", "", "", false, true, true, false, false, 3));
-        this.tileRef.add(new Tile("21.5B", "", "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("22.5C", "cabinet", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("21.5B", "cabinet", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("22.5C", "", "", false, false, true, false, true, 3));
         this.tileRef.add(new Tile("23.5D", "", "", false, false, true, false, true, 3));
         this.tileRef.add(new Tile("24.5E", "", "", false, true, false, false, true, 3));
 
@@ -229,6 +228,7 @@ public class Game {
                 System.out.println(player.getHealth()); // this is returning correct value
                 System.out.println(player.getDamVal()); //is not passing damVal to Calculate Damage. this is here for testing if I decide to fix*/
                 System.out.println(player.getHealth());
+                System.out.println(player.isHasProtectiveClothing());
                 break;
 
             }
@@ -251,16 +251,12 @@ public class Game {
                         player.setInCart(useCart(parts[1], tileRef.get(player.getPosition()).gettCart(), player, tileRef.get(player.getPosition())));
                         break;
                     }
-                    case "Hazmat", "hazmat": {
-                        player.setHasProtectiveClothing(useHazmat(parts[1], player));
-                        break;
-                    }
                     case "wrench", "Wrench": {
                         setPipelineFixed(useWrench(parts[1], tileRef.get(player.getPosition()).gettIntractable(), player));
                         break;
                     }
-                    case "cabinet", "Cabinet", "Table", "table", "Sofa", "sofa": {
-
+                    case "cabinet", "Cabinet": {
+                        useCabinets(parts[1],tileRef.get(player.getPosition()),player);
                         break;
                     }
                     case "map", "Map": {
@@ -329,7 +325,7 @@ public class Game {
 
         //Prologue
 
-        newGame.player.setPosition(18);
+        newGame.player.setPosition(21);
         System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
 
         //Main game loop after intro

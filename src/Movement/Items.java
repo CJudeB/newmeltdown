@@ -1,5 +1,7 @@
 package Movement;
 
+import java.util.Scanner;
+
 public class Items {
 
     /**
@@ -35,23 +37,52 @@ public class Items {
             return false;
     }
 
+    public static void useCabinets (String item, Tile tile, Player player){
 
-    public static boolean useHazmat (String item, Player player) {
-        Validation v = new Validation();
-        String[] pInven = player.getInventory();
-        if (v.validateInput(item, player.getInventory()).equalsIgnoreCase("hazmat")) {
-            System.out.println("You change into the Hazmat suit\nYou notice it has a inbuilt geiger counter");
-            return true;
-            } else
-        System.out.println("You don't have any protective clothing");
-        return false;
-    }
+        if(item.equalsIgnoreCase(tile.gettIntractable())){
+            System.out.println("You shift the locker onto it's back.\nPlacing you're hand on the locks dial, remembering the markings from before (4b1c-5c, (2e4b%3d)+2d, 3d+=3d) you enter.");
+            Scanner code = new Scanner(System.in);
+            int[] combination = new int[3];
+            for(int i = 0; i < combination.length;) {
+                System.out.println(i);
+                        if(i == 0){System.out.println("The first number:");}
+                        else if (i == 1){System.out.println("The second number:");}
+                        else if ( i == 2){System.out.println("The third number:");}
+                System.out.print(">");
+                try{
 
-    public static void useReactorMap(String item, Tile tile){
-    }
-    public static void useCabinets (String item, Tile tile){
-        if(item.equalsIgnoreCase("cabinet")){
-            System.out.println("You turn the cabinet over, as you do so a Hazmat suit and ");
+                    int temp =  code.nextInt();
+                    code.nextLine();
+                    if(temp >= 0 && temp <= 35){
+                        combination[i] = temp;
+                        i++;
+                    }else{
+                        System.out.println("The lock only takes numbers from 0-35");
+                    }
+                }catch (Exception e){
+                    System.out.println("The lock only takes numbers from 0-35");
+                    code.nextLine();
+                }
+            }
+            System.out.println("You turn the dial clockwise to " + combination[0] +".\nThen counterclockwise to " + combination[1] + ".\nFinally clockwise once more to " + combination[2]);
+                if((combination[0] == 26) && (combination[1] == 17) && (combination[2] == 28) ){
+                    System.out.println("The numbers match and the lock opens.\n" +
+                            "You find the Hazmat suit and dosimeter inside, a small key and a thick pile of rouble bills.\n" +
+                            "Putting the heavy suit on is an ordeal though, and you half-collapse from the effort,\n" +
+                            "losing your hold on the key and roubles, which skuttle away, back from where you came.");
+                    player.addItems("hazmat");
+                    tile.settItems("roubles");
+                    tile.settItems("cart-key");
+                    player.setHasProtectiveClothing(true);
+                }else{
+                    System.out.println("The lock doesn't budge perhaps I got it wrong.\nYou step back from the cabinet to think about it.");
+                }
+
+
+
+
+
+
         }
 
 
