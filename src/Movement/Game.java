@@ -134,7 +134,7 @@ public class Game {
 
     /**
      * Drop item. Drops the selected item if it exists in the player inventory. Also does Radiation damage
-     *      * to the player after they drop an item through calculateDamage
+     * to the player after they drop an item through calculateDamage
      *
      * @param item the item that is entered in after the drop key word
      */

@@ -10,12 +10,13 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Map {
-    
+
     JFrame pane = new JFrame();
     JLabel jLab = new JLabel();
 
     /**
-     * Instantiates a new Map. Takes the bufferedImage and sets it as a image to be displayed in the JFrame
+     * Instantiates a new Map. Takes the bufferedImage and sets it as a image to be displayed in the JFrame.
+     * Sets the JFrames background,layout and size.
      * Also creates a window listener to close the JFrame when it is no longer the active window.
      *
      * @throws IOException the io exception

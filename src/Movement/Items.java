@@ -2,27 +2,6 @@ package Movement;
 
 public class Items {
 
-
-    private boolean cartKeyUsed = false;
-    private boolean fuelUsed = false;
-
-    public boolean isCartKeyUsed() {
-        return cartKeyUsed;
-    }
-
-    public boolean isFuelUsed() {
-        return fuelUsed;
-    }
-
-    public void setCartKeyUsed(boolean cartKeyUsed) {
-        this.cartKeyUsed = cartKeyUsed;
-    }
-
-    public void setFuelUsed(boolean fuelUsed) {
-        this.fuelUsed = fuelUsed;
-    }
-
-
     /**
      * Use wrench boolean. The interaction method for using the wrench.
      * Includes blocks for the player not having the wrench and trying to use the pipeline
