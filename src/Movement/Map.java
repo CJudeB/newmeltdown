@@ -72,7 +72,7 @@ public class Map {
             } else {
                 this.pane.setAlwaysOnTop(false);
                 this.pane.setVisible(false);
-                System.out.println("\nYou put the map away\n>");
+                System.out.println("\nYou put the map away");
             }
         }else{
             System.out.println("I don't have a map");
