@@ -98,6 +98,7 @@ public class Player {
         for (int i = 0; i < inventory.length; i++) {
             if (inventory[i].equals(" ")) {
                 inventory[i] = item;
+                break;
             }
         }
     }
