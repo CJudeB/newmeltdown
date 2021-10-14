@@ -29,38 +29,40 @@ public class Game {
     public Game() throws IOException {
         this.tileRef = new ArrayList<Tile>();
         //row 1
-        this.tileRef.add(new Tile("1.1A", "Stairs", null, "", false, false, true, true, false, 6));
-        this.tileRef.add(new Tile("2.1B", "", null, "", false, false, true, false, true, 6));
-        this.tileRef.add(new Tile("3.1C", "", null, "", false, false, false, true, true, 6));
-        this.tileRef.add(new Tile("1D(Unreachable)", "", null, "", false, false, false, false, false, 0));
-        this.tileRef.add(new Tile("1E(Unreachable)", "", null, "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("1.1A", "Stairs", "", false, false, true, true, false, 6));
+        this.tileRef.add(new Tile("2.1B", "", "", false, false, true, false, true, 6));
+        this.tileRef.add(new Tile("3.1C", "", "", false, false, false, true, true, 6));
+        this.tileRef.add(new Tile("1D(Unreachable)", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("1E(Unreachable)", "", "", false, false, false, false, false, 0));
         //row 2
-        this.tileRef.add(new Tile("2A", "", null, "", false, true, false, true, false, 6));
-        this.tileRef.add(new Tile("2B(Unreachable)", "", null, "", false, false, false, false, false, 0));
-        this.tileRef.add(new Tile("2C", "pipeline", null, "", false, true, false, false, false, 10));
-        this.tileRef.add(new Tile("2D(Unreachable)", "", null, "", false, false, false, false, false, 0));
-        this.tileRef.add(new Tile("2E(Unreachable)", "", null, "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("2A", "", "", false, true, false, true, false, 6));
+        this.tileRef.add(new Tile("2B(Unreachable)", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("2C", "pipeline", "", false, true, false, false, false, 10));
+        this.tileRef.add(new Tile("2D(Unreachable)", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("2E(Unreachable)", "", "", false, false, false, false, false, 0));
         //row 3
-        this.tileRef.add(new Tile("3A(Exit via West)", "", null, "cart", false, true, false, true, false, 5));
-        this.tileRef.add(new Tile("3B(Unreachable)", "", null, "", false, false, false, false, false, 0));
-        this.tileRef.add(new Tile("3C(Unreachable)", "", null, "", false, false, false, false, false, 0));
-        this.tileRef.add(new Tile("3D(Unreachable)", "", null, "", false, false, false, false, false, 0));
-        this.tileRef.add(new Tile("3E(Unreachable)", "", null, "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("3A(Exit via West)", "", "cart", false, true, false, true, false, 5));
+        this.tileRef.add(new Tile("3B(Unreachable)", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("3C(Unreachable)", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("3D(Unreachable)", "", "", false, false, false, false, false, 0));
+        this.tileRef.add(new Tile("3E(Unreachable)", "", "", false, false, false, false, false, 0));
         //row 4
-        this.tileRef.add(new Tile("15.4A", "", null, "", false, true, true, true, false, 5));
-        this.tileRef.add(new Tile("16.4B", "", null, "", false, false, true, false, true, 25));
-        this.tileRef.add(new Tile("17.4C(West of Start)", "", null, "", false, false, true, false, true, 25));
-        this.tileRef.add(new Tile("18.4D(Start)", "", reactorMap, "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("19.4E(East of Start)", "instruments", null, "", false, false, false, true, true, 3));
+        this.tileRef.add(new Tile("15.4A", "", "", false, true, true, true, false, 5));
+        this.tileRef.add(new Tile("16.4B", "", "", false, false, true, false, true, 25));
+        this.tileRef.add(new Tile("17.4C(West of Start)", "", "", false, false, true, false, true, 25));
+        this.tileRef.add(new Tile("18.4D(Start)", "", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("19.4E(East of Start)", "instruments", "", false, false, false, true, true, 3));
         //row 5
-        this.tileRef.add(new Tile("20.5A", "", null, "", false, true, true, false, false, 3));
-        this.tileRef.add(new Tile("21.5B", "", null, "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("22.5C", "cabinet", null, "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("23.5D", "", null, "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("24.5E", "", null, "", false, true, false, false, true, 3));
+        this.tileRef.add(new Tile("20.5A", "", "", false, true, true, false, false, 3));
+        this.tileRef.add(new Tile("21.5B", "", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("22.5C", "cabinet", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("23.5D", "", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("24.5E", "", "", false, true, false, false, true, 3));
 
-        //Add items to tile 4D
+        //Add items to tile 4E
         this.tileRef.get(19).settItems("wrench");
+        //Add items to tile 4D
+        this.tileRef.get(18).settItems("map");
         //Add items to tile 5A
         this.tileRef.get(20).settItems("fuel");
         //Add items to tile 5C
@@ -87,7 +89,8 @@ public class Game {
 
     /**
      * Move tile. Changes the value of the players position with reference to the tile array,
-     * It also moves the carts position around the array if the player is in it.
+     * It also moves the carts position around the array if the player is in it. Also does Radiation damage
+     * to the player after they move through calculateDamage
      *
      * @param dir     The direction the player intends to move comes from validation class
      * @param newTile The integer value to move within the array comes from the selection class
@@ -130,7 +133,8 @@ public class Game {
 
 
     /**
-     * Drop item. Drops the selected item if it exists in the player inventory
+     * Drop item. Drops the selected item if it exists in the player inventory. Also does Radiation damage
+     *      * to the player after they drop an item through calculateDamage
      *
      * @param item the item that is entered in after the drop key word
      */
@@ -151,6 +155,7 @@ public class Game {
 
     /**
      * Picks up the selected item from the tile if it exists within the tiles items array
+     * Also does Radiation damage to the player after they pick up an item through calculateDamage
      *
      * @param item   the item that is entered in after the drop key word
      * @param pInven the players inventory
@@ -258,8 +263,8 @@ public class Game {
 
                         break;
                     }
-                    case "reactorMap", "map", "Map", "m", "M": {
-                        this.map.displayMap();
+                    case "map", "Map": {
+                        this.map.displayMap(parts[1], player);
                         break;
                     }
                 }

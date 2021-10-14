@@ -12,13 +12,12 @@ public class Tile {
     private ArrayList<String> tItems = new ArrayList<>();
     private boolean tN, tE, tS, tW, hasVisited;
     private int damVal;
-    private Map reactorMap;
 
-    public Tile(String tDescription, String tIntractable, Map reactorMap, String tCart, boolean hasVisited, boolean tN, boolean tE, boolean tS, boolean tW, int damVal) {
+
+    public Tile(String tDescription, String tIntractable, String tCart, boolean hasVisited, boolean tN, boolean tE, boolean tS, boolean tW, int damVal) {
 
         this.tDescription = tDescription;
         this.tIntractable = tIntractable;
-        this.reactorMap = reactorMap;
         this.tCart = tCart;
         this.tN = tN;
         this.tE = tE;
@@ -99,13 +98,5 @@ public class Tile {
 
     public void setHasVisited(boolean hasVisited) {
         this.hasVisited = hasVisited;
-    }
-
-    public Map getReactorMap() {
-        return reactorMap;
-    }
-
-    public void setReactorMap(Map reactorMap) {
-        this.reactorMap = reactorMap;
     }
 }
