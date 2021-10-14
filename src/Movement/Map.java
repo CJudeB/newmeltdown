@@ -10,28 +10,13 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Map {
-
-    private BufferedImage visual;
-    private Player player;
-    private Tile tile;
-    static Map reactorMap;
+    
     JFrame pane = new JFrame();
     JLabel jLab = new JLabel();
-    private boolean hasWindow = false;
-
-
-    public Map geReactorMap() {
-        return reactorMap;
-    }
-
-    public static void setReactorMap(Map reactorMap) {
-        Map.reactorMap = reactorMap;
-    }
-
 
     /**
      * Instantiates a new Map. Takes the bufferedImage and sets it as a image to be displayed in the JFrame
-     * Also creates a window listener to hide the JFrame when it is no longer the active window
+     * Also creates a window listener to close the JFrame when it is no longer the active window.
      *
      * @throws IOException the io exception
      */
@@ -58,7 +43,7 @@ public class Map {
 
     /**
      * Display map. Checks if the player has a map in the inventory and if they do will set
-     * the JFrame to visible if it is not already open. Or it will tell them they don't have a map
+     * the JFrame to visible and top. If it is called again will close the map JFrame
      *
      * @param item the item the player wanted to use
      */
