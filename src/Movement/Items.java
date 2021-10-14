@@ -37,6 +37,16 @@ public class Items {
             return false;
     }
 
+    /**
+     * Use the fallen over cabinets in tile 5B
+     * Asks the player for 3 numbers to unlock the lock
+     * If it's wrong send the player back to the tile and end the turn
+     *
+     *
+     * @param item   the item that the user inputted to use
+     * @param tile   the tile that the player is currently on
+     * @param player the player instance
+     */
     public static void useCabinets (String item, Tile tile, Player player){
 
         if(item.equalsIgnoreCase(tile.gettIntractable())){
