@@ -32,6 +32,9 @@ public class Selection {
             case "s" -> {
                 if(player.isInCart() && (player.getPosition() == 2 || player.getPosition() == 15 || player.getPosition() == 19)){
                     output = 5;
+                    if(player.isInCart() && (player.getPosition() == 2)){
+                        player.setInCart(false);
+                    }
                 }else if(player.isInCart())
                     output = 10;
                 else
