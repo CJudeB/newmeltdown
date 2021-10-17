@@ -359,8 +359,8 @@ public class Game {
             System.out.println("You fix the pipe but are overwhelmed by the radiation");
             return;
         } else if (newGame.catwalk) {
-            System.out.println("You walk up the 4 flights of stairs to the кошачья прогулка. \nAs you move towards the cooling tower, each step you take becomes more cumbersome. \nYou're head is splitting with pain. \nYou push on reaching the tower." +
-                    "\nYou fall against the rail, you can barely stand. \nThe rail creaks and bends weakened by the explosion, it can no longer support your weight. \nThe rail fails completely and you plummet from the кошачья прогулка. SPLAT!!!!");
+            System.out.println("You walk up the 4 flights of stairs to the catwalk. \nAs you move towards the cooling tower, each step you take becomes more cumbersome. \nYou're head is splitting with pain. \nYou push on reaching the tower." +
+                    "\nYou fall against the rail, you can barely stand. \nThe rail creaks and bends weakened by the explosion, it can no longer support your weight. \nThe rail fails completely and you plummet from the catwalk. SPLAT!!!!");
             return;
         } else if (!newGame.player.alive()) {
             System.out.println("You died. Game over.");
