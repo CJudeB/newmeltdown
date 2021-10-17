@@ -2,6 +2,8 @@ package Movement;
 
 import java.util.Scanner;
 
+import static Movement.CalculateDamage.calculateDamage;
+
 public class Items {
 
     /**
@@ -9,28 +11,29 @@ public class Items {
      * Includes blocks for the player not having the wrench and trying to use the pipeline
      *
      * @param item         the item that the user input to interact with
-     * @param tIntractable the tiles intractable item
+     * @param tile         the tile the player is on
      * @param player       the player instance from game
      * @return the boolean
      */
-    public static boolean useWrench (String item, String tIntractable, Player player) {
+    public static boolean useWrench (String item, Tile tile, Player player) {
         Validation v = new Validation();
         //If not holding wrench
         if (!v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench")) {
             //If player on 2C
-            if(tIntractable.equalsIgnoreCase("pipeline")){
+            if(tile.gettIntractable().equalsIgnoreCase("pipeline")){
                 System.out.println("If you had a tool you might be able to fix the pipe");
             }else
                 System.out.println("I'm not holding an item like that");
             return false;
         }
         //If wrench is in inventory and on 2C
-        else if(v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench") && tIntractable.equalsIgnoreCase("pipeline")) {
+        else if(v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench") && tile.gettIntractable().equalsIgnoreCase("pipeline")) {
             System.out.println("You use the wrench to fix the pipe");
+            calculateDamage(player, tile);
             return true;
         }
         //If wrench is in inventory and not on 2C
-        else if (v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench") && !tIntractable.equalsIgnoreCase("pipeline")){
+        else if (v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench") && !tile.gettIntractable().equalsIgnoreCase("pipeline")){
             System.out.println("I'm not sure what I would use that for here");
             return false;
         } else
@@ -84,8 +87,10 @@ public class Items {
                     tile.settItems("roubles");
                     tile.settItems("cart-key");
                     player.setHasProtectiveClothing(true);
+                    calculateDamage(player, tile);
                 }else{
                     System.out.println("The lock doesn't budge perhaps I got it wrong.\nYou step back from the cabinet to think about it.");
+                    calculateDamage(player, tile);
                 }
 
 

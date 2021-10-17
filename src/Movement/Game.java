@@ -89,7 +89,8 @@ public class Game {
     /**
      * Move tile. Changes the value of the players position with reference to the tile array,
      * It also moves the carts position around the array if the player is in it. Also does Radiation damage
-     * to the player after they move through calculateDamage
+     * to the player after they move through calculateDamage. through the tileVisited method will set the tiles
+     * has visited variable to true before leaving
      *
      * @param dir     The direction the player intends to move comes from validation class
      * @param newTile The integer value to move within the array comes from the selection class
@@ -101,22 +102,22 @@ public class Game {
         if (player.isInCart() && !(player.getPosition() == 2)) {
             tileRef.get(player.getPosition()).settCart("");
         }
-        //Set tile visited to true before leaving it.
-        if (!(tileRef.get(player.getPosition()).isHasVisited())) {
-            tileRef.get(player.getPosition()).setHasVisited(true);
-        }
 
         //Move the player from one space to the next if possible otherwise tell them they can't
         if (dir.equals("n") && this.tileRef.get(this.player.getPosition()).gettN()) {
+            tileVisited();
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("s") && this.tileRef.get(this.player.getPosition()).gettS()) {
+            tileVisited();
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("e") && this.tileRef.get(this.player.getPosition()).gettE()) {
+            tileVisited();
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("w") && this.tileRef.get(this.player.getPosition()).gettW()) {
+            tileVisited();
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("badInput")) {
@@ -127,6 +128,16 @@ public class Game {
         //Setting cart into tile if needed
         if (player.isInCart() && !(player.getPosition() == 7)) {
             tileRef.get(player.getPosition()).settCart("cart");
+        }
+    }
+
+    /**
+     * Tile visited sets the has visited variable of the tile the player is on to true if not already.
+     *
+     */
+    public void tileVisited() {
+        if (!(tileRef.get(player.getPosition()).isHasVisited())) {
+            tileRef.get(player.getPosition()).setHasVisited(true);
         }
     }
 
@@ -252,7 +263,7 @@ public class Game {
                         break;
                     }
                     case "wrench", "Wrench": {
-                        setPipelineFixed(useWrench(parts[1], tileRef.get(player.getPosition()).gettIntractable(), player));
+                        setPipelineFixed(useWrench(parts[1], tileRef.get(player.getPosition()), player));
                         break;
                     }
                     case "cabinet", "Cabinet": {
