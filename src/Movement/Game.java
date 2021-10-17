@@ -336,9 +336,9 @@ public class Game {
 
         //Prologue
 
-        newGame.player.setPosition(7);
+        newGame.player.setPosition(18);
         System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
-
+        currentEvent(newGame.player, newGame.tileRef.get(newGame.player.getPosition()).isHasVisited());
         //Main game loop after intro
         do {
 
