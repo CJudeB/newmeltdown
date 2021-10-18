@@ -255,7 +255,7 @@ public class Game {
             }
             case "Move", "move": {
                 moveTile(v.validateInput(parts[1]), s.directionSelection(v.validateInput(parts[1]), player));
-                currentEvent(player, tileRef.get(player.getPosition()).isHasVisited()); // this prints out tile location need to replace with event
+                currentEvent(player, tileRef.get(player.getPosition()).isHasVisited(), tileRef.get(player.getPosition())); // this prints out tile location need to replace with event
                 break;
             }
             case "Drop", "drop": {
@@ -385,7 +385,7 @@ public class Game {
 
         newGame.player.setPosition(18);
         System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
-        currentEvent(newGame.player, newGame.tileRef.get(newGame.player.getPosition()).isHasVisited());
+        currentEvent(newGame.player, newGame.tileRef.get(newGame.player.getPosition()).isHasVisited(), newGame.tileRef.get(newGame.player.getPosition()));
         //Main game loop after intro
         do {
 
