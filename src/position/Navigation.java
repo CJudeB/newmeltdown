@@ -1,14 +1,12 @@
-package MultiArray;
+package position;
 
 import java.util.Scanner;
 
-import java.util.*;
+
+public class Navigation {
 
 
-public class Various {
-
-
-   /* private static MapOutput MapValue(Scanner s) {
+  /*  private static MapOutput MapValue(Scanner s) {
         System.out.println("define length of y axis");
         int rowVal = s.nextInt();
 
@@ -65,7 +63,7 @@ public class Various {
             int colVal = mapOutput.getMCol();
             int[][] map = mapOutput.getMap();
 
-            int iterate = 0;
+            int iterate = 1;
             for (int x = 0; x < rowVal; x++) {
                 for (int y = 0; y < colVal; y++) {
                     map[x][y] = iterate;
@@ -87,8 +85,8 @@ public class Various {
         {
             for ( int x = 0; x < col; x++ )
             {
-                System.out.printf( "%-2d", map[v][x] );
-                System.out.print( "-" );
+                System.out.printf( " %-4d", map[v][x] );
+                System.out.print( "|" );
             }
             System.out.println( "" );
         }

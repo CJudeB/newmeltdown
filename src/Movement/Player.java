@@ -3,23 +3,40 @@ package Movement;
 public class Player {
 
 
-    private String name;
-    private int Position, health = 100;
+    private final String name;
+    static Map reactorMap;
+    private boolean alive = true;
     private boolean inCart = false;
-    private boolean isAlive = true;
+    private int Position, health = 100;
+    private static String printHealth;
     private boolean hasProtectiveClothing = false;
     private String[] inventory = {" ", " ", " ", " ", " "};
 
-    public String getName() {
-        return name;
-    }
-
-    static Map reactorMap;
 
     public Player(String name, int health) {
         this.name = name;
         int health1 = this.health;
         this.Position = 18;
+
+
+    }
+
+    public String methodPrintHealth(String printHealth) {
+        printHealth = Integer.toString(getHealth());
+        return printHealth;
+    }
+
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
+    public String getPrintHealth() {
+        return printHealth;
     }
 
     public int getPosition() {
@@ -34,8 +51,9 @@ public class Player {
         return health;
     }
 
-    public void setHealth(int health) {
+    public int setHealth(int health) {
         this.health = health;
+        return health;
     }
 
     public boolean isInCart() {
@@ -50,22 +68,22 @@ public class Player {
         return hasProtectiveClothing;
     }
 
+
+    public void setPrintHealth(String printHealth) {
+        Player.printHealth = printHealth;
+    }
+
+
     public void setHasProtectiveClothing(boolean hasProtectiveClothing) {
         this.hasProtectiveClothing = hasProtectiveClothing;
     }
 
-  //  public void setAlive (boolean alive) {
-   //    this.alive = alive;
-   // }
+    //  public void setAlive (boolean alive) {
+    //    this.alive = alive;
+    // }
     public boolean alive() {
-        if (health >= 1) {
-            return true;
-        }
-        else
-        return false;
+        return health >= 1;
     }
-
-
 
   /* public void isAlive(boolean alive) {
 
@@ -134,9 +152,10 @@ public class Player {
         return CalculateDamage.getDamVal();
     }
 
-    public void setAlive(boolean isAlive) {
-        isAlive = isAlive;
+
+    public void getFinalDam() {
     }
+
 }
 
 

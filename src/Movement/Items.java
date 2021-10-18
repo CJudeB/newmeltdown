@@ -2,6 +2,8 @@ package Movement;
 
 import java.util.Scanner;
 
+import static Movement.CalculateDamage.calculateDamage;
+
 public class Items {
 
     /**
@@ -9,33 +11,58 @@ public class Items {
      * Includes blocks for the player not having the wrench and trying to use the pipeline
      *
      * @param item         the item that the user input to interact with
-     * @param tIntractable the tiles intractable item
+     * @param tile         the tile the player is on
      * @param player       the player instance from game
      * @return the boolean
      */
-    public static boolean useWrench (String item, String tIntractable, Player player) {
+    public static boolean useWrench (String item, Tile tile, Player player) {
         Validation v = new Validation();
         //If not holding wrench
         if (!v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench")) {
             //If player on 2C
-            if(tIntractable.equalsIgnoreCase("pipeline")){
+            if(tile.gettIntractable().equalsIgnoreCase("pipeline")){
                 System.out.println("If you had a tool you might be able to fix the pipe");
             }else
                 System.out.println("I'm not holding an item like that");
             return false;
         }
         //If wrench is in inventory and on 2C
-        else if(v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench") && tIntractable.equalsIgnoreCase("pipeline")) {
+        else if(v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench") && tile.gettIntractable().equalsIgnoreCase("pipeline")) {
             System.out.println("You use the wrench to fix the pipe");
+            calculateDamage(player, tile);
             return true;
         }
         //If wrench is in inventory and not on 2C
-        else if (v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench") && !tIntractable.equalsIgnoreCase("pipeline")){
+        else if (v.validateInput(item, player.getInventory()).equalsIgnoreCase("wrench") && !tile.gettIntractable().equalsIgnoreCase("pipeline")){
             System.out.println("I'm not sure what I would use that for here");
             return false;
         } else
             return false;
     }
+
+    public static void useCoreRegulator(String tIntractable, Tile tile, Player player) {
+
+        if (tIntractable.equalsIgnoreCase(tile.gettIntractable())) {
+
+      //    (tIntractable.equalsIgnoreCase(tile.gettIntractable())) {
+            System.out.println("""
+                    /-------------------------------------------------------------------------------------------------------\\\\\\n
+                    You are relieved to discover the instruments are familiar to you.\\n
+                    What you can't understand, or rather, what you cannot believe, is what the readings are showing.
+                    They must have been damaged in the accident, or whatever caused the roof to cave in.\\n \s
+                    Yes, there is no other explanation - for the readings to be accurate, the reactor would have be on\\n\s
+                    the brink of a meltdown, and that’s impossible.\\n\\n
+                    If they were genuine though, which they are not - but if they were, a meltdown must be stopped.\\n
+                    There is an exit west, where you entered, or south.\\n
+                                       \s
+                    move n, s, e, w       	|     use (item)      	|       pick-up (item)	    |	    help help
+                    inventory i           	|     map m           	|       quit q		        | 	    exit exit\\n\\n\\n\\n\\n\\n
+                    5e""");
+
+
+        }
+    }
+
 
     /**
      * Use the fallen over cabinets in tile 5B
@@ -84,8 +111,10 @@ public class Items {
                     tile.settItems("roubles");
                     tile.settItems("cart-key");
                     player.setHasProtectiveClothing(true);
+                    calculateDamage(player, tile);
                 }else{
                     System.out.println("The lock doesn't budge perhaps I got it wrong.\nYou step back from the cabinet to think about it.");
+                    calculateDamage(player, tile);
                 }
 
 

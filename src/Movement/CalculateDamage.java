@@ -11,14 +11,23 @@ public class CalculateDamage {
     private static Tile tile;
     private static int totalDam;
     private static int damVal;
+    private static Player player;
+    private int health;
+    private static int finalDam;
 
 
+
+    public static int getFinalDam() {
+        return finalDam;
+    }
+
+    public static void setFinalDam(int finalDam) {
+        CalculateDamage.finalDam = finalDam;
+    }
 
     public static void setDamVal(int damVal) {
         CalculateDamage.damVal = damVal;
     }
-
-    private static Random randLow;
 
     public static Random getRandMed() {
         return randMed;
@@ -57,71 +66,92 @@ public class CalculateDamage {
     }
 
 
-
-
     public static void calculateDamage(Player player, Tile tile) {
 
-        int damValLow = 3;
-        int damValMed = 5;
-        int damValHigh = 8;
-        int damValExt = 35;
+        int damValLow = 2;
+        int damValMed = 4;
+        int damValHigh = 6;
+        int damValExt = 15;
         int tempDam = player.getHealth();
         int totalDam = tempDam;
+      //  int finalDam = player.setHealth(tempDam);
 
         //if (player.getPosition() >= 18 && player.getPosition() < 24)
         if (player.alive()) {
 
             if (player.getPosition() >= 18 && player.getPosition() < 24) {
 
-                 int subTotalDam = randLowMethod() + tile.getDamVal();
-               //int subTotalDam = randLowMethod() + damValLow;
+                int subTotalDam = randLowMethod() + tile.getDamVal();
+                //int subTotalDam = randLowMethod() + damValLow;
                 tempDam -= subTotalDam;
 
                 if (player.isHasProtectiveClothing()) {
                     tempDam += 1;
                 }
-                player.setHealth(tempDam);
+                finalDam = player.setHealth(tempDam);
 
 
             } else if (player.getPosition() >= 10 && player.getPosition() <= 15) {
-                int subTotalDam = randMedMethod() +  tile.getDamVal();
-             //   int subTotalDam = randMedMethod() + damValMed;
+                int subTotalDam = randMedMethod() + tile.getDamVal();
+                //   int subTotalDam = randMedMethod() + damValMed;
                 tempDam -= subTotalDam;
 
                 if (player.isHasProtectiveClothing()) {
                     tempDam += 1;
                 }
-                player.setHealth(tempDam);
+                finalDam = player.setHealth(tempDam);
 
             } else if (player.getPosition() >= 0 && player.getPosition() <= 7) {
-                int subTotalDam = randHighMethod() +  tile.getDamVal();
-             //   int subTotalDam = randHighMethod() + damValHigh;
+                int subTotalDam = randHighMethod() + tile.getDamVal();
+                //   int subTotalDam = randHighMethod() + damValHigh;
                 tempDam -= subTotalDam;
 
                 if (player.isHasProtectiveClothing()) {
                     tempDam += 1;
                 }
-                player.setHealth(tempDam);
+                finalDam = player.setHealth(tempDam);
 
             } else if (player.getPosition() >= 16 && player.getPosition() <= 17) {
-                int subTotalDam = randExtMethod() +  tile.getDamVal();
-              //  int subTotalDam = randExtMethod() + damValExt;
+                int subTotalDam = randExtMethod() + tile.getDamVal();
+                //  int subTotalDam = randExtMethod() + damValExt;
                 tempDam -= subTotalDam;
 
                 if (player.isHasProtectiveClothing()) {
                     tempDam += 1;
                 }
-                player.setHealth(tempDam);
+                finalDam = player.setHealth(tempDam);
+            }
+
+            //finalDam= player.getHealth();
+            for (int i = 1; i <= 1; i++) {
+                for (int j = 1; j <= finalDam; j++) {
+                    System.out.print("|" + " ");
+                }
+                System.out.println(" HEALTH");
             }
 
         }
 
     }
 
+    public static void damArray(){
+
+        for (int i = 1; i <= 1; i++) {
+            for (int j = 1; j <= finalDam; j++) {
+                System.out.print("|" + " ");
+            }
+            System.out.println(" HEALTH");
+        }
+   }
+
+    public int getHealth() {
+        return health;
+    }
+
 
     //random number either 1 or 2 add to
     public static int randLowMethod() {
-        randLow = new Random();
+        Random randLow = new Random();
         return randLow.nextInt(2 + 1);
     }
 

@@ -9,8 +9,14 @@ import static Movement.Cart.*;
 import static Movement.Event.currentEvent;
 import static Movement.Items.*;
 
+//import static Movement.Items.useHazmat;
+
 
 public class Game {
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
 
     private int health;
     private Map reactorMap;
@@ -47,16 +53,16 @@ public class Game {
         this.tileRef.add(new Tile("3E(Unreachable)", "", "", false, false, false, false, false, 0));
         //row 4
         this.tileRef.add(new Tile("15.4A", "", "", false, true, true, true, false, 5));
-        this.tileRef.add(new Tile("16.4B", "", "", false, false, true, false, true, 25));
-        this.tileRef.add(new Tile("17.4C(West of Start)", "", "", false, false, true, false, true, 25));
+        this.tileRef.add(new Tile("16.4B", "", "", false, false, true, false, true, 15));
+        this.tileRef.add(new Tile("17.4C(West of Start)", "", "", false, false, true, false, true, 15));
         this.tileRef.add(new Tile("18.4D(Start)", "", "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("19.4E(East of Start)", "instruments", "", false, false, false, true, true, 3));
+        this.tileRef.add(new Tile("19.4E(East of Start)", "core-regulator", "", false, false, false, true, true, 3));
         //row 5
         this.tileRef.add(new Tile("20.5A", "", "", false, true, true, false, false, 3));
         this.tileRef.add(new Tile("21.5B", "cabinet", "", false, false, true, false, true, 3));
         this.tileRef.add(new Tile("22.5C", "", "", false, false, true, false, true, 3));
         this.tileRef.add(new Tile("23.5D", "", "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("24.5E", "", "", false, true, false, false, true, 3));
+        this.tileRef.add(new Tile("24.5E", "npc", "", false, true, false, false, true, 3));
 
         //Add items to tile 4E
         this.tileRef.get(19).settItems("wrench");
@@ -89,7 +95,8 @@ public class Game {
     /**
      * Move tile. Changes the value of the players position with reference to the tile array,
      * It also moves the carts position around the array if the player is in it. Also does Radiation damage
-     * to the player after they move through calculateDamage
+     * to the player after they move through calculateDamage. through the tileVisited method will set the tiles
+     * has visited variable to true before leaving
      *
      * @param dir     The direction the player intends to move comes from validation class
      * @param newTile The integer value to move within the array comes from the selection class
@@ -101,22 +108,22 @@ public class Game {
         if (player.isInCart() && !(player.getPosition() == 2)) {
             tileRef.get(player.getPosition()).settCart("");
         }
-        //Set tile visited to true before leaving it.
-        if (!(tileRef.get(player.getPosition()).isHasVisited())) {
-            tileRef.get(player.getPosition()).setHasVisited(true);
-        }
 
         //Move the player from one space to the next if possible otherwise tell them they can't
         if (dir.equals("n") && this.tileRef.get(this.player.getPosition()).gettN()) {
+            tileVisited();
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("s") && this.tileRef.get(this.player.getPosition()).gettS()) {
+            tileVisited();
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("e") && this.tileRef.get(this.player.getPosition()).gettE()) {
+            tileVisited();
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("w") && this.tileRef.get(this.player.getPosition()).gettW()) {
+            tileVisited();
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("badInput")) {
@@ -127,6 +134,16 @@ public class Game {
         //Setting cart into tile if needed
         if (player.isInCart() && !(player.getPosition() == 7)) {
             tileRef.get(player.getPosition()).settCart("cart");
+        }
+    }
+
+    /**
+     * Tile visited sets the has visited variable of the tile the player is on to true if not already.
+     *
+     */
+    public void tileVisited() {
+        if (!(tileRef.get(player.getPosition()).isHasVisited())) {
+            tileRef.get(player.getPosition()).setHasVisited(true);
         }
     }
 
@@ -227,8 +244,12 @@ public class Game {
                currentEvent(player, tileRef.get(player.getPosition()).isHasVisited());
                 System.out.println(player.getHealth()); // this is returning correct value
                 System.out.println(player.getDamVal()); //is not passing damVal to Calculate Damage. this is here for testing if I decide to fix*/
-                System.out.println(player.getHealth());
-                System.out.println(player.isHasProtectiveClothing());
+              //  Player.getFinalDam();
+               // player.getFinalDam();
+              //  System.out.println(player.getHealth());
+
+             //   System.out.println(CalculateDamage.getFinalDam();
+
                 break;
 
             }
@@ -252,7 +273,12 @@ public class Game {
                         break;
                     }
                     case "wrench", "Wrench": {
-                        setPipelineFixed(useWrench(parts[1], tileRef.get(player.getPosition()).gettIntractable(), player));
+                        setPipelineFixed(useWrench(parts[1], tileRef.get(player.getPosition()), player));
+                        break;
+                    }
+                    case "core-regulator", "Core-Regulator", "Core-regulator": {
+                        useCoreRegulator(parts[1], tileRef.get(player.getPosition()), player);
+
                         break;
                     }
                     case "cabinet", "Cabinet": {
@@ -263,8 +289,11 @@ public class Game {
                         this.map.displayMap(parts[1], player);
                         break;
                     }
+                    default: {
+                        System.out.println("YOu can't do that");
+                        break;
+                    }
                 }
-                break;
             }
             case "I", "i": {
                 player.printInventory();
@@ -272,6 +301,11 @@ public class Game {
             }
             case "Q", "q", "Quit", "quit": {
                 this.quit = true;
+                break;
+            }
+            case "help", "h", "Help", "H":{
+                //  player.displayMenu();
+                Event.displayMenu();
                 break;
             }
             case "Exit", "exit": {
@@ -290,11 +324,34 @@ public class Game {
                 }
                 break;
             }
+            case "OK", "ok", "Ok", "k": {
+                if ((player.getPosition()) == 24) {
+                    player.addItems("wrench");
+                    System.out.println("You have to yell over the siren, 'OK, you will try'. He nods in relief, passes you a wrench. and then passes out.");
+                   // npc = true;
+                }
+                break;
+            }
             default: {
                 System.out.println("Bad Input try again");
                 break;
             }
         }
+    }
+    public void damArray() {
+
+        int iterator = getHealth(health);
+        int i, j;
+        for (i = 1; i <= 1; i++) {
+            for (j = 1; j <= iterator; j++) {
+                System.out.print("|" + " ");
+            }
+         //   System.out.println(" HEALTH");
+        }
+    }
+
+    public int getHealth(int health) {
+        return health;
     }
 
 
@@ -315,6 +372,7 @@ public class Game {
         String temp;
         String go = "start";
 
+
         //Intro description before the game begins.
         //To begin game user types start
         do {
@@ -325,15 +383,23 @@ public class Game {
 
         //Prologue
 
-        newGame.player.setPosition(21);
+        newGame.player.setPosition(18);
         System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
-
+        currentEvent(newGame.player, newGame.tileRef.get(newGame.player.getPosition()).isHasVisited());
         //Main game loop after intro
         do {
 
             System.out.print(">");
             temp = input.nextLine();
+            newGame.damArray();
             newGame.inputHandler(temp);
+/**
+ *
+ *@param alive while true loop continues.
+ *@param exitFacility story ending
+ *@param catwalk dying on catwalk
+ *@param pipelineFixed saving the day
+ *@param quit user quits*/
 
         } while (!newGame.pipelineFixed && newGame.player.alive() && !newGame.quit && !newGame.exitFacility && !newGame.catwalk);
 
@@ -345,11 +411,12 @@ public class Game {
             System.out.println("You leave the facility");
             return;
         } else if (newGame.pipelineFixed) {
-            System.out.println("You fix the pipe but are overwhelmed by the radiation");
+            System.out.println("The wrench fits. After a struggle you are able to repair the pipe. You hear the coolant stream back into the system, " +
+                    "just as your eyes shut and you drift back into oblivion - but a deeper kind this time, that no siren will wake you from.");
             return;
         } else if (newGame.catwalk) {
-            System.out.println("You walk up the 4 flights of stairs to the кошачья прогулка. \nAs you move towards the cooling tower, each step you take becomes more cumbersome. \nYou're head is splitting with pain. \nYou push on reaching the tower." +
-                    "\nYou fall against the rail, you can barely stand. \nThe rail creaks and bends weakened by the explosion, it can no longer support your weight. \nThe rail fails completely and you plummet from the кошачья прогулка. SPLAT!!!!");
+            System.out.println("You walk up the 4 flights of stairs to the catwalk. \nAs you move towards the cooling tower, each step you take becomes more cumbersome. \nYou're head is splitting with pain. \nYou push on reaching the tower." +
+                    "\nYou fall against the rail, you can barely stand. \nThe rail creaks and bends weakened by the explosion, it can no longer support your weight. \nThe rail fails completely and you plummet from the catwalk. SPLAT!!!!");
             return;
         } else if (!newGame.player.alive()) {
             System.out.println("You died. Game over.");
