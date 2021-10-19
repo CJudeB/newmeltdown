@@ -46,18 +46,28 @@ public class Items {
 
       //    (tIntractable.equalsIgnoreCase(tile.gettIntractable())) {
             System.out.println("""
-                    /-------------------------------------------------------------------------------------------------------\\\\\\n
-                    You are relieved to discover the instruments are familiar to you.\\n
+                    
+                    /-------------------------------------------------------------------------------------------------------\\
+                    4E
+                    
+                    You are relieved to discover the instruments are familiar to you.
+                    
                     What you can't understand, or rather, what you cannot believe, is what the readings are showing.
-                    They must have been damaged in the accident, or whatever caused the roof to cave in.\\n \s
-                    Yes, there is no other explanation - for the readings to be accurate, the reactor would have be on\\n\s
-                    the brink of a meltdown, and that’s impossible.\\n\\n
-                    If they were genuine though, which they are not - but if they were, a meltdown must be stopped.\\n
-                    There is an exit west, where you entered, or south.\\n
-                                       \s
+                    They must have been damaged in the accident, or whatever caused the roof to cave in.
+                    Yes, there is no other explanation - for the readings to be accurate, the reactor would have be on
+                    the brink of a meltdown, and that’s impossible.
+                    
+                    If they were genuine though, which they are not - but if they were, a meltdown must be stopped.
+                    
+                    There is an exit west, where you entered, or south.
+                    
+                                       
                     move n, s, e, w       	|     use (item)      	|       pick-up (item)	    |	    help help
-                    inventory i           	|     map m           	|       quit q		        | 	    exit exit\\n\\n\\n\\n\\n\\n
-                    5e""");
+                    inventory i           	|     map m           	|       quit q		        | 	    exit exit
+                    drop (item)
+                    
+                    
+                    """);
 
 
         }
@@ -77,7 +87,7 @@ public class Items {
     public static void useCabinets (String item, Tile tile, Player player){
 
         if(item.equalsIgnoreCase(tile.gettIntractable())){
-            System.out.println("You shift the locker onto it's back.\nPlacing you're hand on the locks dial, remembering the markings from before (4b1c-5c, (2e4b%3d)+2d, 3d+=3d) you enter.");
+            System.out.println("You shift the cabinet onto it's back. \nPlacing you're hand on the locks dial, remembering the markings from before\n (4b1c-5c, (2e4b%3d)+2d, 3d+=3d) you enter.");
             Scanner code = new Scanner(System.in);
             int[] combination = new int[3];
             for(int i = 0; i < combination.length;) {
@@ -103,10 +113,15 @@ public class Items {
             }
             System.out.println("You turn the dial clockwise to " + combination[0] +".\nThen counterclockwise to " + combination[1] + ".\nFinally clockwise once more to " + combination[2]);
                 if((combination[0] == 26) && (combination[1] == 17) && (combination[2] == 28) ){
-                    System.out.println("The numbers match and the lock opens.\n" +
-                            "You find the Hazmat suit and dosimeter inside, a small key and a thick pile of rouble bills.\n" +
-                            "Putting the heavy suit on is an ordeal though, and you half-collapse from the effort,\n" +
-                            "losing your hold on the key and roubles, which skuttle away, back from where you came.");
+                    System.out.println("""
+                            
+                            The numbers match and the lock opens.
+                            You find the Hazmat suit and dosimeter inside, a small key and a thick pile of rouble bills.
+                            
+                            Putting the heavy suit on is an ordeal though, and you half-collapse from the effort,
+                            losing your hold on the key and roubles, which scuttle away, back from where you came.
+       
+                    """);
                     player.addItems("hazmat");
                     tile.settItems("roubles");
                     tile.settItems("cart-key");

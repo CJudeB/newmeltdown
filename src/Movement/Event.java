@@ -95,22 +95,6 @@ class Event {
                     Type "Yes" to continue up, toward the bridge?
                     Otherwise continue toward the pipeline to the east or the exit to the south.
                      
-                      _____  _____  _____  _____  _____
-                     | you || 1b  ||  1c ||  1d ||  1e |                 \s
-                     |_____||_____||_____||_____||_____|\s
-                      _____  _____  _____  _____  _____
-                     | 2a  ||  2b ||  2c ||  2d ||  2e |                 \s
-                     |_____||_____||_____||_____||_____|
-                      _____  _____  _____  _____  _____
-                     | 3a  || 3b  || 1c  ||  1d ||  3e |                 \s
-                     |_____||_____||_____||_____||_____|
-                      _____  _____  _____  _____  _____
-                     | 4a  || 4b  ||  4c ||  4d ||  4e |                 \s
-                     |_____||_____||_____||_____||_____|
-                      _____  _____  _____  _____  _____
-                     | 5a ||  5b  ||  5c ||  5d ||  5e |                 \s
-                     |_____||_____||_____||_____||_____|      
-           
                     """);
 
 
@@ -134,7 +118,7 @@ class Event {
                     You can head south to try and repair the coolant pipeline or head back west.
                     
                     You're not sure you have the energy to make it back to the exit now, you realise.
-                    This might be the end of the road.\s
+                    This might be the end of the road.
 
                     """);
 
@@ -150,7 +134,7 @@ class Event {
                     
                     You pass more offices. You see a stairwell in the distance in the north.
                     
-                    You can continue north or head back south.\s.
+                    You can continue north or head back south.
 
                     """);
 
@@ -162,7 +146,7 @@ class Event {
                     2C
                     
                     You can see the problem with the coolant pipeline.
-                    One of the pipes is blocked and needs to be shut-off and the coolant re-directed.\s
+                    One of the pipes is blocked and needs to be shut-off and the coolant re-directed.
  
                     """);
 
@@ -179,9 +163,9 @@ class Event {
                     You arrive at the facilities’ foyer. Through the massive glass lined entrance, you can see emergency services
                     and military congregating. The exit is right here, you can escape now.
                     
-                    THe coolant pipeline needs repairing though. There's no getting around that fact.
+                    The coolant pipeline needs repairing though. There's no getting around that fact.
                     
-                    There is one of the plant's small utility carts parked nearby, but there’s no key in the ignition. 
+                    There is one of the plant's small utility carts parked nearby, but there’s no key in the ignition.
                     If you can start that cart you'll move twice the speed you can on foot.
                
                     """);
@@ -241,7 +225,7 @@ class Event {
                     
                     You get up, woozy, legs like lead. This is a control room, you recall, or what’s left of it.\s
                     On the far side of the room where the damage is worst you see two bodies, a mess of limbs and masonry.
-                    You shudder – that’s Alexi and Pasha from your section. 
+                    You shudder – that’s Alexi and Pasha from your section.
                     
                     You have to get out of here.
                     A draft is blowing from the west exit, and an acrid smell.  To the east is another exit.
@@ -298,6 +282,8 @@ class Event {
                     5C
                     
                     You can make out a bend in the hall far ahead. You have to use the wall to support yourself now.
+                    
+                    You can move west or east along the hall.
                     
                     """);
 
@@ -522,6 +508,7 @@ class Event {
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     4B
+                    
                     You have passed this way before. Is there a reason you have backtracked?
                     Every second you stay in this place is a second closer to death.
                     

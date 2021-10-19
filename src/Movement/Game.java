@@ -69,14 +69,14 @@ public class Game {
         //Add items to tile 4D
         this.tileRef.get(18).settItems("map");
         //Add items to tile 5A
-        this.tileRef.get(20).settItems("fuel");
+        this.tileRef.get(20).settItems("jerry-can");
         //Add items to tile 5C
         this.tileRef.get(22).settItems("cart-key");
         this.tileRef.get(22).settItems("Hazmat");
 
         //Test items
         this.tileRef.get(10).settItems("cart-key");
-        this.tileRef.get(10).settItems("fuel");
+        this.tileRef.get(10).settItems("jerry-can");
         this.tileRef.get(10).settItems("Hazmat");
         //Create player
         player = new Player("Tester", health);
@@ -194,8 +194,11 @@ public class Game {
                 calculateDamage(player, tileRef.get(player.getPosition()));
                 return pInven;
             } else if (i == pInven.length - 1) {
-                System.out.println("You’re feeling very weak – there’s no way you can carry more. 'Why am I carrying all this stuff', you think to yourself.");
-                System.out.println("What should I drop for the item?");
+                System.out.println("" +
+                        "You’re feeling very weak – there’s no way you can carry more. " +
+                        "'Why am I carrying all this stuff', you think to yourself." +
+                        "");
+                System.out.println("What should I drop for the item? (type name of item");
                 player.printInventory();
                 do {
                     System.out.print(">");
@@ -309,7 +312,7 @@ public class Game {
                 break;
             }
             case "Exit", "exit": {
-                if (tileRef.get(player.getPosition()).gettDescription().equalsIgnoreCase("3A")) {
+                if ((player.getPosition()) == 10) {
                     this.exitFacility = true;
                     break;
                 } else
@@ -327,7 +330,14 @@ public class Game {
             case "OK", "ok", "Ok", "k": {
                 if ((player.getPosition()) == 24) {
                     player.addItems("wrench");
-                    System.out.println("You have to yell over the siren, 'OK, you will try'. He nods in relief, passes you a wrench. and then passes out.");
+                    System.out.println("""
+                                    
+                    You have to yell over the siren, 'OK, you will try'.
+                    He nods in relief, hands you a wrench, and then passes out.
+                    
+                    You can move to the west down the hall or north.
+                    
+                    """);
                    // npc = true;
                 }
                 break;
@@ -344,7 +354,9 @@ public class Game {
         int i, j;
         for (i = 1; i <= 1; i++) {
             for (j = 1; j <= iterator; j++) {
-                System.out.print("|" + " ");
+                System.out.print(
+                        "|" + " "
+                );
             }
          //   System.out.println(" HEALTH");
         }
@@ -383,7 +395,7 @@ public class Game {
 
         //Prologue
 
-        newGame.player.setPosition(18);
+        newGame.player.setPosition(24);
         System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
         currentEvent(newGame.player, newGame.tileRef.get(newGame.player.getPosition()).isHasVisited(), newGame.tileRef.get(newGame.player.getPosition()));
         //Main game loop after intro
@@ -405,37 +417,75 @@ public class Game {
 
         //Epilogue
         if (newGame.quit) {
-            System.out.println("Quitting Game");
-            return;
+            System.out.println("Quitting Game.");
         } else if (newGame.exitFacility) {
-            System.out.println("You exit the facility and stumble toward the military medics waiting there. " +
-                    "You notice they don't dare move toward the facility from their position, radiation readings must be through the roof." +
-                    "" +
-                    "Only minutes after you reach them - while being grilled by a official from the ministry of Electrification," +
-                    "you hear the sickening boom of an explosion at the plant - and only moments after that, everyone and everything within" +
-                    "a 50 kilometer radius of the plant is annihilated by the first of many explosions caused by the ensuing meltdown. " +
-                    "" +
-                    "The End.");
-            return;
-        } else if (newGame.pipelineFixed) {
-            System.out.println("The wrench fits. After a struggle you are able to repair the pipe. " +
-                    "You hear the coolant stream back into the system. " +
-                    "" +
-                    "Your eyes shut and you drift back into oblivion, but a deeper kind this time, the kind no siren will wake you from." +
+            System.out.println("""
+                    
+                    You exit the facility and stumble toward the military medics waiting there.
+                    
+                    You notice they don't dare move toward the facility from their position, radiation readings must be through the roof.
+                    Only minutes after you reach them - while being grilled by a official from the ministry of Electrification,
+                    you hear the sickening boom of an explosion at the plant - and only moments after that, everyone and everything within
+                    a 50 kilometer radius of the plant is annihilated by the first of many explosions caused by the ensuing meltdown.
+                    
+                                             ##### #    # ######    ###### #    # ##### \s
+                                               #   #    # #         #      ##   # #    #\s
+                                               #   ###### #####     #####  # #  # #    #\s
+                                               #   #    # #         #      #  # # #    #\s
+                                               #   #    # #         #      #   ## #    #\s
+                                               #   #    # ######    ###### #    # ##### \s
+                    
+                    """);
 
-                    "The End.");
-            return;
+        } else if (newGame.pipelineFixed) {
+            System.out.println("""
+                                        
+                    The wrench fits. After a struggle you are able to repair the pipe.
+                    You hear the coolant stream back into the system.
+                                        
+                    Your eyes shut and you drift back into oblivion, but a deeper kind this time, the kind no siren will wake you from.
+
+                                             ##### #    # ######    ###### #    # ##### \s
+                                               #   #    # #         #      ##   # #    #\s
+                                               #   ###### #####     #####  # #  # #    #\s
+                                               #   #    # #         #      #  # # #    #\s
+                                               #   #    # #         #      #   ## #    #\s
+                                               #   #    # ######    ###### #    # ##### \s
+                                             
+                                        
+                    """);
         } else if (newGame.catwalk) {
-            System.out.println("You walk up the long flight of stairs to the bridge. You are dismayed to see it is nothing more than a narrow catwalk. " +
-                    "As you move towards the reactor, each step you take becomes more cumbersome. Your head is splitting with pain. " +
-                    "You notice the rail bending, weakened by the explosion, straining to support your weight. " +
-                    "A moment later the rail fails completely and you slip, and too weak to grab hold of anything, you fall to your your death." +
-                    "" +
-                    "The End.");
-            return;
+            System.out.println("""
+                    
+                    You walk up the long flight of stairs to the bridge. You are dismayed to see it is nothing more than a narrow catwalk.
+                    
+                    As you move towards the reactor, each step you take becomes more cumbersome. Your head is splitting with pain.
+                    You notice the rail bending, weakened by the explosion, straining to support your weight.
+                    
+                    A moment later the rail fails completely and you slip and too weak to grab hold of anything, you fall to your death.
+                    
+                                             ##### #    # ######    ###### #    # ##### \s
+                                               #   #    # #         #      ##   # #    #\s
+                                               #   ###### #####     #####  # #  # #    #\s
+                                               #   #    # #         #      #  # # #    #\s
+                                               #   #    # #         #      #   ## #    #\s
+                                               #   #    # ######    ###### #    # ##### \s
+                    
+                    """);
         } else if (!newGame.player.alive()) {
-            System.out.println("You died. Game over.");
-            return;
+            System.out.println("""
+                    
+                    You died. Game Over.
+                    
+                                             ##### #    # ######    ###### #    # ##### \s
+                                               #   #    # #         #      ##   # #    #\s
+                                               #   ###### #####     #####  # #  # #    #\s
+                                               #   #    # #         #      #  # # #    #\s
+                                               #   #    # #         #      #   ## #    #\s
+                                               #   #    # ######    ###### #    # ##### \s
+                    
+                    """);
+
         }
     }
 }
