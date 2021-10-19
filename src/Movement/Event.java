@@ -613,7 +613,7 @@ class Event {
             //methods to print alternateTiles HashMap variables
             String alt = Integer.toString(player.getPosition());
             System.out.println(alternateTiles.get(alt));
-            if(tile.gettCart() == "cart") {
+            if((Objects.equals(tile.gettCart(), "cart")) && !player.isInCart()) {
                 System.out.println("The cart sits nearby.");
             }
             for (String item : tile.gettItems())
