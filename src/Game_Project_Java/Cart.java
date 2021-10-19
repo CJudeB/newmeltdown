@@ -46,7 +46,7 @@ public class Cart {
         }
         if (item.equalsIgnoreCase(tIntractable)) {
             if (v.validateInput("jerry-can", player.getInventory()).equalsIgnoreCase("jerry-can") && v.validateInput("key", player.getInventory()).equalsIgnoreCase("key")) {
-                System.out.println("\nYou re-fuel the cart and start it with the key and get in.\n(Type 'use cart' to get in or out of cart\n");
+                System.out.println("\nYou re-fuel the cart, start it with the key and get in.\n(Type 'use cart' to get in or out of cart\n");
                 cartKeyUsed = true;
                 fuelUsed = true;
                 player.removeItems("key");

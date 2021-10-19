@@ -291,7 +291,8 @@ public class Game {
  *@param exitFacility story ending
  *@param catwalk dying on catwalk
  *@param pipelineFixed saving the day
- *@param quit user quits*/
+ *@param quit user quits
+ */
 
         } while (!newGame.pipelineFixed && newGame.player.alive() && !newGame.quit && !newGame.exitFacility && !newGame.catwalk);
 

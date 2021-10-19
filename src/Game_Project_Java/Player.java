@@ -116,6 +116,8 @@ public class Player {
                     tile.settItems(item);
                     calculateDamage(player, tile);
                     break;
+                }else if (i == inventory.length - 1){
+                    System.out.println("You aren't holding a item like that");
                 }
             }
         }
