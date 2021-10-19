@@ -1,13 +1,13 @@
-package Movement;
+package Game_Project_Java;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static Movement.CalculateDamage.calculateDamage;
-import static Movement.Cart.*;
-import static Movement.Event.currentEvent;
-import static Movement.Items.*;
+import static Game_Project_Java.CalculateDamage.calculateDamage;
+import static Game_Project_Java.Cart.*;
+import static Game_Project_Java.Event.currentEvent;
+import static Game_Project_Java.Items.*;
 
 public class Game {
 

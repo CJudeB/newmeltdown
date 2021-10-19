@@ -1,4 +1,4 @@
-package Movement;
+package Game_Project_Java;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,7 +15,7 @@ public class Map {
     JLabel jLab = new JLabel();
 
     /**
-     * Instantiates a new Map. Takes the bufferedImage and sets it as a image to be displayed in the JFrame.
+     * Instantiates a new Map. Takes the bufferedImage and sets it as an image to be displayed in the JFrame.
      * Sets the JFrames background,layout and size.
      * Also creates a window listener to close the JFrame when it is no longer the active window.
      *

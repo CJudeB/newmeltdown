@@ -1,8 +1,8 @@
-package Movement;
+package Game_Project_Java;
 
 import java.util.Scanner;
 
-import static Movement.CalculateDamage.calculateDamage;
+import static Game_Project_Java.CalculateDamage.calculateDamage;
 
 public class Items {
 

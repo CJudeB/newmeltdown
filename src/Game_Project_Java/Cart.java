@@ -1,6 +1,6 @@
-package Movement;
+package Game_Project_Java;
 
-import static Movement.CalculateDamage.calculateDamage;
+import static Game_Project_Java.CalculateDamage.calculateDamage;
 
 public class Cart {
 

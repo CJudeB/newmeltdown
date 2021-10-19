@@ -1,4 +1,4 @@
-package Movement;
+package Game_Project_Java;
 
 
 import java.util.LinkedHashMap;
