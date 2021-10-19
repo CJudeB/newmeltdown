@@ -22,7 +22,6 @@ public class Player {
         int health1 = this.health;
         this.Position = 18;
 
-
     }
 
     public String methodPrintHealth(String printHealth) {
@@ -89,12 +88,6 @@ public class Player {
         return health >= 1;
     }
 
-  /* public void isAlive(boolean alive) {
-
-        if (health >= 1) {
-            isAlive = alive;
-        }
-   } */
 
     public String[] getInventory() {
         return inventory;
@@ -206,7 +199,9 @@ public class Player {
             }
         }
     }
-
+    /**
+     * Print inventory only if there is something to print
+     */
     public void printInventory() {
         for (int i = 0; i < inventory.length; i++) {
             if (!(inventory[i] == " ")) {

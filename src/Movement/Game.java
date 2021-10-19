@@ -181,6 +181,7 @@ public class Game {
                 }
                 break;
             }
+
             case "I", "i": {
                 player.printInventory();
                 break;
@@ -229,7 +230,7 @@ public class Game {
             }
         }
     }
-    public void damArray() {
+  /* public void damArray() {
 
         int iterator = getHealth(health);
         int i, j;
@@ -241,7 +242,7 @@ public class Game {
             }
          //   System.out.println(" HEALTH");
         }
-    }
+    }*/
 
     public int getHealth(int health) {
         return health;
@@ -282,7 +283,7 @@ public class Game {
 
             System.out.print(">");
             temp = input.nextLine();
-            newGame.damArray();
+           // newGame.damArray();
             newGame.inputHandler(temp);
 /**
  *

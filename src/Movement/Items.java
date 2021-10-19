@@ -94,7 +94,7 @@ public class Items {
                     System.out.println("You shift the cabinet onto it's back.");
                     firstInteraction = false;
                 }
-                System.out.println("\nPlacing you're hand on the locks dial, remembering the markings from before\n (4b1c-5c, (2e4b%3d)+2d, 3d+=3d) you enter.");
+                System.out.println("You place your hand on the locks dial and remembering the markings from before\n(4b1c-5c, (2e4b%3d)+2d, 3d+=3d) you enter -");
                 Scanner code = new Scanner(System.in);
                 int[] combination = new int[3];
                 for (int i = 0; i < combination.length; ) {
@@ -125,11 +125,11 @@ public class Items {
                 if ((combination[0] == 26) && (combination[1] == 17) && (combination[2] == 28)) {
                     System.out.println("""
                                     
-                                    The numbers match and the lock opens.
-                                    You find the Hazmat suit and dosimeter inside, a small key and a thick pile of rouble bills.
+                            The numbers match and the lock opens.
+                            You find the Hazmat suit and dosimeter inside, a small key and a thick pile of rouble bills.
                                     
-                                    Putting the heavy suit on is an ordeal though, and you half-collapse from the effort,
-                                    losing your hold on the key and roubles, which scuttle away, back from where you came.
+                            Putting the heavy suit on is an ordeal though, and you half-collapse from the effort,
+                            losing your hold on the key and roubles, which scuttle away, back from where you came.
                                    
                             """);
                     player.addItems("hazmat");

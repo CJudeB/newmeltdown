@@ -162,7 +162,7 @@ class Event {
                     3A
                     
                     You arrive at the facilities’ foyer. Through the massive glass lined entrance, you can see emergency services
-                    and military congregating. The exit is right here, you can escape now.
+                    and military congregating. The exit is right here, you can escape now. (Type 'exit' to escape).
                     
                     The coolant pipeline needs repairing though. There's no getting around that fact.
                     
@@ -331,6 +331,9 @@ class Event {
                                             
                     To view map type m, to view inventory type i, your inventory holds up to 5 items (not including map)
                     To access this menu type menu. To quit game type q.
+                    
+                    WARNING - moving, picking up items and interacting with items may cause you damage. Limit any
+                    un-necessary activity.
  
                     """);
             tiles.put("26", """ 
@@ -623,18 +626,7 @@ class Event {
 
         }
 
-
-        String printHealth = Integer.toString(player.getHealth());
-        System.out.println(tiles.get(player.getPrintHealth()));
-
-
-        //    public static void alternateCurrentEvent (Player player){
-
-
     }
-
-    //public static void check
-
 
     public static void displayMenu() {
         String displayM;
