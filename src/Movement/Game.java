@@ -9,9 +9,6 @@ import static Movement.Cart.*;
 import static Movement.Event.currentEvent;
 import static Movement.Items.*;
 
-//import static Movement.Items.useHazmat;
-
-
 public class Game {
 
     public void setHealth(int health) {
