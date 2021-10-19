@@ -100,19 +100,19 @@ public class Game {
 
         //Move the player from one space to the next if possible otherwise tell them they can't
         if (dir.equals("n") && this.tileRef.get(this.player.getPosition()).gettN()) {
-            tileRef.get(player.getPosition()).setHasVisited(true);
+            this.tileRef.get(player.getPosition()).setHasVisited(true);
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("s") && this.tileRef.get(this.player.getPosition()).gettS()) {
-            tileRef.get(player.getPosition()).setHasVisited(true);
+            this.tileRef.get(player.getPosition()).setHasVisited(true);
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("e") && this.tileRef.get(this.player.getPosition()).gettE()) {
-            tileRef.get(player.getPosition()).setHasVisited(true);
+            this.tileRef.get(player.getPosition()).setHasVisited(true);
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("w") && this.tileRef.get(this.player.getPosition()).gettW()) {
-            tileRef.get(player.getPosition()).setHasVisited(true);
+            this.tileRef.get(player.getPosition()).setHasVisited(true);
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("badInput")) {
