@@ -408,15 +408,30 @@ public class Game {
             System.out.println("Quitting Game");
             return;
         } else if (newGame.exitFacility) {
-            System.out.println("You leave the facility");
+            System.out.println("You exit the facility and stumble toward the military medics waiting there. " +
+                    "You notice they don't dare move toward the facility from their position, radiation readings must be through the roof." +
+                    "" +
+                    "Only minutes after you reach them - while being grilled by a official from the ministry of Electrification," +
+                    "you hear the sickening boom of an explosion at the plant - and only moments after that, everyone and everything within" +
+                    "a 50 kilometer radius of the plant is annihilated by the first of many explosions caused by the ensuing meltdown. " +
+                    "" +
+                    "The End.");
             return;
         } else if (newGame.pipelineFixed) {
-            System.out.println("The wrench fits. After a struggle you are able to repair the pipe. You hear the coolant stream back into the system, " +
-                    "just as your eyes shut and you drift back into oblivion - but a deeper kind this time, that no siren will wake you from.");
+            System.out.println("The wrench fits. After a struggle you are able to repair the pipe. " +
+                    "You hear the coolant stream back into the system. " +
+                    "" +
+                    "Your eyes shut and you drift back into oblivion, but a deeper kind this time, the kind no siren will wake you from." +
+
+                    "The End.");
             return;
         } else if (newGame.catwalk) {
-            System.out.println("You walk up the 4 flights of stairs to the catwalk. \nAs you move towards the cooling tower, each step you take becomes more cumbersome. \nYou're head is splitting with pain. \nYou push on reaching the tower." +
-                    "\nYou fall against the rail, you can barely stand. \nThe rail creaks and bends weakened by the explosion, it can no longer support your weight. \nThe rail fails completely and you plummet from the catwalk. SPLAT!!!!");
+            System.out.println("You walk up the long flight of stairs to the bridge. You are dismayed to see it is nothing more than a narrow catwalk. " +
+                    "As you move towards the reactor, each step you take becomes more cumbersome. Your head is splitting with pain. " +
+                    "You notice the rail bending, weakened by the explosion, straining to support your weight. " +
+                    "A moment later the rail fails completely and you slip, and too weak to grab hold of anything, you fall to your your death." +
+                    "" +
+                    "The End.");
             return;
         } else if (!newGame.player.alive()) {
             System.out.println("You died. Game over.");
