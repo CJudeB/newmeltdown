@@ -70,6 +70,11 @@ public class Tile {
         return tItems;
     }
 
+    /**
+     * Remove an item from the tile item array.
+     *
+     * @param item the item
+     */
     public void removeItem(String item) {
 
         for (int i = 0; i < tItems.size(); i++) {
