@@ -7,6 +7,7 @@ import static Movement.CalculateDamage.calculateDamage;
 public class Items {
 
     static boolean cabinetUsed = false;
+    static boolean firstInteraction = true;
     /**
      * Use wrench boolean. The interaction method for using the wrench.
      * Includes blocks for the player not having the wrench and trying to use the pipeline
@@ -86,7 +87,7 @@ public class Items {
      * @param player the player instance
      */
     public static void useCabinets (String item, Tile tile, Player player){
-        boolean firstInteraction = true;
+
         if(!cabinetUsed) {
             if (item.equalsIgnoreCase(tile.gettIntractable())) {
                 if (firstInteraction) {
