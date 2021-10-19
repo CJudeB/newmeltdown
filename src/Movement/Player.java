@@ -207,6 +207,9 @@ public class Player {
         }
     }
 
+    /**
+     * Print inventory only if there is something to print
+     */
     public void printInventory() {
         for (int i = 0; i < inventory.length; i++) {
             if (!(inventory[i] == " ")) {
