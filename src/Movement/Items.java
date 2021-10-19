@@ -6,6 +6,7 @@ import static Movement.CalculateDamage.calculateDamage;
 
 public class Items {
 
+    static boolean cabinetUsed = false;
     /**
      * Use wrench boolean. The interaction method for using the wrench.
      * Includes blocks for the player not having the wrench and trying to use the pipeline
@@ -85,60 +86,64 @@ public class Items {
      * @param player the player instance
      */
     public static void useCabinets (String item, Tile tile, Player player){
-
-        if(item.equalsIgnoreCase(tile.gettIntractable())){
-            System.out.println("You shift the cabinet onto it's back. \nPlacing you're hand on the locks dial, remembering the markings from before\n (4b1c-5c, (2e4b%3d)+2d, 3d+=3d) you enter.");
-            Scanner code = new Scanner(System.in);
-            int[] combination = new int[3];
-            for(int i = 0; i < combination.length;) {
-                System.out.println(i);
-                        if(i == 0){System.out.println("The first number:");}
-                        else if (i == 1){System.out.println("The second number:");}
-                        else if ( i == 2){System.out.println("The third number:");}
-                System.out.print(">");
-                try{
-
-                    int temp =  code.nextInt();
-                    code.nextLine();
-                    if(temp >= 0 && temp <= 35){
-                        combination[i] = temp;
-                        i++;
-                    }else{
-                        System.out.println("The lock only takes numbers from 0-35");
-                    }
-                }catch (Exception e){
-                    System.out.println("The lock only takes numbers from 0-35");
-                    code.nextLine();
+        boolean firstInteraction = true;
+        if(!cabinetUsed) {
+            if (item.equalsIgnoreCase(tile.gettIntractable())) {
+                if (firstInteraction) {
+                    System.out.println("You shift the cabinet onto it's back.");
+                    firstInteraction = false;
                 }
-            }
-            System.out.println("You turn the dial clockwise to " + combination[0] +".\nThen counterclockwise to " + combination[1] + ".\nFinally clockwise once more to " + combination[2]);
-                if((combination[0] == 26) && (combination[1] == 17) && (combination[2] == 28) ){
+                System.out.println("\nPlacing you're hand on the locks dial, remembering the markings from before\n (4b1c-5c, (2e4b%3d)+2d, 3d+=3d) you enter.");
+                Scanner code = new Scanner(System.in);
+                int[] combination = new int[3];
+                for (int i = 0; i < combination.length; ) {
+                    if (i == 0) {
+                        System.out.println("The first number:");
+                    } else if (i == 1) {
+                        System.out.println("The second number:");
+                    } else if (i == 2) {
+                        System.out.println("The third number:");
+                    }
+                    System.out.print(">");
+                    try {
+
+                        int temp = code.nextInt();
+                        code.nextLine();
+                        if (temp >= 0 && temp <= 35) {
+                            combination[i] = temp;
+                            i++;
+                        } else {
+                            System.out.println("The lock only takes numbers from 0-35");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("The lock only takes numbers from 0-35");
+                        code.nextLine();
+                    }
+                }
+                System.out.println("You turn the dial clockwise to " + combination[0] + ".\nThen counterclockwise to " + combination[1] + ".\nFinally clockwise once more to " + combination[2]);
+                if ((combination[0] == 26) && (combination[1] == 17) && (combination[2] == 28)) {
                     System.out.println("""
-                            
-                            The numbers match and the lock opens.
-                            You find the Hazmat suit and dosimeter inside, a small key and a thick pile of rouble bills.
-                            
-                            Putting the heavy suit on is an ordeal though, and you half-collapse from the effort,
-                            losing your hold on the key and roubles, which scuttle away, back from where you came.
-       
-                    """);
+                                    
+                                    The numbers match and the lock opens.
+                                    You find the Hazmat suit and dosimeter inside, a small key and a thick pile of rouble bills.
+                                    
+                                    Putting the heavy suit on is an ordeal though, and you half-collapse from the effort,
+                                    losing your hold on the key and roubles, which scuttle away, back from where you came.
+                                   
+                            """);
                     player.addItems("hazmat");
                     tile.settItems("roubles");
-                    tile.settItems("cart-key");
+                    tile.settItems("key");
                     player.setHasProtectiveClothing(true);
-                    calculateDamage(player, tile);
-                }else{
+                    cabinetUsed = true;
+                } else {
                     System.out.println("The lock doesn't budge perhaps I got it wrong.\nYou step back from the cabinet to think about it.");
-                    calculateDamage(player, tile);
                 }
-
-
-
-
-
-
+                calculateDamage(player, tile);
+            }
+        }else{
+            System.out.println("There is nothing else to use in the cabinet");
         }
-
 
     }
 }

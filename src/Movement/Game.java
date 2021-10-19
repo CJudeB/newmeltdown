@@ -19,7 +19,6 @@ public class Game {
     }
 
     private int health;
-    private Map reactorMap;
     private ArrayList<Tile> tileRef;
     private Player player;
     private boolean pipelineFixed = false, quit = false, exitFacility = false, catwalk = false;
@@ -64,20 +63,14 @@ public class Game {
         this.tileRef.add(new Tile("23.5D", "", "", false, false, true, false, true, 3));
         this.tileRef.add(new Tile("24.5E", "npc", "", false, true, false, false, true, 3));
 
-        //Add items to tile 4E
-        this.tileRef.get(19).settItems("wrench");
         //Add items to tile 4D
         this.tileRef.get(18).settItems("map");
         //Add items to tile 5A
         this.tileRef.get(20).settItems("jerry-can");
         //Add items to tile 5C
-        this.tileRef.get(22).settItems("cart-key");
+        this.tileRef.get(22).settItems("key");
         this.tileRef.get(22).settItems("Hazmat");
 
-        //Test items
-        this.tileRef.get(10).settItems("cart-key");
-        this.tileRef.get(10).settItems("jerry-can");
-        this.tileRef.get(10).settItems("Hazmat");
         //Create player
         player = new Player("Tester", health);
 
@@ -147,81 +140,6 @@ public class Game {
         }
     }
 
-
-    /**
-     * Drop item. Drops the selected item if it exists in the player inventory. Also does Radiation damage
-     * to the player after they drop an item through calculateDamage
-     *
-     * @param item the item that is entered in after the drop key word
-     */
-    public void dropItem(String item) {
-        //If validate returns badInput print
-        if (item.equals("badInput")) {
-            System.out.println("You aren't holding a item like that");
-        } else if (item.equals("hazmat")) {
-            System.out.println("It would be a bad idea to take the radiation suit off");
-        } else {
-            player.removeItems(item);
-            System.out.println("You dropped the " + item);
-            this.tileRef.get(this.player.getPosition()).settItems(item);
-            calculateDamage(player, tileRef.get(player.getPosition()));
-        }
-    }
-
-
-    /**
-     * Picks up the selected item from the tile if it exists within the tiles items array
-     * Also does Radiation damage to the player after they pick up an item through calculateDamage
-     *
-     * @param item   the item that is entered in after the drop key word
-     * @param pInven the players inventory
-     * @return the string [ ], returned to be set as the player inventory
-     */
-    public String[] pickItem(String item, String pInven[]) {
-        String itemToDrop;
-        Scanner input = new Scanner(System.in);
-        Validation v = new Validation();
-        boolean itemDropped = true;
-        if (item.equals("badInput")) {
-            System.out.println("There doesn't seem to be an item like that here");
-            return pInven;
-        }
-        for (int i = 0; i < pInven.length; i++) {
-            if (pInven[i].equals(" ")) {
-                pInven[i] = item;
-                this.tileRef.get(this.player.getPosition()).removeItem(item);
-                System.out.println("You picked up the " + item);
-                calculateDamage(player, tileRef.get(player.getPosition()));
-                return pInven;
-            } else if (i == pInven.length - 1) {
-                System.out.println("" +
-                        "You’re feeling very weak – there’s no way you can carry more. " +
-                        "'Why am I carrying all this stuff', you think to yourself." +
-                        "");
-                System.out.println("What should I drop for the item? (type name of item");
-                player.printInventory();
-                do {
-                    System.out.print(">");
-                    itemToDrop = input.nextLine();
-                    for (int a = 0; a < pInven.length; a++) {
-                        if (pInven[a].equalsIgnoreCase(itemToDrop)) {
-                            pInven[a] = item;
-                            this.tileRef.get(this.player.getPosition()).settItems(itemToDrop);
-                            System.out.println("You drop the " + itemToDrop + " for the " + item);
-                            itemDropped = false;
-                            calculateDamage(player, tileRef.get(player.getPosition()));
-                            break;
-                        } else if (a == pInven.length - 1)
-                            System.out.println("I'm not carrying that item");
-                    }
-                } while (itemDropped);
-                return pInven;
-            }
-        }
-        return pInven;
-    }
-
-
     /**
      * Input handler. Handles the user input by splitting the scanner in string into two words,
      * the first is the key word used to define what action the user wants to take. The second is what item
@@ -235,24 +153,6 @@ public class Game {
         String[] parts = temp.split(" ");
         switch (parts[0]) {
             case "p": {
-          /*    System.out.println(tileRef.get(player.getPosition()).gettDescription());
-                System.out.println(tileRef.get(player.getPosition()).gettCart());
-                tileRef.get(player.getPosition()).printItems();
-                System.out.println(player.isInCart());
-                System.out.println(isFuelUsed());
-                System.out.println(isCartKeyUsed());
-                System.out.println(tileRef.get(player.getPosition()).isHasVisited());
-
-
-               currentEvent(player, tileRef.get(player.getPosition()).isHasVisited());
-                System.out.println(player.getHealth()); // this is returning correct value
-                System.out.println(player.getDamVal()); //is not passing damVal to Calculate Damage. this is here for testing if I decide to fix*/
-              //  Player.getFinalDam();
-               // player.getFinalDam();
-              //  System.out.println(player.getHealth());
-
-             //   System.out.println(CalculateDamage.getFinalDam();
-
                 break;
 
             }
@@ -262,11 +162,11 @@ public class Game {
                 break;
             }
             case "Drop", "drop": {
-                dropItem(v.validateInput(parts[1], player.getInventory()));
+                player.removeItems(v.validateInput(parts[1], player.getInventory()), tileRef.get(player.getPosition()),player);
                 break;
             }
             case "Pick-up", "pick-up": {
-                player.setInventory(pickItem(v.validateInput(parts[1], tileRef.get(player.getPosition()).gettItems()), player.getInventory()));
+                player.addItems(v.validateInput(parts[1], tileRef.get(player.getPosition()).gettItems()), tileRef.get(player.getPosition()), player );
                 break;
             }
             case "Use", "use": {
@@ -293,7 +193,7 @@ public class Game {
                         break;
                     }
                     default: {
-                        System.out.println("YOu can't do that");
+                        System.out.println("It doesn't look like I can use that.");
                         break;
                     }
                 }
@@ -319,11 +219,9 @@ public class Game {
                     System.out.println("There's no where for me to exit the facility from here");
                 break;
             }
-            case "Yes", "yes", "No", "no": {
-                if ((parts[0].equalsIgnoreCase("yes") && (player.getPosition()) == 0)) {
+            case "Yes", "yes": {
+                if ((player.getPosition()) == 0) {
                     catwalk = true;
-                } else {
-                    System.out.println("You move back down the stairs.");
                 }
                 break;
             }
@@ -376,9 +274,6 @@ public class Game {
      */
     public static void main(String[] args) throws IOException {
         Game newGame = new Game();
-        Selection s = new Selection();
-        Validation v = new Validation();
-        CalculateDamage cd = new CalculateDamage();
         Scanner input = new Scanner(System.in);
         Scanner scan = new Scanner(System.in);
         String temp;
@@ -395,9 +290,10 @@ public class Game {
 
         //Prologue
 
-        newGame.player.setPosition(24);
+        newGame.player.setPosition(18);
         System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
         currentEvent(newGame.player, newGame.tileRef.get(newGame.player.getPosition()).isHasVisited(), newGame.tileRef.get(newGame.player.getPosition()));
+
         //Main game loop after intro
         do {
 

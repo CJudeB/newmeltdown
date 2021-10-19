@@ -46,13 +46,6 @@ public class Validation {
         return badInput;
     }
 
-    public String validateInput(String input, String tIntractable){
-        if(input.equalsIgnoreCase(tIntractable)){
-            return input;
-        }else
-            return badInput;
-    }
-
     /**
      * Validate input string against the tile items array to ensure that the item the player selected is in their inventory
      *

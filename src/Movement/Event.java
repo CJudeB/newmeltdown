@@ -357,8 +357,8 @@ class Event {
 
             String s = Integer.toString(player.getPosition());
             System.out.println(tiles.get(s));
-            for (String item : tile.gettItems())
-            {System.out.println("There is a " + item + " here.");
+            for (String item : tile.gettItems()) {
+                    System.out.println("There is a " + item + " here.");
             }
             System.out.println(tiles.get("27"));
 

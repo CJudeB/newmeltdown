@@ -5,10 +5,7 @@ public class Tile {
 
 
 
-    public Tile() {
-    }
-
-    private String tDescription, tIntractable, tPuzzle, tCart;
+    private String tDescription, tIntractable, tCart;
     private ArrayList<String> tItems = new ArrayList<>();
     private boolean tN, tE, tS, tW, hasVisited;
     private int damVal;
@@ -52,10 +49,6 @@ public class Tile {
         return tIntractable;
     }
 
-    public void settIntractable(String tIntractable) {
-        this.tIntractable = tIntractable;
-    }
-
     public String gettCart() {
         return tCart;
     }
@@ -83,12 +76,6 @@ public class Tile {
             if (item.equals(this.tItems.get(i))) {
                 this.tItems.remove(i);
             }
-        }
-    }
-
-    public void printItems() {
-        for (String i : tItems) {
-            System.out.println(i);
         }
     }
 
