@@ -2,6 +2,7 @@ package Movement;
 
 
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 
 class Event {
@@ -357,6 +358,9 @@ class Event {
 
             String s = Integer.toString(player.getPosition());
             System.out.println(tiles.get(s));
+            if((Objects.equals(tile.gettCart(), "cart")) && (!s.equals("10")) && !player.isInCart()) {
+                System.out.println("The cart sits nearby.");
+            }
             for (String item : tile.gettItems()) {
                     System.out.println("There is a " + item + " here.");
             }
@@ -609,6 +613,9 @@ class Event {
             //methods to print alternateTiles HashMap variables
             String alt = Integer.toString(player.getPosition());
             System.out.println(alternateTiles.get(alt));
+            if(tile.gettCart() == "cart") {
+                System.out.println("The cart sits nearby.");
+            }
             for (String item : tile.gettItems())
             {System.out.println("There is a " + item + " here.");
             }
