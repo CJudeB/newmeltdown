@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class Validation {
 
     private String[] cardinals = {"n", "e", "s", "w"};
-    private String[] tileItems = new String[5];
     private String badInput = "badInput";
 
     /**
