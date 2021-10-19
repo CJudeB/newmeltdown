@@ -226,14 +226,6 @@ public class Player {
         System.out.print("\n");
     }
 
-    public static void setReactorMap(Map reactorMap) {
-        Player.reactorMap = reactorMap;
-    }
-
-    public Map getReactorMap() {
-        return reactorMap;
-    }
-
     public int getDamVal() {
         return CalculateDamage.getDamVal();
     }

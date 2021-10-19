@@ -67,10 +67,6 @@ public class Game {
         this.tileRef.get(18).settItems("map");
         //Add items to tile 5A
         this.tileRef.get(20).settItems("jerry-can");
-        //Add items to tile 5C
-        this.tileRef.get(22).settItems("key");
-        this.tileRef.get(22).settItems("Hazmat");
-
         //Create player
         player = new Player("Tester", health);
 
@@ -104,19 +100,19 @@ public class Game {
 
         //Move the player from one space to the next if possible otherwise tell them they can't
         if (dir.equals("n") && this.tileRef.get(this.player.getPosition()).gettN()) {
-            tileVisited();
+            tileRef.get(player.getPosition()).setHasVisited(true);
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("s") && this.tileRef.get(this.player.getPosition()).gettS()) {
-            tileVisited();
+            tileRef.get(player.getPosition()).setHasVisited(true);
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("e") && this.tileRef.get(this.player.getPosition()).gettE()) {
-            tileVisited();
+            tileRef.get(player.getPosition()).setHasVisited(true);
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("w") && this.tileRef.get(this.player.getPosition()).gettW()) {
-            tileVisited();
+            tileRef.get(player.getPosition()).setHasVisited(true);
             this.player.setPosition(this.player.getPosition() + newTile);
             calculateDamage(player, tileRef.get(player.getPosition()));
         } else if (dir.equals("badInput")) {
@@ -131,23 +127,13 @@ public class Game {
     }
 
     /**
-     * Tile visited sets the has visited variable of the tile the player is on to true if not already.
-     *
-     */
-    public void tileVisited() {
-        if (!(tileRef.get(player.getPosition()).isHasVisited())) {
-            tileRef.get(player.getPosition()).setHasVisited(true);
-        }
-    }
-
-    /**
      * Input handler. Handles the user input by splitting the scanner in string into two words,
      * the first is the key word used to define what action the user wants to take. The second is what item
      * the user wants to interact with. Each case calls a method or set of methods to handle each situation.
      *
      * @param temp the temporary storage for user inputs.
      */
-    public void inputHandler(String temp) throws IOException {
+    public void inputHandler(String temp) {
         Validation v = new Validation();
         Selection s = new Selection();
         String[] parts = temp.split(" ");
@@ -181,7 +167,6 @@ public class Game {
                     }
                     case "core-regulator", "Core-Regulator", "Core-regulator": {
                         useCoreRegulator(parts[1], tileRef.get(player.getPosition()), player);
-
                         break;
                     }
                     case "cabinet", "Cabinet": {
@@ -197,6 +182,7 @@ public class Game {
                         break;
                     }
                 }
+                break;
             }
             case "I", "i": {
                 player.printInventory();
