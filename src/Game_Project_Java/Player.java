@@ -118,6 +118,7 @@ public class Player {
                     break;
                 }else if (i == inventory.length - 1){
                     System.out.println("You aren't holding a item like that");
+                    break;
                 }
             }
         }
