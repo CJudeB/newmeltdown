@@ -3,14 +3,14 @@ import java.util.ArrayList;
 
 public class Tile {
 
-
-
     private String tDescription, tIntractable, tCart;
     private ArrayList<String> tItems = new ArrayList<>();
     private boolean tN, tE, tS, tW, hasVisited;
     private int damVal;
 
-
+    /**
+     * Tile class constructor.
+     */
     public Tile(String tDescription, String tIntractable, String tCart, boolean hasVisited, boolean tN, boolean tE, boolean tS, boolean tW, int damVal) {
 
         this.tDescription = tDescription;
@@ -24,6 +24,10 @@ public class Tile {
         this.hasVisited = false;
 
     }
+    /**
+     * Getters and Setters for Tile params.
+     *
+     */
 
     public Boolean gettN() {
         return tN;

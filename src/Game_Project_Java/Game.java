@@ -30,42 +30,42 @@ public class Game {
     public Game() throws IOException {
         this.tileRef = new ArrayList<Tile>();
         //row 1
-        this.tileRef.add(new Tile("1.1A", "stairs", "", false, false, true, true, false, 6));
-        this.tileRef.add(new Tile("2.1B", "", "", false, false, true, false, true, 6));
-        this.tileRef.add(new Tile("3.1C", "", "", false, false, false, true, true, 6));
+        this.tileRef.add(new Tile("", "stairs", "", false, false, true, true, false, 6));
+        this.tileRef.add(new Tile("", "", "", false, false, true, false, true, 6));
+        this.tileRef.add(new Tile("", "", "", false, false, false, true, true, 6));
         this.tileRef.add(new Tile("1D(Unreachable)", "", "", false, false, false, false, false, 0));
         this.tileRef.add(new Tile("1E(Unreachable)", "", "", false, false, false, false, false, 0));
         //row 2
-        this.tileRef.add(new Tile("2A", "", "", false, true, false, true, false, 6));
+        this.tileRef.add(new Tile("", "", "", false, true, false, true, false, 6));
         this.tileRef.add(new Tile("2B(Unreachable)", "", "", false, false, false, false, false, 0));
-        this.tileRef.add(new Tile("2C", "pipeline", "", false, true, false, false, false, 10));
+        this.tileRef.add(new Tile("", "pipeline", "", false, true, false, false, false, 10));
         this.tileRef.add(new Tile("2D(Unreachable)", "", "", false, false, false, false, false, 0));
         this.tileRef.add(new Tile("2E(Unreachable)", "", "", false, false, false, false, false, 0));
         //row 3
-        this.tileRef.add(new Tile("3A(Exit via West)", "", "cart", false, true, false, true, false, 5));
+        this.tileRef.add(new Tile("", "", "cart", false, true, false, true, false, 5));
         this.tileRef.add(new Tile("3B(Unreachable)", "", "", false, false, false, false, false, 0));
         this.tileRef.add(new Tile("3C(Unreachable)", "", "", false, false, false, false, false, 0));
         this.tileRef.add(new Tile("3D(Unreachable)", "", "", false, false, false, false, false, 0));
         this.tileRef.add(new Tile("3E(Unreachable)", "", "", false, false, false, false, false, 0));
         //row 4
-        this.tileRef.add(new Tile("15.4A", "", "", false, true, true, true, false, 5));
-        this.tileRef.add(new Tile("16.4B", "", "", false, false, true, false, true, 15));
-        this.tileRef.add(new Tile("17.4C(West of Start)", "", "", false, false, true, false, true, 15));
-        this.tileRef.add(new Tile("18.4D(Start)", "", "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("19.4E(East of Start)", "core-regulator", "", false, false, false, true, true, 3));
+        this.tileRef.add(new Tile("", "", "", false, true, true, true, false, 5));
+        this.tileRef.add(new Tile("", "", "", false, false, true, false, true, 15));
+        this.tileRef.add(new Tile("", "", "", false, false, true, false, true, 15));
+        this.tileRef.add(new Tile("", "", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("", "core-regulator", "", false, false, false, true, true, 3));
         //row 5
-        this.tileRef.add(new Tile("20.5A", "", "", false, true, true, false, false, 3));
-        this.tileRef.add(new Tile("21.5B", "cabinet", "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("22.5C", "", "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("23.5D", "", "", false, false, true, false, true, 3));
-        this.tileRef.add(new Tile("24.5E", "npc", "", false, true, false, false, true, 3));
+        this.tileRef.add(new Tile("", "", "", false, true, true, false, false, 3));
+        this.tileRef.add(new Tile("", "cabinet", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("", "", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("", "", "", false, false, true, false, true, 3));
+        this.tileRef.add(new Tile("", "npc", "", false, true, false, false, true, 3));
 
         //Add items to tile 4D
         this.tileRef.get(18).settItems("map");
         //Add items to tile 5A
         this.tileRef.get(20).settItems("jerry-can");
         //Create player
-        player = new Player("Tester", health);
+        player = new Player("Tester", 100);
 
     }
 
@@ -230,24 +230,10 @@ public class Game {
             }
         }
     }
-  /* public void damArray() {
 
-        int iterator = getHealth(health);
-        int i, j;
-        for (i = 1; i <= 1; i++) {
-            for (j = 1; j <= iterator; j++) {
-                System.out.print(
-                        "|" + " "
-                );
-            }
-         //   System.out.println(" HEALTH");
-        }
-    }*/
-
-    public int getHealth(int health) {
+/*    public int getHealth(int health) {
         return health;
-    }
-
+    }*/
 
     /**
      * The entry point of application. Has three sections the prologue which is a cutscene to introduce the story.
@@ -270,7 +256,7 @@ public class Game {
             Event.initialDescription();
             System.out.print(">");
         } while (!go.equalsIgnoreCase(scan.nextLine()));
-        System.out.print("\n\nGood Luck\n\n");
+        System.out.print("\nGood Luck\n\n");
 
         //Prologue
 
@@ -286,12 +272,12 @@ public class Game {
            // newGame.damArray();
             newGame.inputHandler(temp);
 /**
- *
- *@param alive while true loop continues.
- *@param exitFacility story ending
- *@param catwalk dying on catwalk
- *@param pipelineFixed saving the day
- *@param quit user quits*/
+ *condition alive while true loop continues.
+ *condition exitFacility story ending
+ *condition catwalk dying on catwalk
+ *condition pipelineFixed saving the day
+ *condition quit user quits
+ * */
 
         } while (!newGame.pipelineFixed && newGame.player.alive() && !newGame.quit && !newGame.exitFacility && !newGame.catwalk);
 
@@ -355,7 +341,7 @@ public class Game {
         } else if (!newGame.player.alive()) {
             System.out.println("""
                     
-                    You died. Game Over.
+                    You succumb to your wounds and radiation exposure.
                     
                                              ##### #    # ######    ###### #    # ##### \s
                                                #   #    # #         #      ##   # #    #\s

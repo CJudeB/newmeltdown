@@ -7,8 +7,7 @@ import static Game_Project_Java.CalculateDamage.calculateDamage;
 public class Player {
 
 
-    private final String name;
-    static Map reactorMap;
+    private String name;
     private boolean alive = true;
     private boolean inCart = false;
     private int Position, health = 100;
@@ -16,27 +15,28 @@ public class Player {
     private boolean hasProtectiveClothing = false;
     private String[] inventory = {" ", " ", " ", " ", " "};
 
-
+    /**
+     * Player constructor.
+     *
+     */
     public Player(String name, int health) {
         this.name = name;
-        int health1 = this.health;
+        this.health = health;
         this.Position = 18;
-
     }
 
-    public String methodPrintHealth(String printHealth) {
+  /*  public String methodPrintHealth(String printHealth) {
         printHealth = Integer.toString(getHealth());
         return printHealth;
-    }
+    }*/
 
-
-    public boolean isAlive() {
+   /* public boolean isAlive() {
         return alive;
     }
 
     public void setAlive(boolean alive) {
         this.alive = alive;
-    }
+    }*/
 
     public String getPrintHealth() {
         return printHealth;
@@ -117,6 +117,10 @@ public class Player {
                     calculateDamage(player, tile);
                     break;
                 }
+                else if (i == inventory.length - 1){
+                    System.out.println("You aren't holding a item like that");
+                    break;
+                }
             }
         }
     }
@@ -140,29 +144,29 @@ public class Player {
      * Picks up the selected item from the tile if it exists within the tiles items array
      * Also does Radiation damage to the player after they pick up an item through calculateDamage
      *
-     * @param item   the item that is entered in after the drop key word
+     * @param item  the item that is entered in after the drop key word.
      */
     public void addItems(String item, Tile tile, Player player) {
         String itemToDrop;
         boolean itemDropped = true;
         Scanner input = new Scanner(System.in);
         if (item.equals("badInput")) {
-            System.out.println("There doesn't seem to be an item like that here");
+            System.out.println("\nThere doesn't seem to be an item like that here");
         }
         else {
             for (int i = 0; i < inventory.length; i++) {
                 if (inventory[i].equals(" ")) {
                     inventory[i] = item;
                     tile.removeItem(item);
-                    System.out.println("You picked up the " + item);
+                    System.out.println("\nYou picked up the " + item);
                     calculateDamage(player, tile);
                     break;
                 } else if (i == inventory.length - 1) {
-                    System.out.println("" +
-                            "You’re feeling very weak – there’s no way you can carry more. " +
-                            "'Why am I carrying all this stuff', you think to yourself." +
-                            "");
-                    System.out.println("What should I drop for the item? (type name of item");
+                    System.out.println("""
+                    You’re feeling very weak – there’s no way you can carry more.
+                    'Why am I carrying all this stuff', you think to yourself.
+                                            """);
+                    System.out.println("What should I drop for the item? (type name of item)\n");
                     printInventory();
                     do {
                         System.out.print(">");

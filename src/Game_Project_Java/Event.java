@@ -12,21 +12,14 @@ class Event {
 
     }
 
-    private static Player player;
+
     private static String displayM;
     private static String printHealth;
     private static String prologue;
-    private static boolean hasVisited;
 
-    public static boolean isInstrumentsUsed() {
-        return instrumentsUsed;
-    }
 
-    public static void setInstrumentsUsed(boolean instrumentsUsed) {
-        Event.instrumentsUsed = instrumentsUsed;
-    }
 
-    private static boolean instrumentsUsed;
+
     private static LinkedHashMap<String, String> tiles = new LinkedHashMap<>();
     private static LinkedHashMap<String, String> alternateTiles = new LinkedHashMap<>();
 
@@ -39,13 +32,7 @@ class Event {
         Event.alternateTiles = alternateTiles;
     }
 
-    public static String getDisplayM() {
-        return displayM;
-    }
 
-    public static void setDisplayM(String displayM) {
-        Event.displayM = displayM;
-    }
 
     public static String getPrintHealth() {
         return printHealth;
@@ -71,8 +58,6 @@ class Event {
     }
 
 
-
-
     public static void currentEvent(Player player, boolean hasVisited, Tile tile) {
 
         String sPos;
@@ -84,6 +69,7 @@ class Event {
 
 
             tiles.put("0", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     1A
@@ -101,6 +87,7 @@ class Event {
 
             tiles.put("1", """
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     1B
                                         
@@ -111,6 +98,7 @@ class Event {
 
 
             tiles.put("2", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     1C
@@ -130,6 +118,7 @@ class Event {
 
             tiles.put("5", """
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     2A
                     
@@ -142,6 +131,7 @@ class Event {
             tiles.put("6", "2b_");
 
             tiles.put("7", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     2C
@@ -158,13 +148,14 @@ class Event {
 
             tiles.put("10", """
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     3A
                     
                     You arrive at the facilities’ foyer. Through the massive glass lined entrance, you can see emergency services
                     and military congregating. The exit is right here, you can escape now. (Type 'exit' to escape).
                     
-                    The coolant pipeline needs repairing though. There's no getting around that fact.
+                    The coolant pipeline needs repairing though, you think. There's no getting around that fact.
                     
                     There is one of the plant's small utility carts parked nearby, but there’s no key in the ignition.
                     If you can start that cart you'll move twice the speed you can on foot.
@@ -182,6 +173,7 @@ class Event {
 
             tiles.put("15", """
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     4A
                     
@@ -192,6 +184,7 @@ class Event {
 
 
             tiles.put("16", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     4B
@@ -205,6 +198,7 @@ class Event {
 
 
             tiles.put("17", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     4C
@@ -221,29 +215,34 @@ class Event {
 
             tiles.put("18", """
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     4D
                     
-                    You get up, woozy, legs like lead. This is a control room, you recall, or what’s left of it.\s
+                    You get up, woozy, legs like lead. This is a control room, you recall, or what’s left of it.
+                    
                     On the far side of the room where the damage is worst you see two bodies, a mess of limbs and masonry.
                     You shudder – that’s Alexi and Pasha from your section.
                     
                     You have to get out of here.
+                    
                     A draft is blowing from the west exit, and an acrid smell.  To the east is another exit.
                     You try and focus but you've no idea where they lead, the persistent, violent whine of the siren does not help.\s
                     
                     A map of the facility has fallen from its frame and lies on floor nearby.
-                    You may need that map. (Type pick-up map)
+                    You may need that map. (Type 'pick-up map')
                     
                     """);
 
             tiles.put("19", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     4E
                     
                     You enter another control room - home to a dizzying array of monitoring apparatus.
                     Some memory is returning now - this room is familiar.
+                    
                     You notice one panel, labelled 'core-regulator', is lit-up like an angry fairground attraction.
                     You do not like the look of that panel. There is an exit west, where you entered, or south.
                     
@@ -251,17 +250,21 @@ class Event {
 
             tiles.put("20", """ 
                          
+                         
                     /-------------------------------------------------------------------------------------------------------\\
                     5A
                     
                     The hall bends north and you approach a stretch of workshops. You see a utility cart in one of them,\s
                     the type used to transport light goods around the facility. It’s in disrepair unfortunately.
+                    
                     You grab hold of a workbench to keep from falling, almost toppling a jerry-can.
-                    You could have.
+                    
+                    If only that cart was working, you really need a ride.
                     
                     """);
 
             tiles.put("21", """
+                             
                                                   
                     /-------------------------------------------------------------------------------------------------------\\
                     5B
@@ -269,15 +272,18 @@ class Event {
                     You approach a line of built-in storage cabinets. Several lie face down on the floor, wrenched from the wall.
                     None of the combination locks are open though. You notice something  etched into the back of one cabinet.
                     
-                    4b*1c-5c, (2a*3b%1b)-3d, 3d+=3d.
+                    4b*1c-5e, (2e*4b%3d)+2d, 3d+=3d.
                     
                     Did you just hear a Geiger dosimeter? In the moments between siren phases, you swear you did, from this same cabinet.
-                    You put your ear to the metal and the clicking. The noise is chilling, only extreme radiation can cause that reading.
+                    You put your ear to the metal and hear the clicking. The noise is chilling, only extreme radiation can cause that reading.
+                    
                     You consider the etchings again - Hazmat suits are stored with Geiger dosimeters you recall.
+                    In these conditions, protective clothing is a must.
                     
                     """);
 
             tiles.put("22", """ 
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     5C
@@ -290,16 +296,18 @@ class Event {
 
             tiles.put("23", """ 
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     5D
                     
                     You approach an abandoned security checkpoint consisting of a guard’s booth and turnstile.\s
-                    On the floor by the booth, is an overturned card table and a half empty bottle of Stolichnaya.\s
+                    On the floor by the booth is an overturned card table and a half empty bottle of Stolichnaya.\s
                     Looks like the guard was in a hurry to leave.
                   
                     """);
 
             tiles.put("24", """ 
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     5E
@@ -316,27 +324,39 @@ class Event {
 
             tiles.put("25", """ 
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     
                     HELP MENU
                     
                     
                     Enter text commands to control your character. Take note of the descriptions, and the map.
+                    Each turn, your updated position on the map is listed in the top left corner of the current display.
+                    
                     You have 100 health.  You lose health every turn from environmental damage.
-                    Each turn you must choose to either move or use/drop an item. You cannot do both.5e
+                    Each time you take damage your current total health is displayed in the console.
+                    
+                    WARNING - moving, picking up items and interacting with items takes time.
+                    Time spent in reactor causes you damage. Limit ANY un-necessary activity.
+                    
+                    Each turn you must choose to either move or use/drop an item. You cannot do both.
                     (Except with drop - you can drop an item and pickup a different item in the same turn)
                                             
                     To pickup, drop, or use (interact with) an item, type the keyword (use, drop or pick-up) and item name.
-                    To move or exit type the keyword move or exit and the direction, n, s, e, w
-                                            
-                    To view map type m, to view inventory type i, your inventory holds up to 5 items (not including map)
-                    To access this menu type menu. To quit game type q.
                     
-                    WARNING - moving, picking up items and interacting with items may cause you damage. Limit any
-                    un-necessary activity.
+                    To move type the keyword 'move' and the direction, 'n', 's', 'e', 'w'.
+                    
+                    To exit simply type exit (when prompted).
+                                            
+                    To view map type 'use map', to view inventory type i. Your inventory holds max 5 items (including map)
+                    
+                    To access this menu type help. To quit game type q.
+                    
+
  
                     """);
             tiles.put("26", """ 
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     4E
@@ -348,14 +368,17 @@ class Event {
                     Yes, there is no other explanation - for the readings to be accurate, the reactor would have be on
                     the brink of a meltdown, and that’s impossible.
                     
-                    If they were genuine though, which they are not - but if they were, a meltdown must be stopped.
+                    If the readings are genuine though, which they are not - but if they are, a meltdown must be stopped.
+                    
                     There is an exit west, where you entered, or south.
 
                     """);
-            tiles.put("27", """           
+            tiles.put("27", """ 
+                              
                     move n, s, e, w       	|     use (item)      	|       pick-up (item)	    |	    help help
-                    inventory i           	|     map m           	|       quit q		        | 	    exit exit
+                    inventory i           	|     use map           |       quit q		        | 	    exit exit
                     drop (item)
+                    
                     
                     """);
 
@@ -365,23 +388,14 @@ class Event {
                 System.out.println("The cart sits nearby.");
             }
             for (String item : tile.gettItems()) {
-                    System.out.println("There is a " + item + " here.");
+                    System.out.println("There is a " + item + " here.\n");
             }
             System.out.println(tiles.get("27"));
 
-
-
-
-
-            //variable to display health in events descriptions. To be concat into events.tile descriptions
-         //   String healthDisplay = Integer.toString(player.getHealth());
-            //    System.out.println(tiles.get(healthDisplay));
-
-      //  }   if (sPos = "19"
-        //   {
         }
          else {
             alternateTiles.put("0", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     1A
@@ -395,6 +409,7 @@ class Event {
                     """);
             alternateTiles.put("1", """
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     1B
                     
@@ -405,6 +420,7 @@ class Event {
 
                     """);
             alternateTiles.put("2", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     1C
@@ -426,6 +442,7 @@ class Event {
                     """);
             alternateTiles.put("4", """
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     
                     You have passed this way before. Is there a reason you have backtracked?
@@ -433,6 +450,7 @@ class Event {
                     
                     """);
             alternateTiles.put("5", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     2A
@@ -443,12 +461,15 @@ class Event {
                     
                     """);
             alternateTiles.put("6", """
+                    
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     You have passed this way before. Is there a reason you have backtracked?
                     Every second you stay in this place is a second closer to death. \s
                     
                     """);
             alternateTiles.put("7", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     2C
@@ -471,6 +492,8 @@ class Event {
                     
                     """);
             alternateTiles.put("10", """
+                    
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     3A
                     
@@ -502,6 +525,8 @@ class Event {
                     
                     """);
             alternateTiles.put("15", """
+                    
+                    
                     /-------------------------------------------------------------------------------------------------------
                     4A
                     
@@ -512,6 +537,7 @@ class Event {
                     
                     """);
             alternateTiles.put("16", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     4B
@@ -524,6 +550,7 @@ class Event {
                     """);
             alternateTiles.put("17", """
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     4C
                     
@@ -535,16 +562,18 @@ class Event {
                     """);
             alternateTiles.put("18", """
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     4D
                     
                     You have passed this way before, this is the control room where you woke.
                     Is there a reason you have backtracked? Every second you stay in this place is a second closer to death.
                     
-                    You can travel east toward the control room? north toward the exit or south.
+                    You can travel east or west from here.
                     
                     """);
             alternateTiles.put("19", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     4E
@@ -557,6 +586,7 @@ class Event {
                     """);
             alternateTiles.put("20", """
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     5A
                     
@@ -567,6 +597,7 @@ class Event {
                     
                     """);
             alternateTiles.put("21", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     5B
@@ -581,6 +612,7 @@ class Event {
                     """);
             alternateTiles.put("22", """
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     5C
                     
@@ -592,6 +624,7 @@ class Event {
                     """);
             alternateTiles.put("23", """
                     
+                    
                     /-------------------------------------------------------------------------------------------------------\\
                     5D
                     
@@ -602,6 +635,7 @@ class Event {
                     
                     """);
             alternateTiles.put("24", """
+                    
                     
                     /-------------------------------------------------------------------------------------------------------\\
                     5E
@@ -638,6 +672,7 @@ class Event {
 
         prologue =
                 """
+                
                 /-------------------------------------------------------------------------------------------------------\\
                                         
                                    #    # ###### #      ##### #####   ####  #    # #    #\s
@@ -652,16 +687,18 @@ class Event {
                 
                 The siren jolts you from unconsciousness.
                 
-                You come-to in what looks like a warzone, lying among rubble and dust, a pulsing ache in your head.
+                You come-to in what looks like a war-zone, lying among rubble and dust, a pulsing ache in your head.
                 The first thing you notice, beside the pain, is that the ceiling has partially collapsed.
-                This explains your headache, and your confusion - You have no memory of where you are, or what's happening,
-                you realise - It's a blank slate. For a moment the memory of who YOU ARE feels like it might slip away.
+                This explains your headache, and your confusion - You have no memory of where you are, or what's happening -
+                it's a blank slate, you realise. For a moment the memory of who YOU ARE feels like it might slip away.
+                
                 No. that memory you still have.
                 
                 'I’m an Energetiki power engineer with the ministry of Electrification'. You say resolutely.
-                'I work here, at this nuclear power plant'.
+                '... and I work here, at this nuclear power plant'.
                 
                 To begin type start.
+                
                 
                 """;
         System.out.println(prologue);

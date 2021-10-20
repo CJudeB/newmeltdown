@@ -63,6 +63,10 @@ public class CalculateDamage {
     }
 
 
+    /**
+     * @param player
+     * @param tile
+     */
     public static void calculateDamage(Player player, Tile tile) {
 
 
@@ -109,7 +113,7 @@ public class CalculateDamage {
                 finalDam = player.setHealth(tempDam);
             }
 
-           for (int i = 1; i <= 1; i++) {
+        //for loop that prints out a number of '|' equal to finalDam
                 for (int j = 1; j <= finalDam; j++) {
                     System.out.print("|");
                 }
@@ -118,7 +122,7 @@ public class CalculateDamage {
 
         }
 
-    }
+
 
     //random number either 1 or 2 add to
     public static int randLowMethod() {

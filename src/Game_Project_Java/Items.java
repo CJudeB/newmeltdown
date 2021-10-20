@@ -42,6 +42,15 @@ public class Items {
             return false;
     }
 
+    /**
+     * Use core-regulator on tile 4E
+     * Prints a description of events that will help the player make the 'right' choices going forward.
+     *
+     * @param tIntractable  the item that the user inputted to use
+     * @param tile   the tile that the player is currently on
+     * @param player the player instance
+     */
+
     public static void useCoreRegulator(String tIntractable, Tile tile, Player player) {
 
         if (tIntractable.equalsIgnoreCase(tile.gettIntractable())) {
@@ -65,7 +74,7 @@ public class Items {
                     
                                        
                     move n, s, e, w       	|     use (item)      	|       pick-up (item)	    |	    help help
-                    inventory i           	|     map m           	|       quit q		        | 	    exit exit
+                    inventory i           	|     use map        	|       quit q		        | 	    exit exit
                     drop (item)
                     
                     
@@ -94,7 +103,7 @@ public class Items {
                     System.out.println("You shift the cabinet onto it's back.");
                     firstInteraction = false;
                 }
-                System.out.println("You place your hand on the locks dial and remembering the markings from before\n(4b1c-5c, (2e4b%3d)+2d, 3d+=3d) you enter -");
+                System.out.println("You place your hand on the locks dial and remembering the markings from before\n(4b*1c-5e, (2e*4b%3d)+2d, 3d+=3d) you enter -");
                 Scanner code = new Scanner(System.in);
                 int[] combination = new int[3];
                 for (int i = 0; i < combination.length; ) {
