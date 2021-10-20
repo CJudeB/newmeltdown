@@ -1,5 +1,6 @@
 package Game_Project_Java;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 import static Game_Project_Java.CalculateDamage.calculateDamage;
@@ -188,7 +189,7 @@ public class Player {
      */
     public void printInventory() {
         for (int i = 0; i < inventory.length; i++) {
-            if (!(inventory[i] == " ")) {
+            if (!(Objects.equals(inventory[i], " "))) {
                 System.out.print("Inventory: ");
                 break;
             } else if (i == inventory.length - 1) {
@@ -197,7 +198,7 @@ public class Player {
             }
         }
         for (String i : inventory) {
-            if (!(i == " ")) {
+            if (!(Objects.equals(i, " "))) {
                 System.out.print(i + " | ");
             }
 

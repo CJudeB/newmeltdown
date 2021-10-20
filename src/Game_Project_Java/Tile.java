@@ -3,9 +3,11 @@ import java.util.ArrayList;
 
 public class Tile {
 
-    private String tDescription, tIntractable, tCart;
+    private  final String tDescription, tIntractable;
+    private String tCart;
     private ArrayList<String> tItems = new ArrayList<>();
-    private boolean tN, tE, tS, tW, hasVisited;
+    private final boolean tN, tE, tS, tW;
+    private boolean hasVisited;
     private int damVal;
 
     /**
@@ -84,6 +86,7 @@ public class Tile {
         for (int i = 0; i < tItems.size(); i++) {
             if (item.equals(this.tItems.get(i))) {
                 this.tItems.remove(i);
+                break;
             }
         }
     }
