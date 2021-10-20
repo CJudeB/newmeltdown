@@ -163,7 +163,7 @@ public class Game {
                         break;
                     }
                     case "core-regulator", "Core-Regulator", "Core-regulator": {
-                        useCoreRegulator(parts[1], tileRef.get(player.getPosition()), player);
+                        useCoreRegulator(parts[1], tileRef.get(player.getPosition()));
                         break;
                     }
                     case "cabinet", "Cabinet": {
@@ -191,7 +191,6 @@ public class Game {
                 break;
             }
             case "help", "h", "Help", "H":{
-                //  player.displayMenu();
                 Event.displayMenu();
                 break;
             }
@@ -220,7 +219,6 @@ public class Game {
                     You can move to the west down the hall or north.
                     
                     """);
-                   // npc = true;
                 }
                 break;
             }
@@ -230,10 +228,6 @@ public class Game {
             }
         }
     }
-
-/*    public int getHealth(int health) {
-        return health;
-    }*/
 
     /**
      * The entry point of application. Has three sections the prologue which is a cutscene to introduce the story.
@@ -259,8 +253,6 @@ public class Game {
         System.out.print("\nGood Luck\n\n");
 
         //Prologue
-
-        newGame.player.setPosition(18);
         System.out.println(newGame.tileRef.get(newGame.player.getPosition()).gettDescription());
         currentEvent(newGame.player, newGame.tileRef.get(newGame.player.getPosition()).isHasVisited(), newGame.tileRef.get(newGame.player.getPosition()));
 
@@ -269,7 +261,6 @@ public class Game {
 
             System.out.print(">");
             temp = input.nextLine();
-           // newGame.damArray();
             newGame.inputHandler(temp);
 /**
  *condition alive while true loop continues.

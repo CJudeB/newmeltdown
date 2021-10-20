@@ -48,10 +48,9 @@ public class Items {
      *
      * @param tIntractable  the item that the user inputted to use
      * @param tile   the tile that the player is currently on
-     * @param player the player instance
      */
 
-    public static void useCoreRegulator(String tIntractable, Tile tile, Player player) {
+    public static void useCoreRegulator(String tIntractable, Tile tile) {
 
         if (tIntractable.equalsIgnoreCase(tile.gettIntractable())) {
 

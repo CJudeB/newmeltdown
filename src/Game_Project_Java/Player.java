@@ -7,7 +7,7 @@ import static Game_Project_Java.CalculateDamage.calculateDamage;
 public class Player {
 
 
-    private String name;
+    private final String name;
     private boolean alive = true;
     private boolean inCart = false;
     private int Position, health = 100;
@@ -24,19 +24,6 @@ public class Player {
         this.health = health;
         this.Position = 18;
     }
-
-  /*  public String methodPrintHealth(String printHealth) {
-        printHealth = Integer.toString(getHealth());
-        return printHealth;
-    }*/
-
-   /* public boolean isAlive() {
-        return alive;
-    }
-
-    public void setAlive(boolean alive) {
-        this.alive = alive;
-    }*/
 
     public String getPrintHealth() {
         return printHealth;
@@ -81,9 +68,6 @@ public class Player {
         this.hasProtectiveClothing = hasProtectiveClothing;
     }
 
-    //  public void setAlive (boolean alive) {
-    //    this.alive = alive;
-    // }
     public boolean alive() {
         return health >= 1;
     }
@@ -93,9 +77,6 @@ public class Player {
         return inventory;
     }
 
-    public void setInventory(String[] inventory) {
-        this.inventory = inventory;
-    }
 
     /**
      * Drop item. Drops the selected item if it exists in the player inventory. Also does Radiation damage
@@ -117,10 +98,6 @@ public class Player {
                     calculateDamage(player, tile);
                     break;
                 }else if (i == inventory.length - 1){
-                    System.out.println("You aren't holding a item like that");
-                    break;
-                }
-                else if (i == inventory.length - 1){
                     System.out.println("You aren't holding a item like that");
                     break;
                 }

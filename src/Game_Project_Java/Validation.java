@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Validation {
 
-    private String[] cardinals = {"n", "e", "s", "w"};
-    private String badInput = "badInput";
+    private final String[] cardinals = {"n", "e", "s", "w"};
+    private final String badInput = "badInput";
 
     /**
      * Validate input string to insure correct direction has been inputted.
@@ -51,7 +51,7 @@ public class Validation {
      * @param pInven the player inventory array
      * @return the string back as entered if it exists in the array
      */
-    public String validateInput(String input, String pInven[]) {
+    public String validateInput(String input, String[] pInven) {
         for (String i : pInven) {
             if (input.equalsIgnoreCase(i)) {
                 return input;

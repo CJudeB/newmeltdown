@@ -78,10 +78,7 @@ public class Cart {
         }else
             System.out.println("There doesn't seem to be an item like that here");
 
-        if (isCartKeyUsed() && isFuelUsed()) {
-            return true;
-        } else
-            return false;
+        return isCartKeyUsed() && isFuelUsed();
 
     }
 }
