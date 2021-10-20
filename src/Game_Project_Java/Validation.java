@@ -16,7 +16,6 @@ public class Validation {
      */
     public String validateInput(String input) {
 
-
         if (input.equalsIgnoreCase("n") || input.equalsIgnoreCase("north")) {
             return cardinals[0];
         } else if (input.equalsIgnoreCase("e") || input.equalsIgnoreCase("east")) {
