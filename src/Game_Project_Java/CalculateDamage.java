@@ -64,6 +64,13 @@ public class CalculateDamage {
 
 
     /**
+     * Calculates amount of damage a player takes each turn.
+     * Calculation takes a tiles set amount of damage
+     * Calculation creates a random amount of damage within various ranges, depending on where player is positioned.
+     * Set tile damage is added to random damage to create subtotal.
+     * If player is wearing Hazmat, -1 is offset from subtotal.
+     * players health is updated by subtracting total damage from players current health.
+     * prints a graphic representation of player's health to console.
      * @param player
      * @param tile
      */

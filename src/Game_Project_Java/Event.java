@@ -18,8 +18,6 @@ class Event {
     private static String prologue;
 
 
-
-
     private static LinkedHashMap<String, String> tiles = new LinkedHashMap<>();
     private static LinkedHashMap<String, String> alternateTiles = new LinkedHashMap<>();
 
@@ -44,7 +42,6 @@ class Event {
 
     public static void getPrologue() {
     }
-
     public static void setPrologue(String prologue) {
         Event.prologue = prologue;
     }
@@ -57,7 +54,16 @@ class Event {
         Event.tiles = tiles;
     }
 
-
+    /**
+     * Method uses 2 x LinkedHashMaps (LinkedHashMap 'tiles' and LinkedHAshMap 'alternatetiles') to store key value pairs.
+     * Key is players position, Value is description on tile
+     * If !hasVisited conditional is true method prints value of tiles
+     * If !hasVisited conditional is false method prints value of alternatetiles
+     *
+     * @param hasVisited   boolean to check is player has been on this tile before
+     * @param tile   the tile that the player is currently on
+     * @param player the player instance
+     */
     public static void currentEvent(Player player, boolean hasVisited, Tile tile) {
 
         String sPos;
@@ -661,13 +667,14 @@ class Event {
         }
 
     }
-
+//Method to print Help menu. Stored as key 25 in tiles.
     public static void displayMenu() {
         String displayM;
         displayM = tiles.get("25");
         System.out.println(displayM);
     }
 
+    // simply print initial description before game begins.
     public static void initialDescription() {
 
         prologue =
